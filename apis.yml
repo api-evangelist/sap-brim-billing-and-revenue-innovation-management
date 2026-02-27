@@ -1,0 +1,176 @@
+name: SAP BRIM (Billing and Revenue Innovation Management)
+description: 'SAP BRIM (Billing and Revenue Innovation Management) is a comprehensive  solution for order-to-cash processes, subscription management, usage-based  pricing, and revenue management. It enables businesses to manage complex  billing scenarios, subscription lifecycle, and revenue recognition.
+
+  '
+image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+url: https://www.sap.com/products/financial-management/billing-revenue-innovation-mgmt.html
+created: '2024-01-15'
+modified: '2024-01-15'
+specificationVersion: '0.18'
+tags:
+- Billing
+- Revenue Management
+- Subscription Management
+- Order to Cash
+- Usage-Based Pricing
+- SAP
+- Enterprise
+apis:
+- name: SAP Convergent Charging API
+  description: 'API for real-time charging and rating of usage-based services. Supports  complex pricing models, prepaid and postpaid scenarios.
+
+    '
+  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  baseURL: https://api.sap.com/convergent-charging
+  tags:
+  - Charging
+  - Rating
+  - Usage-Based Pricing
+  - Real-time
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  - type: OpenAPI
+    url: https://api.sap.com/api/convergent_charging/overview
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
+  contact:
+  - FN: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+- name: SAP Convergent Invoicing API
+  description: 'API for creating, managing, and processing invoices from multiple sources.  Supports complex billing scenarios, invoice consolidation, and flexible  output formats.
+
+    '
+  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+  baseURL: https://api.sap.com/convergent-invoicing
+  tags:
+  - Invoicing
+  - Billing
+  - Invoice Management
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+  - type: OpenAPI
+    url: https://api.sap.com/api/convergent_invoicing/overview
+  - type: Sandbox
+    url: https://api.sap.com/api/convergent_invoicing/tryout
+  contact:
+  - FN: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+- name: SAP Subscription Billing API
+  description: 'API for managing subscription lifecycle, including creation, modification,  renewal, and cancellation. Supports various billing frequencies and  subscription models.
+
+    '
+  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+  humanURL: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+  baseURL: https://api.sap.com/subscription-billing
+  tags:
+  - Subscriptions
+  - Recurring Billing
+  - Lifecycle Management
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+  - type: OpenAPI
+    url: https://api.sap.com/api/subscription_billing/overview
+  - type: API Console
+    url: https://api.sap.com/api/subscription_billing/console
+  contact:
+  - FN: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+- name: SAP Contract Accounts Receivable and Payable API
+  description: 'API for managing customer accounts, payment processing, dunning, and  dispute management. Core component for financial customer relationship  management.
+
+    '
+  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+  humanURL: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+  baseURL: https://api.sap.com/fica
+  tags:
+  - Accounts Receivable
+  - Payments
+  - Dunning
+  - Financial Accounting
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+  - type: OpenAPI
+    url: https://api.sap.com/api/fica/overview
+  - type: Integration Guide
+    url: https://help.sap.com/docs/SAP_FICA/integration
+  contact:
+  - FN: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+- name: SAP BRIM Usage Data Intake API
+  description: 'API for ingesting high-volume usage data from various sources. Supports  batch and real-time processing of usage events for rating and billing.
+
+    '
+  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+  humanURL: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+  baseURL: https://api.sap.com/usage-data-intake
+  tags:
+  - Usage Data
+  - Data Ingestion
+  - Mediation
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+  - type: OpenAPI
+    url: https://api.sap.com/api/usage_data_intake/overview
+  - type: Technical Specifications
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
+  contact:
+  - FN: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+- name: SAP Revenue Accounting and Reporting API
+  description: 'API for revenue recognition according to IFRS 15 and ASC 606 standards.  Manages performance obligations, revenue allocation, and compliance  reporting.
+
+    '
+  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+  humanURL: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+  baseURL: https://api.sap.com/revenue-accounting
+  tags:
+  - Revenue Recognition
+  - IFRS 15
+  - ASC 606
+  - Compliance
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+  - type: OpenAPI
+    url: https://api.sap.com/api/revenue_accounting/overview
+  - type: Compliance Guide
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
+  contact:
+  - FN: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+common:
+- type: Portal
+  url: https://api.sap.com
+- type: Getting Started
+  url: https://help.sap.com/docs/SAP_BRIM/getting-started
+- type: Authentication
+  url: https://help.sap.com/docs/SAP_BRIM/authentication
+- type: Support
+  url: https://support.sap.com
+- type: Terms of Service
+  url: https://www.sap.com/about/legal/terms-of-use.html
+- type: Privacy Policy
+  url: https://www.sap.com/about/legal/privacy.html
+- type: Status Page
+  url: https://www.sap.com/about/trust-center/cloud-service-status.html
+- type: Community
+  url: https://community.sap.com
+- type: Blog
+  url: https://blogs.sap.com
+maintainers:
+- FN: SAP
+  email: info@sap.com
+  url: https://www.sap.com
