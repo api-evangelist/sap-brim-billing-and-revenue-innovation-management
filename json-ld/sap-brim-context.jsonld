@@ -1,0 +1,353 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "sap-brim": "https://api.sap.com/brim/vocab#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dc": "http://purl.org/dc/terms/",
+    "gr": "http://purl.org/goodrelations/v1#",
+
+    "Subscription": {
+      "@id": "sap-brim:Subscription",
+      "@context": {
+        "subscriptionId": {
+          "@id": "sap-brim:subscriptionId",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "sap-brim:subscriptionStatus",
+          "@type": "xsd:string"
+        },
+        "startDate": {
+          "@id": "schema:validFrom",
+          "@type": "xsd:date"
+        },
+        "endDate": {
+          "@id": "schema:validThrough",
+          "@type": "xsd:date"
+        },
+        "billingFrequency": {
+          "@id": "sap-brim:billingFrequency",
+          "@type": "xsd:string"
+        },
+        "autoRenew": {
+          "@id": "sap-brim:autoRenew",
+          "@type": "xsd:boolean"
+        },
+        "renewalCount": {
+          "@id": "sap-brim:renewalCount",
+          "@type": "xsd:integer"
+        },
+        "cancellationDate": {
+          "@id": "sap-brim:cancellationDate",
+          "@type": "xsd:date"
+        },
+        "cancellationReason": {
+          "@id": "sap-brim:cancellationReason",
+          "@type": "xsd:string"
+        },
+        "trialEndDate": {
+          "@id": "sap-brim:trialEndDate",
+          "@type": "xsd:date"
+        }
+      }
+    },
+
+    "SubscriptionItem": {
+      "@id": "sap-brim:SubscriptionItem",
+      "@context": {
+        "itemId": {
+          "@id": "sap-brim:itemId",
+          "@type": "xsd:string"
+        },
+        "quantity": {
+          "@id": "schema:amount",
+          "@type": "xsd:integer"
+        },
+        "billingType": {
+          "@id": "sap-brim:billingType",
+          "@type": "xsd:string"
+        },
+        "includedUnits": {
+          "@id": "sap-brim:includedUnits",
+          "@type": "xsd:integer"
+        },
+        "overageRate": {
+          "@id": "sap-brim:overageRate",
+          "@type": "xsd:double"
+        }
+      }
+    },
+
+    "SubscriptionPlan": {
+      "@id": "sap-brim:SubscriptionPlan",
+      "@context": {
+        "planId": {
+          "@id": "sap-brim:planId",
+          "@type": "xsd:string"
+        },
+        "contractTermMonths": {
+          "@id": "sap-brim:contractTermMonths",
+          "@type": "xsd:integer"
+        },
+        "trialPeriodDays": {
+          "@id": "sap-brim:trialPeriodDays",
+          "@type": "xsd:integer"
+        },
+        "features": {
+          "@id": "sap-brim:features",
+          "@container": "@list"
+        }
+      }
+    },
+
+    "PricingPlan": {
+      "@id": "sap-brim:PricingPlan",
+      "@context": {
+        "pricingModel": {
+          "@id": "sap-brim:pricingModel",
+          "@type": "xsd:string"
+        },
+        "effectiveFrom": {
+          "@id": "schema:validFrom",
+          "@type": "xsd:date"
+        },
+        "effectiveTo": {
+          "@id": "schema:validThrough",
+          "@type": "xsd:date"
+        },
+        "rateCards": {
+          "@id": "sap-brim:hasRateCard",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "RateCard": {
+      "@id": "sap-brim:RateCard",
+      "@context": {
+        "rateCardId": {
+          "@id": "sap-brim:rateCardId",
+          "@type": "xsd:string"
+        },
+        "unit": {
+          "@id": "schema:unitCode",
+          "@type": "xsd:string"
+        },
+        "baseRate": {
+          "@id": "sap-brim:baseRate",
+          "@type": "xsd:double"
+        },
+        "tiers": {
+          "@id": "sap-brim:hasPricingTier",
+          "@container": "@list"
+        }
+      }
+    },
+
+    "PricingTier": {
+      "@id": "sap-brim:PricingTier",
+      "@context": {
+        "tierName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "fromQuantity": {
+          "@id": "sap-brim:fromQuantity",
+          "@type": "xsd:double"
+        },
+        "toQuantity": {
+          "@id": "sap-brim:toQuantity",
+          "@type": "xsd:double"
+        },
+        "ratePerUnit": {
+          "@id": "gr:hasCurrencyValue",
+          "@type": "xsd:double"
+        }
+      }
+    },
+
+    "ChargingEvent": {
+      "@id": "sap-brim:ChargingEvent",
+      "@context": {
+        "chargeId": {
+          "@id": "sap-brim:chargeId",
+          "@type": "xsd:string"
+        },
+        "chargeType": {
+          "@id": "sap-brim:chargeType",
+          "@type": "xsd:string"
+        },
+        "chargedAt": {
+          "@id": "sap-brim:chargedAt",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "UsageEvent": {
+      "@id": "sap-brim:UsageEvent",
+      "@context": {
+        "eventId": {
+          "@id": "sap-brim:eventId",
+          "@type": "xsd:string"
+        },
+        "serviceType": {
+          "@id": "sap-brim:serviceType",
+          "@type": "xsd:string"
+        },
+        "usageTimestamp": {
+          "@id": "sap-brim:usageTimestamp",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "RatingResult": {
+      "@id": "sap-brim:RatingResult",
+      "@context": {
+        "ratingId": {
+          "@id": "sap-brim:ratingId",
+          "@type": "xsd:string"
+        },
+        "rateApplied": {
+          "@id": "sap-brim:rateApplied",
+          "@type": "xsd:double"
+        },
+        "tierApplied": {
+          "@id": "sap-brim:tierApplied",
+          "@type": "xsd:string"
+        },
+        "ratedAt": {
+          "@id": "sap-brim:ratedAt",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "BillingRecord": {
+      "@id": "sap-brim:BillingRecord",
+      "@context": {
+        "billingRecordId": {
+          "@id": "sap-brim:billingRecordId",
+          "@type": "xsd:string"
+        },
+        "invoiceNumber": {
+          "@id": "sap-brim:invoiceNumber",
+          "@type": "xsd:string"
+        },
+        "billingPeriodStart": {
+          "@id": "sap-brim:billingPeriodStart",
+          "@type": "xsd:date"
+        },
+        "billingPeriodEnd": {
+          "@id": "sap-brim:billingPeriodEnd",
+          "@type": "xsd:date"
+        },
+        "issuedAt": {
+          "@id": "sap-brim:issuedAt",
+          "@type": "xsd:dateTime"
+        },
+        "dueDate": {
+          "@id": "sap-brim:dueDate",
+          "@type": "xsd:date"
+        },
+        "paidAt": {
+          "@id": "sap-brim:paidAt",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "MonetaryAmount": {
+      "@id": "schema:MonetaryAmount",
+      "@context": {
+        "value": {
+          "@id": "schema:value",
+          "@type": "xsd:double"
+        },
+        "currency": {
+          "@id": "schema:currency",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "Customer": {
+      "@id": "schema:Organization",
+      "@context": {
+        "customerId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "Account": {
+      "@id": "sap-brim:Account",
+      "@context": {
+        "accountId": {
+          "@id": "sap-brim:accountId",
+          "@type": "xsd:string"
+        },
+        "accountType": {
+          "@id": "sap-brim:accountType",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "customer": {
+      "@id": "sap-brim:hasCustomer",
+      "@type": "@id"
+    },
+    "plan": {
+      "@id": "sap-brim:hasPlan",
+      "@type": "@id"
+    },
+    "items": {
+      "@id": "sap-brim:hasItem",
+      "@container": "@set"
+    },
+    "account": {
+      "@id": "sap-brim:hasAccount",
+      "@type": "@id"
+    },
+    "recurringCharge": {
+      "@id": "sap-brim:recurringCharge",
+      "@type": "@id"
+    },
+    "price": {
+      "@id": "schema:price",
+      "@type": "@id"
+    },
+    "unitPrice": {
+      "@id": "schema:price",
+      "@type": "@id"
+    },
+    "totalPrice": {
+      "@id": "sap-brim:totalPrice",
+      "@type": "@id"
+    },
+    "amount": {
+      "@id": "sap-brim:amount",
+      "@type": "@id"
+    },
+    "createdAt": {
+      "@id": "dc:created",
+      "@type": "xsd:dateTime"
+    },
+    "modifiedAt": {
+      "@id": "dc:modified",
+      "@type": "xsd:dateTime"
+    }
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/sap-brim-billing-and-revenue-innovation-management/json-schema/sap-brim-subscription-schema.json",
+  "title": "SAP BRIM Subscription",
+  "description": "Schema for a subscription entity within the SAP BRIM (Billing and Revenue Innovation Management) suite. Represents a customer's subscription to a service or product with full lifecycle, billing, and pricing details.",
+  "type": "object",
+  "required": [
+    "subscriptionId",
+    "customerId",
+    "planId",
+    "status",
+    "startDate",
+    "billingFrequency"
+  ],
+  "properties": {
+    "subscriptionId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the subscription"
+    },
+    "customerId": {
+      "type": "string",
+      "description": "Unique identifier of the customer who owns the subscription"
+    },
+    "customerName": {
+      "type": "string",
+      "description": "Display name of the customer"
+    },
+    "planId": {
+      "type": "string",
+      "description": "Identifier of the subscription plan"
+    },
+    "planName": {
+      "type": "string",
+      "description": "Display name of the subscription plan"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "SUSPENDED",
+        "CANCELLED",
+        "EXPIRED",
+        "PENDING",
+        "TRIAL"
+      ],
+      "description": "Current lifecycle status of the subscription"
+    },
+    "billingFrequency": {
+      "type": "string",
+      "enum": [
+        "MONTHLY",
+        "QUARTERLY",
+        "SEMI_ANNUAL",
+        "ANNUAL",
+        "CUSTOM"
+      ],
+      "description": "How often the subscription is billed"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when the subscription became or becomes active"
+    },
+    "endDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date when the subscription ends (null for open-ended subscriptions)"
+    },
+    "trialEndDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "End date for the trial period, if applicable"
+    },
+    "currentPeriodStart": {
+      "type": "string",
+      "format": "date",
+      "description": "Start date of the current billing period"
+    },
+    "currentPeriodEnd": {
+      "type": "string",
+      "format": "date",
+      "description": "End date of the current billing period"
+    },
+    "nextBillingDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date of the next scheduled billing event"
+    },
+    "autoRenew": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the subscription automatically renews at the end of each term"
+    },
+    "renewalCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of times this subscription has been renewed"
+    },
+    "contractTermMonths": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "Minimum contract term in months"
+    },
+    "cancellationDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date when the subscription was or will be cancelled"
+    },
+    "cancellationReason": {
+      "type": ["string", "null"],
+      "description": "Reason provided for cancellation"
+    },
+    "recurringCharge": {
+      "$ref": "#/$defs/monetaryAmount",
+      "description": "The recurring charge amount per billing period"
+    },
+    "setupFee": {
+      "$ref": "#/$defs/monetaryAmount",
+      "description": "One-time setup fee charged at subscription creation"
+    },
+    "items": {
+      "type": "array",
+      "description": "Line items included in the subscription",
+      "items": {
+        "$ref": "#/$defs/subscriptionItem"
+      }
+    },
+    "discounts": {
+      "type": "array",
+      "description": "Discounts applied to this subscription",
+      "items": {
+        "$ref": "#/$defs/discount"
+      }
+    },
+    "paymentMethod": {
+      "type": ["string", "null"],
+      "description": "Identifier of the payment method on file"
+    },
+    "billingAddress": {
+      "$ref": "#/$defs/address",
+      "description": "Billing address for the subscription"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Custom key-value metadata associated with the subscription"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the subscription was created"
+    },
+    "modifiedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the subscription was last modified"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "Identifier of the user or system that created the subscription"
+    },
+    "modifiedBy": {
+      "type": "string",
+      "description": "Identifier of the user or system that last modified the subscription"
+    }
+  },
+  "$defs": {
+    "monetaryAmount": {
+      "type": "object",
+      "required": [
+        "value",
+        "currency"
+      ],
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "The monetary value"
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$",
+          "description": "ISO 4217 currency code"
+        }
+      }
+    },
+    "subscriptionItem": {
+      "type": "object",
+      "required": [
+        "itemId",
+        "productId",
+        "quantity"
+      ],
+      "properties": {
+        "itemId": {
+          "type": "string",
+          "description": "Unique identifier for the subscription item"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Identifier of the product or service"
+        },
+        "productName": {
+          "type": "string",
+          "description": "Display name of the product or service"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the line item"
+        },
+        "quantity": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Quantity of the item"
+        },
+        "unitPrice": {
+          "$ref": "#/$defs/monetaryAmount",
+          "description": "Price per unit"
+        },
+        "totalPrice": {
+          "$ref": "#/$defs/monetaryAmount",
+          "description": "Total price for the item (quantity x unitPrice)"
+        },
+        "billingType": {
+          "type": "string",
+          "enum": [
+            "RECURRING",
+            "ONE_TIME",
+            "USAGE_BASED"
+          ],
+          "description": "How this item is billed"
+        },
+        "includedUnits": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Number of units included in the base price for usage-based items"
+        },
+        "overageRate": {
+          "type": ["number", "null"],
+          "description": "Rate per unit above the included quantity"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "discount": {
+      "type": "object",
+      "required": [
+        "discountId",
+        "type"
+      ],
+      "properties": {
+        "discountId": {
+          "type": "string",
+          "description": "Unique identifier for the discount"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the discount"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "PERCENTAGE",
+            "FIXED_AMOUNT",
+            "FREE_TRIAL"
+          ],
+          "description": "Type of discount"
+        },
+        "value": {
+          "type": "number",
+          "description": "Discount value (percentage or fixed amount)"
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$",
+          "description": "Currency for fixed-amount discounts"
+        },
+        "couponCode": {
+          "type": ["string", "null"],
+          "description": "Coupon code that applied this discount"
+        },
+        "validFrom": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date of discount validity"
+        },
+        "validTo": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "End date of discount validity"
+        }
+      }
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "line1": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$",
+          "description": "ISO 3166-1 alpha-2 country code"
+        }
+      }
+    }
+  }
+}

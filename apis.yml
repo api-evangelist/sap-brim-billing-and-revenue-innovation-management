@@ -5,7 +5,7 @@ description: 'SAP BRIM (Billing and Revenue Innovation Management) is a comprehe
 image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
 url: https://www.sap.com/products/financial-management/billing-revenue-innovation-mgmt.html
 created: '2024-01-15'
-modified: '2024-01-15'
+modified: '2025-03-04'
 specificationVersion: '0.18'
 tags:
 - Billing
@@ -33,6 +33,8 @@ apis:
     url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
   - type: OpenAPI
     url: https://api.sap.com/api/convergent_charging/overview
+  - type: OpenAPI
+    url: openapi/sap-brim-convergent-charging-openapi.yml
   - type: Authentication
     url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
   contact:
@@ -77,8 +79,16 @@ apis:
     url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
   - type: OpenAPI
     url: https://api.sap.com/api/subscription_billing/overview
+  - type: OpenAPI
+    url: openapi/sap-brim-subscription-billing-openapi.yml
   - type: API Console
     url: https://api.sap.com/api/subscription_billing/console
+  - type: Reference
+    url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
+  - type: Getting Started
+    url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+  - type: JSONSchema
+    url: json-schema/sap-brim-subscription-schema.json
   contact:
   - FN: SAP Support
     email: support@sap.com
@@ -151,9 +161,30 @@ apis:
   - FN: SAP Support
     email: support@sap.com
     url: https://support.sap.com
+- name: SAP Subscription Order Management API
+  description: >-
+    API for managing subscription-based orders within the SAP BRIM suite,
+    supporting complex offerings that combine physical products, services,
+    and usage-based fees with full lifecycle management.
+  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+  humanURL: https://help.sap.com/docs/BRIM
+  baseURL: https://api.sap.com/subscription-order-management
+  tags:
+  - Subscription Orders
+  - Order Management
+  - Lifecycle Management
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/BRIM
+  contact:
+  - FN: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
 common:
 - type: Portal
   url: https://api.sap.com
+- type: JSON-LD Context
+  url: json-ld/sap-brim-context.jsonld
 - type: Getting Started
   url: https://help.sap.com/docs/SAP_BRIM/getting-started
 - type: Authentication
@@ -170,7 +201,25 @@ common:
   url: https://community.sap.com
 - type: Blog
   url: https://blogs.sap.com
+- type: Website
+  url: https://www.sap.com/products/financial-management/billing-revenue-innovation-management.html
+- type: Documentation
+  url: https://help.sap.com/docs/BRIM
+- type: SDKs
+  url: https://developers.sap.com/
+- type: GitHub Organization
+  url: https://github.com/SAP
+- type: Stack Overflow
+  url: https://stackoverflow.com/questions/tagged/sap
+- type: Sign Up
+  url: https://developers.sap.com/
+- type: YouTube
+  url: https://www.youtube.com/@sapdevs
+- type: Learning
+  url: https://learning.sap.com/
+- type: Onboarding
+  url: https://support.sap.com/en/product/onboarding-resource-center/brim.html
 maintainers:
-- FN: SAP
-  email: info@sap.com
-  url: https://www.sap.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
+  url: https://apievangelist.com

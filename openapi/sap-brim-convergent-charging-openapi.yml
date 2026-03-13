@@ -1,0 +1,1226 @@
+openapi: 3.0.3
+info:
+  title: SAP BRIM Convergent Charging API
+  description: >-
+    API for real-time charging and rating of usage-based services within the SAP
+    BRIM (Billing and Revenue Innovation Management) suite. Supports complex
+    pricing models, prepaid and postpaid scenarios, tiered and volume-based
+    pricing, and real-time balance management.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/legal/terms-of-use.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+  - url: https://api.sap.com/convergent-charging/v1
+    description: SAP API Business Hub - Production
+  - url: https://sandbox.api.sap.com/convergent-charging/v1
+    description: SAP API Business Hub - Sandbox
+security:
+  - OAuth2:
+      - read
+      - write
+  - ApiKeyAuth: []
+tags:
+  - name: Rating
+    description: Operations for rating usage events against pricing plans
+  - name: Charging
+    description: Real-time charging operations for prepaid and postpaid accounts
+  - name: Pricing
+    description: Management of pricing plans, rate cards, and pricing structures
+  - name: Balances
+    description: Account balance inquiries and adjustments
+  - name: Usage Events
+    description: Submission and management of usage event records
+paths:
+  /rating/rate:
+    post:
+      operationId: rateUsageEvent
+      summary: Rate a usage event
+      description: >-
+        Rates a single usage event against the applicable pricing plan and
+        returns the calculated charge. Supports real-time and batch rating
+        scenarios.
+      tags:
+        - Rating
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RatingRequest'
+      responses:
+        '200':
+          description: Usage event rated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /rating/rate-batch:
+    post:
+      operationId: rateUsageEventBatch
+      summary: Rate a batch of usage events
+      description: >-
+        Rates multiple usage events in a single request for high-throughput
+        scenarios. Returns individual rating results for each event.
+      tags:
+        - Rating
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - events
+              properties:
+                events:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RatingRequest'
+                  minItems: 1
+                  maxItems: 1000
+      responses:
+        '200':
+          description: Batch rating completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RatingResponse'
+                  summary:
+                    type: object
+                    properties:
+                      totalEvents:
+                        type: integer
+                      successCount:
+                        type: integer
+                      failureCount:
+                        type: integer
+                      totalCharge:
+                        $ref: '#/components/schemas/MonetaryAmount'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /rating/simulate:
+    post:
+      operationId: simulateRating
+      summary: Simulate rating without committing
+      description: >-
+        Simulates the rating of a usage event without persisting the result.
+        Useful for quote generation and what-if analysis.
+      tags:
+        - Rating
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RatingRequest'
+      responses:
+        '200':
+          description: Simulation completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /charging/charge:
+    post:
+      operationId: chargeAccount
+      summary: Charge an account
+      description: >-
+        Executes a real-time charge against a subscriber account. Supports
+        prepaid balance deduction and postpaid charge accumulation.
+      tags:
+        - Charging
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargingRequest'
+      responses:
+        '200':
+          description: Charge executed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          description: Insufficient balance for prepaid charge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /charging/refund:
+    post:
+      operationId: refundCharge
+      summary: Refund a previous charge
+      description: >-
+        Processes a full or partial refund for a previously executed charge.
+        Restores prepaid balances or creates credit adjustments for postpaid.
+      tags:
+        - Charging
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundRequest'
+      responses:
+        '200':
+          description: Refund processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /charging/authorize:
+    post:
+      operationId: authorizeCharge
+      summary: Authorize a charge reservation
+      description: >-
+        Reserves an amount against a prepaid balance without executing the final
+        charge. The reservation can later be confirmed or released.
+      tags:
+        - Charging
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationRequest'
+      responses:
+        '200':
+          description: Authorization successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          description: Insufficient balance for authorization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /charging/authorize/{authorizationId}/confirm:
+    post:
+      operationId: confirmAuthorization
+      summary: Confirm a charge authorization
+      description: >-
+        Confirms a previously created authorization, converting the reserved
+        amount into a final charge.
+      tags:
+        - Charging
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                finalAmount:
+                  $ref: '#/components/schemas/MonetaryAmount'
+      responses:
+        '200':
+          description: Authorization confirmed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /charging/authorize/{authorizationId}/release:
+    post:
+      operationId: releaseAuthorization
+      summary: Release a charge authorization
+      description: >-
+        Releases a previously created authorization, restoring the reserved
+        amount to the available balance.
+      tags:
+        - Charging
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationId'
+      responses:
+        '200':
+          description: Authorization released
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  authorizationId:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                      - RELEASED
+                  releasedAt:
+                    type: string
+                    format: date-time
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /pricing/plans:
+    get:
+      operationId: listPricingPlans
+      summary: List pricing plans
+      description: >-
+        Retrieves a paginated list of pricing plans. Supports filtering by
+        status, service type, and effective date.
+      tags:
+        - Pricing
+      parameters:
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Limit'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - INACTIVE
+              - DRAFT
+        - name: serviceType
+          in: query
+          schema:
+            type: string
+        - name: effectiveDate
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: List of pricing plans
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PricingPlan'
+                  totalCount:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createPricingPlan
+      summary: Create a pricing plan
+      description: >-
+        Creates a new pricing plan with associated rate cards and pricing tiers.
+      tags:
+        - Pricing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PricingPlanCreate'
+      responses:
+        '201':
+          description: Pricing plan created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingPlan'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Pricing plan with the same identifier already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /pricing/plans/{planId}:
+    get:
+      operationId: getPricingPlan
+      summary: Get a pricing plan
+      description: Retrieves the details of a specific pricing plan by its identifier.
+      tags:
+        - Pricing
+      parameters:
+        - $ref: '#/components/parameters/PlanId'
+      responses:
+        '200':
+          description: Pricing plan details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingPlan'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      operationId: updatePricingPlan
+      summary: Update a pricing plan
+      description: >-
+        Updates an existing pricing plan. Only DRAFT plans can be fully updated;
+        ACTIVE plans support limited modifications.
+      tags:
+        - Pricing
+      parameters:
+        - $ref: '#/components/parameters/PlanId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PricingPlanCreate'
+      responses:
+        '200':
+          description: Pricing plan updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingPlan'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: deletePricingPlan
+      summary: Delete a pricing plan
+      description: >-
+        Deletes a pricing plan. Only DRAFT or INACTIVE plans can be deleted.
+      tags:
+        - Pricing
+      parameters:
+        - $ref: '#/components/parameters/PlanId'
+      responses:
+        '204':
+          description: Pricing plan deleted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /pricing/plans/{planId}/rate-cards:
+    get:
+      operationId: listRateCards
+      summary: List rate cards for a pricing plan
+      description: >-
+        Retrieves all rate cards associated with a pricing plan.
+      tags:
+        - Pricing
+      parameters:
+        - $ref: '#/components/parameters/PlanId'
+      responses:
+        '200':
+          description: List of rate cards
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RateCard'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createRateCard
+      summary: Add a rate card to a pricing plan
+      description: >-
+        Creates a new rate card and associates it with the specified pricing
+        plan. Rate cards define the unit prices and tier structures.
+      tags:
+        - Pricing
+      parameters:
+        - $ref: '#/components/parameters/PlanId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RateCardCreate'
+      responses:
+        '201':
+          description: Rate card created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateCard'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /balances/{accountId}:
+    get:
+      operationId: getAccountBalance
+      summary: Get account balance
+      description: >-
+        Retrieves the current balance information for a subscriber account,
+        including available balance, reserved amounts, and credit limits.
+      tags:
+        - Balances
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      responses:
+        '200':
+          description: Account balance details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBalance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /balances/{accountId}/topup:
+    post:
+      operationId: topUpBalance
+      summary: Top up account balance
+      description: >-
+        Adds funds to a prepaid account balance.
+      tags:
+        - Balances
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - amount
+              properties:
+                amount:
+                  $ref: '#/components/schemas/MonetaryAmount'
+                reference:
+                  type: string
+                  description: External payment reference
+                expiresAt:
+                  type: string
+                  format: date-time
+                  description: Expiry date for the topped-up balance
+      responses:
+        '200':
+          description: Balance topped up
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBalance'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /usage-events:
+    post:
+      operationId: submitUsageEvent
+      summary: Submit a usage event
+      description: >-
+        Submits a usage event for rating and charging. The event is processed
+        against the applicable pricing plan.
+      tags:
+        - Usage Events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsageEvent'
+      responses:
+        '202':
+          description: Usage event accepted for processing
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  eventId:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    enum:
+                      - ACCEPTED
+                      - QUEUED
+                  receivedAt:
+                    type: string
+                    format: date-time
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /usage-events/{eventId}:
+    get:
+      operationId: getUsageEvent
+      summary: Get usage event status
+      description: >-
+        Retrieves the processing status and details of a previously submitted
+        usage event.
+      tags:
+        - Usage Events
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Usage event details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageEventDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.sap.com/oauth/token
+          scopes:
+            read: Read access to charging and rating resources
+            write: Write access to charging and rating resources
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: APIKey
+  parameters:
+    PlanId:
+      name: planId
+      in: path
+      required: true
+      description: Unique identifier of the pricing plan
+      schema:
+        type: string
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Unique identifier of the subscriber account
+      schema:
+        type: string
+    AuthorizationId:
+      name: authorizationId
+      in: path
+      required: true
+      description: Unique identifier of the charge authorization
+      schema:
+        type: string
+    Offset:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 20
+        minimum: 1
+        maximum: 100
+  schemas:
+    MonetaryAmount:
+      type: object
+      required:
+        - value
+        - currency
+      properties:
+        value:
+          type: number
+          format: double
+          description: The monetary value
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          description: ISO 4217 currency code
+    RatingRequest:
+      type: object
+      required:
+        - subscriberId
+        - serviceType
+        - quantity
+        - usageTimestamp
+      properties:
+        subscriberId:
+          type: string
+          description: Unique identifier of the subscriber
+        serviceType:
+          type: string
+          description: Type of service being consumed
+        quantity:
+          type: number
+          format: double
+          description: Quantity of usage units
+        unit:
+          type: string
+          description: Unit of measurement (e.g., MB, minutes, events)
+        usageTimestamp:
+          type: string
+          format: date-time
+          description: Timestamp when the usage occurred
+        pricingPlanId:
+          type: string
+          description: Optional override for the pricing plan to use
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional attributes for rating context
+    RatingResponse:
+      type: object
+      properties:
+        ratingId:
+          type: string
+          format: uuid
+        subscriberId:
+          type: string
+        serviceType:
+          type: string
+        quantity:
+          type: number
+          format: double
+        charge:
+          $ref: '#/components/schemas/MonetaryAmount'
+        pricingPlanId:
+          type: string
+        rateApplied:
+          type: number
+          format: double
+          description: The unit rate applied
+        tierApplied:
+          type: string
+          description: Name of the pricing tier that was applied
+        ratedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+            - RATED
+            - FAILED
+            - ZERO_RATED
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              tierName:
+                type: string
+              unitsInTier:
+                type: number
+                format: double
+              ratePerUnit:
+                type: number
+                format: double
+              tierCharge:
+                $ref: '#/components/schemas/MonetaryAmount'
+    ChargingRequest:
+      type: object
+      required:
+        - accountId
+        - amount
+        - chargeType
+      properties:
+        accountId:
+          type: string
+          description: Account to charge
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        chargeType:
+          type: string
+          enum:
+            - PREPAID
+            - POSTPAID
+          description: Charging model
+        serviceType:
+          type: string
+        description:
+          type: string
+        externalReference:
+          type: string
+          description: External transaction reference
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    ChargingResponse:
+      type: object
+      properties:
+        chargeId:
+          type: string
+          format: uuid
+        accountId:
+          type: string
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        chargeType:
+          type: string
+          enum:
+            - PREPAID
+            - POSTPAID
+        status:
+          type: string
+          enum:
+            - COMPLETED
+            - PENDING
+            - FAILED
+        remainingBalance:
+          $ref: '#/components/schemas/MonetaryAmount'
+        chargedAt:
+          type: string
+          format: date-time
+    RefundRequest:
+      type: object
+      required:
+        - originalChargeId
+      properties:
+        originalChargeId:
+          type: string
+          format: uuid
+          description: Identifier of the original charge to refund
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        reason:
+          type: string
+          description: Reason for the refund
+    RefundResponse:
+      type: object
+      properties:
+        refundId:
+          type: string
+          format: uuid
+        originalChargeId:
+          type: string
+          format: uuid
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        status:
+          type: string
+          enum:
+            - COMPLETED
+            - PENDING
+        refundedAt:
+          type: string
+          format: date-time
+    AuthorizationRequest:
+      type: object
+      required:
+        - accountId
+        - amount
+      properties:
+        accountId:
+          type: string
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        expiresIn:
+          type: integer
+          description: Authorization expiry in seconds
+          default: 3600
+        serviceType:
+          type: string
+        description:
+          type: string
+    AuthorizationResponse:
+      type: object
+      properties:
+        authorizationId:
+          type: string
+          format: uuid
+        accountId:
+          type: string
+        reservedAmount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        status:
+          type: string
+          enum:
+            - AUTHORIZED
+            - EXPIRED
+            - CONFIRMED
+            - RELEASED
+        expiresAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+    PricingPlan:
+      type: object
+      properties:
+        planId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - INACTIVE
+            - DRAFT
+        serviceType:
+          type: string
+        pricingModel:
+          type: string
+          enum:
+            - FLAT
+            - TIERED
+            - VOLUME
+            - STAIRCASE
+            - PERCENTAGE
+        effectiveFrom:
+          type: string
+          format: date
+        effectiveTo:
+          type: string
+          format: date
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+        rateCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateCard'
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    PricingPlanCreate:
+      type: object
+      required:
+        - name
+        - serviceType
+        - pricingModel
+        - effectiveFrom
+        - currency
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        serviceType:
+          type: string
+        pricingModel:
+          type: string
+          enum:
+            - FLAT
+            - TIERED
+            - VOLUME
+            - STAIRCASE
+            - PERCENTAGE
+        effectiveFrom:
+          type: string
+          format: date
+        effectiveTo:
+          type: string
+          format: date
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+    RateCard:
+      type: object
+      properties:
+        rateCardId:
+          type: string
+        name:
+          type: string
+        unit:
+          type: string
+          description: Unit of measurement
+        baseRate:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingTier'
+        effectiveFrom:
+          type: string
+          format: date
+        effectiveTo:
+          type: string
+          format: date
+    RateCardCreate:
+      type: object
+      required:
+        - name
+        - unit
+        - baseRate
+      properties:
+        name:
+          type: string
+        unit:
+          type: string
+        baseRate:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingTier'
+        effectiveFrom:
+          type: string
+          format: date
+        effectiveTo:
+          type: string
+          format: date
+    PricingTier:
+      type: object
+      required:
+        - fromQuantity
+        - ratePerUnit
+      properties:
+        tierName:
+          type: string
+        fromQuantity:
+          type: number
+          format: double
+        toQuantity:
+          type: number
+          format: double
+          description: Upper bound of the tier (null for unlimited)
+        ratePerUnit:
+          type: number
+          format: double
+        flatFee:
+          $ref: '#/components/schemas/MonetaryAmount'
+    AccountBalance:
+      type: object
+      properties:
+        accountId:
+          type: string
+        accountType:
+          type: string
+          enum:
+            - PREPAID
+            - POSTPAID
+        availableBalance:
+          $ref: '#/components/schemas/MonetaryAmount'
+        reservedAmount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        totalBalance:
+          $ref: '#/components/schemas/MonetaryAmount'
+        creditLimit:
+          $ref: '#/components/schemas/MonetaryAmount'
+        lastUpdated:
+          type: string
+          format: date-time
+    UsageEvent:
+      type: object
+      required:
+        - subscriberId
+        - serviceType
+        - quantity
+        - usageTimestamp
+      properties:
+        externalId:
+          type: string
+          description: External identifier for deduplication
+        subscriberId:
+          type: string
+        serviceType:
+          type: string
+        quantity:
+          type: number
+          format: double
+        unit:
+          type: string
+        usageTimestamp:
+          type: string
+          format: date-time
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+    UsageEventDetail:
+      type: object
+      properties:
+        eventId:
+          type: string
+          format: uuid
+        externalId:
+          type: string
+        subscriberId:
+          type: string
+        serviceType:
+          type: string
+        quantity:
+          type: number
+          format: double
+        unit:
+          type: string
+        usageTimestamp:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+            - ACCEPTED
+            - QUEUED
+            - RATED
+            - CHARGED
+            - FAILED
+        ratingResult:
+          $ref: '#/components/schemas/RatingResponse'
+        receivedAt:
+          type: string
+          format: date-time
+        processedAt:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Request is valid but cannot be processed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

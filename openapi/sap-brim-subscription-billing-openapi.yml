@@ -1,0 +1,1350 @@
+openapi: 3.0.3
+info:
+  title: SAP BRIM Subscription Billing API
+  description: >-
+    API for managing subscription lifecycle within the SAP BRIM (Billing and
+    Revenue Innovation Management) suite. Supports creation, modification,
+    renewal, suspension, and cancellation of subscriptions across various
+    billing frequencies and subscription models including recurring, usage-based,
+    and hybrid subscriptions.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/legal/terms-of-use.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+  - url: https://api.sap.com/subscription-billing/v1
+    description: SAP API Business Hub - Production
+  - url: https://sandbox.api.sap.com/subscription-billing/v1
+    description: SAP API Business Hub - Sandbox
+security:
+  - OAuth2:
+      - read
+      - write
+  - ApiKeyAuth: []
+tags:
+  - name: Subscriptions
+    description: Subscription lifecycle management operations
+  - name: Subscription Items
+    description: Management of individual items within a subscription
+  - name: Billing
+    description: Billing cycle and invoice generation operations
+  - name: Plans
+    description: Subscription plan and offer catalog management
+  - name: Customers
+    description: Customer account management for subscriptions
+paths:
+  /subscriptions:
+    get:
+      operationId: listSubscriptions
+      summary: List subscriptions
+      description: >-
+        Retrieves a paginated list of subscriptions. Supports filtering by
+        customer, status, plan, and date range.
+      tags:
+        - Subscriptions
+      parameters:
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Limit'
+        - name: customerId
+          in: query
+          description: Filter by customer identifier
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter by subscription status
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - SUSPENDED
+              - CANCELLED
+              - EXPIRED
+              - PENDING
+              - TRIAL
+        - name: planId
+          in: query
+          description: Filter by subscription plan
+          schema:
+            type: string
+        - name: createdFrom
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: createdTo
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: List of subscriptions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscription'
+                  totalCount:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createSubscription
+      summary: Create a subscription
+      description: >-
+        Creates a new subscription for a customer. Associates the subscription
+        with a plan, sets the billing frequency, and initializes the
+        subscription lifecycle.
+      tags:
+        - Subscriptions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionCreate'
+      responses:
+        '201':
+          description: Subscription created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Conflict with existing subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /subscriptions/{subscriptionId}:
+    get:
+      operationId: getSubscription
+      summary: Get a subscription
+      description: >-
+        Retrieves detailed information about a specific subscription, including
+        its items, billing history, and current status.
+      tags:
+        - Subscriptions
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+      responses:
+        '200':
+          description: Subscription details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      operationId: updateSubscription
+      summary: Update a subscription
+      description: >-
+        Updates an existing subscription. Supports modifying billing details,
+        metadata, and other configurable attributes. Plan changes should use
+        the dedicated change-plan endpoint.
+      tags:
+        - Subscriptions
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionUpdate'
+      responses:
+        '200':
+          description: Subscription updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: deleteSubscription
+      summary: Delete a subscription
+      description: >-
+        Permanently removes a subscription. Only PENDING or CANCELLED
+        subscriptions can be deleted. Active subscriptions must be cancelled
+        first.
+      tags:
+        - Subscriptions
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+      responses:
+        '204':
+          description: Subscription deleted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /subscriptions/{subscriptionId}/activate:
+    post:
+      operationId: activateSubscription
+      summary: Activate a subscription
+      description: >-
+        Activates a PENDING or SUSPENDED subscription, starting or resuming
+        the billing cycle.
+      tags:
+        - Subscriptions
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                effectiveDate:
+                  type: string
+                  format: date
+                  description: Date when activation takes effect (defaults to today)
+      responses:
+        '200':
+          description: Subscription activated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /subscriptions/{subscriptionId}/suspend:
+    post:
+      operationId: suspendSubscription
+      summary: Suspend a subscription
+      description: >-
+        Temporarily suspends an active subscription. Billing is paused during
+        the suspension period. The subscription can be reactivated later.
+      tags:
+        - Subscriptions
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - reason
+              properties:
+                reason:
+                  type: string
+                  description: Reason for suspension
+                effectiveDate:
+                  type: string
+                  format: date
+                resumeDate:
+                  type: string
+                  format: date
+                  description: Scheduled date to automatically resume
+      responses:
+        '200':
+          description: Subscription suspended
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /subscriptions/{subscriptionId}/cancel:
+    post:
+      operationId: cancelSubscription
+      summary: Cancel a subscription
+      description: >-
+        Cancels an active or suspended subscription. Supports immediate
+        cancellation or end-of-term cancellation.
+      tags:
+        - Subscriptions
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - reason
+                - cancellationType
+              properties:
+                reason:
+                  type: string
+                cancellationType:
+                  type: string
+                  enum:
+                    - IMMEDIATE
+                    - END_OF_TERM
+                    - SPECIFIC_DATE
+                  description: When the cancellation takes effect
+                effectiveDate:
+                  type: string
+                  format: date
+                  description: Required when cancellationType is SPECIFIC_DATE
+                refundPolicy:
+                  type: string
+                  enum:
+                    - NO_REFUND
+                    - PRORATED
+                    - FULL
+      responses:
+        '200':
+          description: Subscription cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /subscriptions/{subscriptionId}/renew:
+    post:
+      operationId: renewSubscription
+      summary: Renew a subscription
+      description: >-
+        Manually triggers the renewal of a subscription. Useful for
+        subscriptions that do not auto-renew or for early renewal requests.
+      tags:
+        - Subscriptions
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                renewalTerm:
+                  type: integer
+                  description: Number of billing periods for the renewal
+                renewalPlanId:
+                  type: string
+                  description: Optional new plan for the renewal period
+      responses:
+        '200':
+          description: Subscription renewed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /subscriptions/{subscriptionId}/change-plan:
+    post:
+      operationId: changeSubscriptionPlan
+      summary: Change subscription plan
+      description: >-
+        Changes the plan associated with a subscription. Handles prorating,
+        upgrade/downgrade logic, and billing adjustments automatically.
+      tags:
+        - Subscriptions
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - newPlanId
+              properties:
+                newPlanId:
+                  type: string
+                effectiveDate:
+                  type: string
+                  format: date
+                prorateCharges:
+                  type: boolean
+                  default: true
+                  description: Whether to prorate charges for the current period
+      responses:
+        '200':
+          description: Plan changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /subscriptions/{subscriptionId}/items:
+    get:
+      operationId: listSubscriptionItems
+      summary: List subscription items
+      description: >-
+        Retrieves all items within a subscription, including their quantities,
+        pricing, and status.
+      tags:
+        - Subscription Items
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+      responses:
+        '200':
+          description: List of subscription items
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SubscriptionItem'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: addSubscriptionItem
+      summary: Add an item to a subscription
+      description: >-
+        Adds a new line item to an existing subscription. The item is billed
+        according to the subscription billing cycle.
+      tags:
+        - Subscription Items
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionItemCreate'
+      responses:
+        '201':
+          description: Item added to subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionItem'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /subscriptions/{subscriptionId}/items/{itemId}:
+    get:
+      operationId: getSubscriptionItem
+      summary: Get a subscription item
+      description: Retrieves details of a specific item within a subscription.
+      tags:
+        - Subscription Items
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/ItemId'
+      responses:
+        '200':
+          description: Subscription item details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionItem'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      operationId: updateSubscriptionItem
+      summary: Update a subscription item
+      description: >-
+        Updates the quantity or configuration of a subscription item.
+      tags:
+        - Subscription Items
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/ItemId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+                  minimum: 1
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+      responses:
+        '200':
+          description: Item updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionItem'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: removeSubscriptionItem
+      summary: Remove a subscription item
+      description: >-
+        Removes an item from a subscription. Prorated credits may be applied
+        to the next billing cycle.
+      tags:
+        - Subscription Items
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/ItemId'
+      responses:
+        '204':
+          description: Item removed from subscription
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /subscriptions/{subscriptionId}/billing-history:
+    get:
+      operationId: getSubscriptionBillingHistory
+      summary: Get subscription billing history
+      description: >-
+        Retrieves the billing history for a subscription, including all
+        generated invoices and payment records.
+      tags:
+        - Billing
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Billing history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BillingRecord'
+                  totalCount:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /subscriptions/{subscriptionId}/generate-invoice:
+    post:
+      operationId: generateInvoice
+      summary: Generate an invoice for a subscription
+      description: >-
+        Manually triggers invoice generation for a subscription outside of the
+        normal billing cycle. Useful for ad-hoc or on-demand billing.
+      tags:
+        - Billing
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                billingPeriodStart:
+                  type: string
+                  format: date
+                billingPeriodEnd:
+                  type: string
+                  format: date
+                includeUsageCharges:
+                  type: boolean
+                  default: true
+      responses:
+        '201':
+          description: Invoice generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingRecord'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /plans:
+    get:
+      operationId: listPlans
+      summary: List subscription plans
+      description: >-
+        Retrieves a paginated list of available subscription plans from the
+        product catalog.
+      tags:
+        - Plans
+      parameters:
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Limit'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - INACTIVE
+              - DRAFT
+        - name: billingFrequency
+          in: query
+          schema:
+            type: string
+            enum:
+              - MONTHLY
+              - QUARTERLY
+              - SEMI_ANNUAL
+              - ANNUAL
+              - CUSTOM
+      responses:
+        '200':
+          description: List of plans
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Plan'
+                  totalCount:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createPlan
+      summary: Create a subscription plan
+      description: >-
+        Creates a new subscription plan in the product catalog with pricing,
+        billing frequency, and included items.
+      tags:
+        - Plans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanCreate'
+      responses:
+        '201':
+          description: Plan created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Plan with the same identifier already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /plans/{planId}:
+    get:
+      operationId: getPlan
+      summary: Get a subscription plan
+      description: Retrieves details of a specific subscription plan.
+      tags:
+        - Plans
+      parameters:
+        - $ref: '#/components/parameters/PlanId'
+      responses:
+        '200':
+          description: Plan details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      operationId: updatePlan
+      summary: Update a subscription plan
+      description: >-
+        Updates an existing subscription plan. Changes do not affect existing
+        subscriptions unless explicitly propagated.
+      tags:
+        - Plans
+      parameters:
+        - $ref: '#/components/parameters/PlanId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanCreate'
+      responses:
+        '200':
+          description: Plan updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: deletePlan
+      summary: Delete a subscription plan
+      description: >-
+        Deletes a subscription plan. Only DRAFT or INACTIVE plans with no
+        active subscriptions can be deleted.
+      tags:
+        - Plans
+      parameters:
+        - $ref: '#/components/parameters/PlanId'
+      responses:
+        '204':
+          description: Plan deleted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /customers/{customerId}/subscriptions:
+    get:
+      operationId: listCustomerSubscriptions
+      summary: List subscriptions for a customer
+      description: >-
+        Retrieves all subscriptions belonging to a specific customer.
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/CustomerId'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Limit'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - SUSPENDED
+              - CANCELLED
+              - EXPIRED
+              - PENDING
+              - TRIAL
+      responses:
+        '200':
+          description: List of customer subscriptions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscription'
+                  totalCount:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /customers/{customerId}/billing-summary:
+    get:
+      operationId: getCustomerBillingSummary
+      summary: Get billing summary for a customer
+      description: >-
+        Retrieves a billing summary across all of a customer's subscriptions,
+        including outstanding amounts, next billing dates, and payment status.
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/CustomerId'
+      responses:
+        '200':
+          description: Customer billing summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerBillingSummary'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.sap.com/oauth/token
+          scopes:
+            read: Read access to subscription resources
+            write: Write access to subscription resources
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: APIKey
+  parameters:
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      required: true
+      description: Unique identifier of the subscription
+      schema:
+        type: string
+        format: uuid
+    PlanId:
+      name: planId
+      in: path
+      required: true
+      description: Unique identifier of the subscription plan
+      schema:
+        type: string
+    ItemId:
+      name: itemId
+      in: path
+      required: true
+      description: Unique identifier of the subscription item
+      schema:
+        type: string
+    CustomerId:
+      name: customerId
+      in: path
+      required: true
+      description: Unique identifier of the customer
+      schema:
+        type: string
+    Offset:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 20
+        minimum: 1
+        maximum: 100
+  schemas:
+    MonetaryAmount:
+      type: object
+      required:
+        - value
+        - currency
+      properties:
+        value:
+          type: number
+          format: double
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          description: ISO 4217 currency code
+    Subscription:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+          format: uuid
+        customerId:
+          type: string
+        planId:
+          type: string
+        planName:
+          type: string
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - SUSPENDED
+            - CANCELLED
+            - EXPIRED
+            - PENDING
+            - TRIAL
+        billingFrequency:
+          type: string
+          enum:
+            - MONTHLY
+            - QUARTERLY
+            - SEMI_ANNUAL
+            - ANNUAL
+            - CUSTOM
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        trialEndDate:
+          type: string
+          format: date
+        currentPeriodStart:
+          type: string
+          format: date
+        currentPeriodEnd:
+          type: string
+          format: date
+        nextBillingDate:
+          type: string
+          format: date
+        autoRenew:
+          type: boolean
+        renewalCount:
+          type: integer
+          description: Number of times this subscription has been renewed
+        cancellationDate:
+          type: string
+          format: date
+        cancellationReason:
+          type: string
+        recurringCharge:
+          $ref: '#/components/schemas/MonetaryAmount'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionItem'
+        paymentMethod:
+          type: string
+          description: Identifier of the payment method on file
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    SubscriptionCreate:
+      type: object
+      required:
+        - customerId
+        - planId
+      properties:
+        customerId:
+          type: string
+        planId:
+          type: string
+        billingFrequency:
+          type: string
+          enum:
+            - MONTHLY
+            - QUARTERLY
+            - SEMI_ANNUAL
+            - ANNUAL
+            - CUSTOM
+        startDate:
+          type: string
+          format: date
+          description: Defaults to today if not specified
+        endDate:
+          type: string
+          format: date
+        trialPeriodDays:
+          type: integer
+          minimum: 0
+          description: Number of trial days before billing begins
+        autoRenew:
+          type: boolean
+          default: true
+        quantity:
+          type: integer
+          minimum: 1
+          default: 1
+        paymentMethod:
+          type: string
+        couponCode:
+          type: string
+          description: Promotional coupon to apply
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    SubscriptionUpdate:
+      type: object
+      properties:
+        autoRenew:
+          type: boolean
+        paymentMethod:
+          type: string
+        endDate:
+          type: string
+          format: date
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    SubscriptionItem:
+      type: object
+      properties:
+        itemId:
+          type: string
+        productId:
+          type: string
+        productName:
+          type: string
+        description:
+          type: string
+        quantity:
+          type: integer
+          minimum: 1
+        unitPrice:
+          $ref: '#/components/schemas/MonetaryAmount'
+        totalPrice:
+          $ref: '#/components/schemas/MonetaryAmount'
+        billingType:
+          type: string
+          enum:
+            - RECURRING
+            - ONE_TIME
+            - USAGE_BASED
+        includedUnits:
+          type: integer
+          description: Number of units included in the base price
+        overageRate:
+          type: number
+          format: double
+          description: Rate per unit above the included quantity
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    SubscriptionItemCreate:
+      type: object
+      required:
+        - productId
+        - quantity
+      properties:
+        productId:
+          type: string
+        quantity:
+          type: integer
+          minimum: 1
+        billingType:
+          type: string
+          enum:
+            - RECURRING
+            - ONE_TIME
+            - USAGE_BASED
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    Plan:
+      type: object
+      properties:
+        planId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - INACTIVE
+            - DRAFT
+        billingFrequency:
+          type: string
+          enum:
+            - MONTHLY
+            - QUARTERLY
+            - SEMI_ANNUAL
+            - ANNUAL
+            - CUSTOM
+        price:
+          $ref: '#/components/schemas/MonetaryAmount'
+        setupFee:
+          $ref: '#/components/schemas/MonetaryAmount'
+        trialPeriodDays:
+          type: integer
+          minimum: 0
+        contractTermMonths:
+          type: integer
+          description: Minimum contract term in months
+        autoRenewDefault:
+          type: boolean
+        includedItems:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: string
+              productName:
+                type: string
+              quantity:
+                type: integer
+              billingType:
+                type: string
+                enum:
+                  - RECURRING
+                  - ONE_TIME
+                  - USAGE_BASED
+        features:
+          type: array
+          items:
+            type: string
+          description: List of features included in this plan
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    PlanCreate:
+      type: object
+      required:
+        - name
+        - billingFrequency
+        - price
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        billingFrequency:
+          type: string
+          enum:
+            - MONTHLY
+            - QUARTERLY
+            - SEMI_ANNUAL
+            - ANNUAL
+            - CUSTOM
+        price:
+          $ref: '#/components/schemas/MonetaryAmount'
+        setupFee:
+          $ref: '#/components/schemas/MonetaryAmount'
+        trialPeriodDays:
+          type: integer
+          minimum: 0
+          default: 0
+        contractTermMonths:
+          type: integer
+        autoRenewDefault:
+          type: boolean
+          default: true
+        features:
+          type: array
+          items:
+            type: string
+    BillingRecord:
+      type: object
+      properties:
+        billingRecordId:
+          type: string
+          format: uuid
+        subscriptionId:
+          type: string
+          format: uuid
+        invoiceNumber:
+          type: string
+        billingPeriodStart:
+          type: string
+          format: date
+        billingPeriodEnd:
+          type: string
+          format: date
+        subtotal:
+          $ref: '#/components/schemas/MonetaryAmount'
+        tax:
+          $ref: '#/components/schemas/MonetaryAmount'
+        total:
+          $ref: '#/components/schemas/MonetaryAmount'
+        status:
+          type: string
+          enum:
+            - DRAFT
+            - ISSUED
+            - PAID
+            - OVERDUE
+            - VOID
+        issuedAt:
+          type: string
+          format: date-time
+        dueDate:
+          type: string
+          format: date
+        paidAt:
+          type: string
+          format: date-time
+        lineItems:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+              quantity:
+                type: number
+              unitPrice:
+                $ref: '#/components/schemas/MonetaryAmount'
+              amount:
+                $ref: '#/components/schemas/MonetaryAmount'
+    CustomerBillingSummary:
+      type: object
+      properties:
+        customerId:
+          type: string
+        activeSubscriptions:
+          type: integer
+        totalRecurringCharge:
+          $ref: '#/components/schemas/MonetaryAmount'
+        outstandingBalance:
+          $ref: '#/components/schemas/MonetaryAmount'
+        nextBillingDate:
+          type: string
+          format: date
+        nextBillingAmount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        paymentStatus:
+          type: string
+          enum:
+            - CURRENT
+            - OVERDUE
+            - DELINQUENT
+        lastPaymentDate:
+          type: string
+          format: date
+        lastPaymentAmount:
+          $ref: '#/components/schemas/MonetaryAmount'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
