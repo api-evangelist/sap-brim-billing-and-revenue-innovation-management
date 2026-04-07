@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: SAP BRIM Subscription Billing API
+  title: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Subscription Billing API
   description: >-
     API for managing subscription lifecycle within the SAP BRIM (Billing and
     Revenue Innovation Management) suite. Supports creation, modification,
@@ -41,7 +41,7 @@ paths:
   /subscriptions:
     get:
       operationId: listSubscriptions
-      summary: List subscriptions
+      summary: SAP BRIM (Billing and Revenue Innovation Management) List subscriptions
       description: >-
         Retrieves a paginated list of subscriptions. Supports filtering by
         customer, status, plan, and date range.
@@ -106,7 +106,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     post:
       operationId: createSubscription
-      summary: Create a subscription
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Create a subscription
       description: >-
         Creates a new subscription for a customer. Associates the subscription
         with a plan, sets the billing frequency, and initializes the
@@ -141,7 +141,7 @@ paths:
   /subscriptions/{subscriptionId}:
     get:
       operationId: getSubscription
-      summary: Get a subscription
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get a subscription
       description: >-
         Retrieves detailed information about a specific subscription, including
         its items, billing history, and current status.
@@ -164,7 +164,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     patch:
       operationId: updateSubscription
-      summary: Update a subscription
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Update a subscription
       description: >-
         Updates an existing subscription. Supports modifying billing details,
         metadata, and other configurable attributes. Plan changes should use
@@ -196,7 +196,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     delete:
       operationId: deleteSubscription
-      summary: Delete a subscription
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Delete a subscription
       description: >-
         Permanently removes a subscription. Only PENDING or CANCELLED
         subscriptions can be deleted. Active subscriptions must be cancelled
@@ -219,7 +219,7 @@ paths:
   /subscriptions/{subscriptionId}/activate:
     post:
       operationId: activateSubscription
-      summary: Activate a subscription
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Activate a subscription
       description: >-
         Activates a PENDING or SUSPENDED subscription, starting or resuming
         the billing cycle.
@@ -254,7 +254,7 @@ paths:
   /subscriptions/{subscriptionId}/suspend:
     post:
       operationId: suspendSubscription
-      summary: Suspend a subscription
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Suspend a subscription
       description: >-
         Temporarily suspends an active subscription. Billing is paused during
         the suspension period. The subscription can be reactivated later.
@@ -297,7 +297,7 @@ paths:
   /subscriptions/{subscriptionId}/cancel:
     post:
       operationId: cancelSubscription
-      summary: Cancel a subscription
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Cancel a subscription
       description: >-
         Cancels an active or suspended subscription. Supports immediate
         cancellation or end-of-term cancellation.
@@ -350,7 +350,7 @@ paths:
   /subscriptions/{subscriptionId}/renew:
     post:
       operationId: renewSubscription
-      summary: Renew a subscription
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Renew a subscription
       description: >-
         Manually triggers the renewal of a subscription. Useful for
         subscriptions that do not auto-renew or for early renewal requests.
@@ -387,7 +387,7 @@ paths:
   /subscriptions/{subscriptionId}/change-plan:
     post:
       operationId: changeSubscriptionPlan
-      summary: Change subscription plan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Change subscription plan
       description: >-
         Changes the plan associated with a subscription. Handles prorating,
         upgrade/downgrade logic, and billing adjustments automatically.
@@ -429,7 +429,7 @@ paths:
   /subscriptions/{subscriptionId}/items:
     get:
       operationId: listSubscriptionItems
-      summary: List subscription items
+      summary: SAP BRIM (Billing and Revenue Innovation Management) List subscription items
       description: >-
         Retrieves all items within a subscription, including their quantities,
         pricing, and status.
@@ -457,7 +457,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     post:
       operationId: addSubscriptionItem
-      summary: Add an item to a subscription
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Add an item to a subscription
       description: >-
         Adds a new line item to an existing subscription. The item is billed
         according to the subscription billing cycle.
@@ -487,7 +487,7 @@ paths:
   /subscriptions/{subscriptionId}/items/{itemId}:
     get:
       operationId: getSubscriptionItem
-      summary: Get a subscription item
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get a subscription item
       description: Retrieves details of a specific item within a subscription.
       tags:
         - Subscription Items
@@ -507,7 +507,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     patch:
       operationId: updateSubscriptionItem
-      summary: Update a subscription item
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Update a subscription item
       description: >-
         Updates the quantity or configuration of a subscription item.
       tags:
@@ -544,7 +544,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     delete:
       operationId: removeSubscriptionItem
-      summary: Remove a subscription item
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Remove a subscription item
       description: >-
         Removes an item from a subscription. Prorated credits may be applied
         to the next billing cycle.
@@ -565,7 +565,7 @@ paths:
   /subscriptions/{subscriptionId}/billing-history:
     get:
       operationId: getSubscriptionBillingHistory
-      summary: Get subscription billing history
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get subscription billing history
       description: >-
         Retrieves the billing history for a subscription, including all
         generated invoices and payment records.
@@ -602,7 +602,7 @@ paths:
   /subscriptions/{subscriptionId}/generate-invoice:
     post:
       operationId: generateInvoice
-      summary: Generate an invoice for a subscription
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Generate an invoice for a subscription
       description: >-
         Manually triggers invoice generation for a subscription outside of the
         normal billing cycle. Useful for ad-hoc or on-demand billing.
@@ -642,7 +642,7 @@ paths:
   /plans:
     get:
       operationId: listPlans
-      summary: List subscription plans
+      summary: SAP BRIM (Billing and Revenue Innovation Management) List subscription plans
       description: >-
         Retrieves a paginated list of available subscription plans from the
         product catalog.
@@ -693,7 +693,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     post:
       operationId: createPlan
-      summary: Create a subscription plan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Create a subscription plan
       description: >-
         Creates a new subscription plan in the product catalog with pricing,
         billing frequency, and included items.
@@ -727,7 +727,7 @@ paths:
   /plans/{planId}:
     get:
       operationId: getPlan
-      summary: Get a subscription plan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get a subscription plan
       description: Retrieves details of a specific subscription plan.
       tags:
         - Plans
@@ -746,7 +746,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     put:
       operationId: updatePlan
-      summary: Update a subscription plan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Update a subscription plan
       description: >-
         Updates an existing subscription plan. Changes do not affect existing
         subscriptions unless explicitly propagated.
@@ -775,7 +775,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     delete:
       operationId: deletePlan
-      summary: Delete a subscription plan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Delete a subscription plan
       description: >-
         Deletes a subscription plan. Only DRAFT or INACTIVE plans with no
         active subscriptions can be deleted.
@@ -795,7 +795,7 @@ paths:
   /customers/{customerId}/subscriptions:
     get:
       operationId: listCustomerSubscriptions
-      summary: List subscriptions for a customer
+      summary: SAP BRIM (Billing and Revenue Innovation Management) List subscriptions for a customer
       description: >-
         Retrieves all subscriptions belonging to a specific customer.
       tags:
@@ -838,7 +838,7 @@ paths:
   /customers/{customerId}/billing-summary:
     get:
       operationId: getCustomerBillingSummary
-      summary: Get billing summary for a customer
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get billing summary for a customer
       description: >-
         Retrieves a billing summary across all of a customer's subscriptions,
         including outstanding amounts, next billing dates, and payment status.

@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: SAP BRIM Convergent Charging API
+  title: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging API
   description: >-
     API for real-time charging and rating of usage-based services within the SAP
     BRIM (Billing and Revenue Innovation Management) suite. Supports complex
@@ -40,7 +40,7 @@ paths:
   /rating/rate:
     post:
       operationId: rateUsageEvent
-      summary: Rate a usage event
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Rate a usage event
       description: >-
         Rates a single usage event against the applicable pricing plan and
         returns the calculated charge. Supports real-time and batch rating
@@ -73,7 +73,7 @@ paths:
   /rating/rate-batch:
     post:
       operationId: rateUsageEventBatch
-      summary: Rate a batch of usage events
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Rate a batch of usage events
       description: >-
         Rates multiple usage events in a single request for high-throughput
         scenarios. Returns individual rating results for each event.
@@ -126,7 +126,7 @@ paths:
   /rating/simulate:
     post:
       operationId: simulateRating
-      summary: Simulate rating without committing
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Simulate rating without committing
       description: >-
         Simulates the rating of a usage event without persisting the result.
         Useful for quote generation and what-if analysis.
@@ -154,7 +154,7 @@ paths:
   /charging/charge:
     post:
       operationId: chargeAccount
-      summary: Charge an account
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Charge an account
       description: >-
         Executes a real-time charge against a subscriber account. Supports
         prepaid balance deduction and postpaid charge accumulation.
@@ -190,7 +190,7 @@ paths:
   /charging/refund:
     post:
       operationId: refundCharge
-      summary: Refund a previous charge
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Refund a previous charge
       description: >-
         Processes a full or partial refund for a previously executed charge.
         Restores prepaid balances or creates credit adjustments for postpaid.
@@ -220,7 +220,7 @@ paths:
   /charging/authorize:
     post:
       operationId: authorizeCharge
-      summary: Authorize a charge reservation
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Authorize a charge reservation
       description: >-
         Reserves an amount against a prepaid balance without executing the final
         charge. The reservation can later be confirmed or released.
@@ -254,7 +254,7 @@ paths:
   /charging/authorize/{authorizationId}/confirm:
     post:
       operationId: confirmAuthorization
-      summary: Confirm a charge authorization
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Confirm a charge authorization
       description: >-
         Confirms a previously created authorization, converting the reserved
         amount into a final charge.
@@ -287,7 +287,7 @@ paths:
   /charging/authorize/{authorizationId}/release:
     post:
       operationId: releaseAuthorization
-      summary: Release a charge authorization
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Release a charge authorization
       description: >-
         Releases a previously created authorization, restoring the reserved
         amount to the available balance.
@@ -319,7 +319,7 @@ paths:
   /pricing/plans:
     get:
       operationId: listPricingPlans
-      summary: List pricing plans
+      summary: SAP BRIM (Billing and Revenue Innovation Management) List pricing plans
       description: >-
         Retrieves a paginated list of pricing plans. Supports filtering by
         status, service type, and effective date.
@@ -369,7 +369,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     post:
       operationId: createPricingPlan
-      summary: Create a pricing plan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Create a pricing plan
       description: >-
         Creates a new pricing plan with associated rate cards and pricing tiers.
       tags:
@@ -402,7 +402,7 @@ paths:
   /pricing/plans/{planId}:
     get:
       operationId: getPricingPlan
-      summary: Get a pricing plan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get a pricing plan
       description: Retrieves the details of a specific pricing plan by its identifier.
       tags:
         - Pricing
@@ -423,7 +423,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     put:
       operationId: updatePricingPlan
-      summary: Update a pricing plan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Update a pricing plan
       description: >-
         Updates an existing pricing plan. Only DRAFT plans can be fully updated;
         ACTIVE plans support limited modifications.
@@ -454,7 +454,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     delete:
       operationId: deletePricingPlan
-      summary: Delete a pricing plan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Delete a pricing plan
       description: >-
         Deletes a pricing plan. Only DRAFT or INACTIVE plans can be deleted.
       tags:
@@ -475,7 +475,7 @@ paths:
   /pricing/plans/{planId}/rate-cards:
     get:
       operationId: listRateCards
-      summary: List rate cards for a pricing plan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) List rate cards for a pricing plan
       description: >-
         Retrieves all rate cards associated with a pricing plan.
       tags:
@@ -502,7 +502,7 @@ paths:
           $ref: '#/components/responses/InternalServerError'
     post:
       operationId: createRateCard
-      summary: Add a rate card to a pricing plan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Add a rate card to a pricing plan
       description: >-
         Creates a new rate card and associates it with the specified pricing
         plan. Rate cards define the unit prices and tier structures.
@@ -534,7 +534,7 @@ paths:
   /balances/{accountId}:
     get:
       operationId: getAccountBalance
-      summary: Get account balance
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get account balance
       description: >-
         Retrieves the current balance information for a subscriber account,
         including available balance, reserved amounts, and credit limits.
@@ -558,7 +558,7 @@ paths:
   /balances/{accountId}/topup:
     post:
       operationId: topUpBalance
-      summary: Top up account balance
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Top up account balance
       description: >-
         Adds funds to a prepaid account balance.
       tags:
@@ -601,7 +601,7 @@ paths:
   /usage-events:
     post:
       operationId: submitUsageEvent
-      summary: Submit a usage event
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Submit a usage event
       description: >-
         Submits a usage event for rating and charging. The event is processed
         against the applicable pricing plan.
@@ -641,7 +641,7 @@ paths:
   /usage-events/{eventId}:
     get:
       operationId: getUsageEvent
-      summary: Get usage event status
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get usage event status
       description: >-
         Retrieves the processing status and details of a previously submitted
         usage event.
