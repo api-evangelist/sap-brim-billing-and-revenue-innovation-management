@@ -5,19 +5,18 @@ description: >-
   management. It enables businesses to manage complex billing scenarios, subscription
   lifecycle, and revenue recognition.
 image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-url: 
-  https://www.sap.com/products/financial-management/billing-revenue-innovation-mgmt.html
+url: https://www.sap.com/products/financial-management/billing-revenue-innovation-mgmt.html
 created: '2024-01-15'
 modified: '2025-03-04'
 specificationVersion: '0.18'
 tags:
   - Billing
-  - Revenue Management
-  - Subscription Management
-  - Order to Cash
-  - Usage-Based Pricing
-  - SAP
   - Enterprise
+  - Order to Cash
+  - Revenue Management
+  - SAP
+  - Subscription Management
+  - Usage-Based Pricing
 apis:
   - name: SAP Convergent Charging API
     description: >-
@@ -29,8 +28,8 @@ apis:
     tags:
       - Charging
       - Rating
+      - Real-Time
       - Usage-Based Pricing
-      - Real-time
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
@@ -52,9 +51,9 @@ apis:
     humanURL: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
     baseURL: https://api.sap.com/convergent-invoicing
     tags:
-      - Invoicing
       - Billing
       - Invoice Management
+      - Invoicing
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
@@ -74,9 +73,9 @@ apis:
     humanURL: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
     baseURL: https://api.sap.com/subscription-billing
     tags:
-      - Subscriptions
-      - Recurring Billing
       - Lifecycle Management
+      - Recurring Billing
+      - Subscriptions
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
@@ -89,8 +88,7 @@ apis:
       - type: Reference
         url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
       - type: Getting Started
-        url: 
-          https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+        url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
       - type: JSONSchema
         url: json-schema/sap-brim-subscription-schema.json
     contact:
@@ -106,9 +104,9 @@ apis:
     baseURL: https://api.sap.com/fica
     tags:
       - Accounts Receivable
-      - Payments
       - Dunning
       - Financial Accounting
+      - Payments
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
@@ -128,9 +126,9 @@ apis:
     humanURL: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
     baseURL: https://api.sap.com/usage-data-intake
     tags:
-      - Usage Data
       - Data Ingestion
       - Mediation
+      - Usage Data
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
@@ -150,18 +148,17 @@ apis:
     humanURL: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
     baseURL: https://api.sap.com/revenue-accounting
     tags:
-      - Revenue Recognition
-      - IFRS 15
       - ASC 606
       - Compliance
+      - IFRS 15
+      - Revenue Recognition
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
       - type: OpenAPI
         url: https://api.sap.com/api/revenue_accounting/overview
       - type: Compliance Guide
-        url: 
-          https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
+        url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
     contact:
       - FN: SAP Support
         email: support@sap.com
@@ -175,9 +172,9 @@ apis:
     humanURL: https://help.sap.com/docs/BRIM
     baseURL: https://api.sap.com/subscription-order-management
     tags:
-      - Subscription Orders
-      - Order Management
       - Lifecycle Management
+      - Order Management
+      - Subscription Orders
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/BRIM
@@ -207,8 +204,7 @@ common:
   - type: Blog
     url: https://blogs.sap.com
   - type: Website
-    url: 
-      https://www.sap.com/products/financial-management/billing-revenue-innovation-management.html
+    url: https://www.sap.com/products/financial-management/billing-revenue-innovation-management.html
   - type: Documentation
     url: https://help.sap.com/docs/BRIM
   - type: SDKs

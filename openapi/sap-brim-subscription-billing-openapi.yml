@@ -27,16 +27,16 @@ security:
       - write
   - ApiKeyAuth: []
 tags:
-  - name: Subscriptions
-    description: Subscription lifecycle management operations
-  - name: Subscription Items
-    description: Management of individual items within a subscription
   - name: Billing
     description: Billing cycle and invoice generation operations
-  - name: Plans
-    description: Subscription plan and offer catalog management
   - name: Customers
     description: Customer account management for subscriptions
+  - name: Plans
+    description: Subscription plan and offer catalog management
+  - name: Subscription Items
+    description: Management of individual items within a subscription
+  - name: Subscriptions
+    description: Subscription lifecycle management operations
 paths:
   /subscriptions:
     get:

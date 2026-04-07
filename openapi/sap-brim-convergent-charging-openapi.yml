@@ -26,14 +26,14 @@ security:
       - write
   - ApiKeyAuth: []
 tags:
-  - name: Rating
-    description: Operations for rating usage events against pricing plans
+  - name: Balances
+    description: Account balance inquiries and adjustments
   - name: Charging
     description: Real-time charging operations for prepaid and postpaid accounts
   - name: Pricing
     description: Management of pricing plans, rate cards, and pricing structures
-  - name: Balances
-    description: Account balance inquiries and adjustments
+  - name: Rating
+    description: Operations for rating usage events against pricing plans
   - name: Usage Events
     description: Submission and management of usage event records
 paths:
