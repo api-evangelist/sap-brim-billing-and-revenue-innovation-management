@@ -1,0 +1,31 @@
+{
+  "name": "Subscription",
+  "description": "SAP BRIM Subscription - customer subscription lifecycle record",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique subscription identifier" },
+    { "name": "customerId", "type": "string", "required": true, "description": "Customer account identifier" },
+    { "name": "planId", "type": "string", "required": true, "description": "Subscription plan identifier" },
+    { "name": "status", "type": "string", "required": true, "description": "Subscription status", "enum": ["ACTIVE", "SUSPENDED", "CANCELLED", "EXPIRED", "PENDING", "TRIAL"] },
+    { "name": "startDate", "type": "date", "required": true, "description": "Subscription start date" },
+    { "name": "endDate", "type": "date", "required": false, "description": "Subscription end date" },
+    { "name": "nextBillingDate", "type": "date", "required": false, "description": "Next scheduled billing date" },
+    { "name": "billingFrequency", "type": "string", "required": false, "description": "Billing cycle frequency", "enum": ["MONTHLY", "QUARTERLY", "ANNUAL", "USAGE"] },
+    { "name": "currency", "type": "string", "required": false, "description": "Billing currency code (ISO 4217)" },
+    { "name": "createdAt", "type": "datetime", "required": false, "description": "Creation timestamp" },
+    { "name": "modifiedAt", "type": "datetime", "required": false, "description": "Last modification timestamp" },
+    {
+      "name": "items",
+      "type": "array",
+      "required": false,
+      "description": "Individual subscription line items",
+      "items": {
+        "fields": [
+          { "name": "id", "type": "string", "required": true, "description": "Item identifier" },
+          { "name": "productId", "type": "string", "required": true, "description": "Product/service identifier" },
+          { "name": "quantity", "type": "number", "required": false, "description": "Item quantity" },
+          { "name": "unitPrice", "type": "number", "required": false, "description": "Price per unit" }
+        ]
+      }
+    }
+  ]
+}

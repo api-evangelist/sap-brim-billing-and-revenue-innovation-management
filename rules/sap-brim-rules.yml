@@ -1,0 +1,93 @@
+extends: spectral:oas
+rules:
+  sap-brim-operation-summary-title-case:
+    description: Operation summaries must use Title Case
+    message: Summary "{{value}}" should be in Title Case
+    given: "$.paths[*][*].summary"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+
+  sap-brim-operation-id-camel-case:
+    description: OperationIds must use camelCase
+    message: OperationId "{{value}}" should use camelCase
+    given: "$.paths[*][*].operationId"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  sap-brim-tags-title-case:
+    description: All tags must use Title Case
+    message: Tag "{{value}}" should be in Title Case
+    given: "$.tags[*].name"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+
+  sap-brim-path-kebab-case:
+    description: API paths should use kebab-case for segments
+    message: Path should use kebab-case for all segments
+    given: "$.paths"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z][a-z0-9-]*(/[a-z][a-z0-9-]*|/\\{[a-zA-Z][a-zA-Z0-9]*\\})*)*$"
+
+  sap-brim-oauth2-or-apikey-required:
+    description: BRIM APIs require OAuth 2.0 or API Key authentication
+    message: APIs should define OAuth2 or ApiKey security schemes
+    given: "$.components.securitySchemes"
+    severity: warn
+    then:
+      function: truthy
+
+  sap-brim-error-responses:
+    description: Operations should define error responses (400, 401, 500)
+    message: Operation should define standard error responses
+    given: "$.paths[*][*].responses"
+    severity: warn
+    then:
+      function: truthy
+
+  sap-brim-subscription-status-enum:
+    description: Subscription status fields should use defined enum values
+    message: Subscription status should be ACTIVE, SUSPENDED, CANCELLED, EXPIRED, PENDING, or TRIAL
+    given: "$.components.schemas.Subscription.properties.status.enum"
+    severity: info
+    then:
+      function: truthy
+
+  sap-brim-request-body-required:
+    description: POST and PUT operations must define request bodies
+    message: POST/PUT operations should define a requestBody
+    given: "$.paths[*].post.requestBody"
+    severity: warn
+    then:
+      function: truthy
+
+  sap-brim-pagination-parameters:
+    description: List operations should support offset/limit pagination
+    message: Collection endpoints should define offset and limit pagination parameters
+    given: "$.paths[*].get.parameters"
+    severity: info
+    then:
+      function: truthy
+
+  sap-brim-servers-defined:
+    description: APIs must define production and sandbox server URLs
+    message: API should define both production and sandbox server environments
+    given: "$.servers"
+    severity: warn
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1

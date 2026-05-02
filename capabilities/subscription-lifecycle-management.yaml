@@ -1,0 +1,171 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SAP BRIM Subscription Lifecycle Management"
+  description: "Workflow capability for end-to-end subscription management within the SAP BRIM suite. Covers subscriber onboarding, plan management, lifecycle transitions (activate, suspend, renew, cancel), and billing cycle orchestration. Used by subscription management teams and customer service representatives."
+  tags:
+    - Billing
+    - Revenue Management
+    - SAP
+    - Subscription Management
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SAP_BRIM_OAUTH_TOKEN: SAP_BRIM_OAUTH_TOKEN
+
+capability:
+  consumes:
+    - import: sap-brim-subscription-billing
+      location: ./shared/subscription-billing.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: sap-brim-subscription-lifecycle-api
+      description: "Unified REST API for SAP BRIM subscription lifecycle management."
+      resources:
+        - path: /v1/subscriptions
+          name: subscriptions
+          description: "Subscription management."
+          operations:
+            - method: GET
+              name: list-subscriptions
+              description: "List all subscriptions with filtering."
+              call: "sap-brim-subscription-billing.list-subscriptions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/subscriptions/{subscriptionId}
+          name: subscription
+          description: "Single subscription."
+          operations:
+            - method: GET
+              name: get-subscription
+              description: "Get subscription details."
+              call: "sap-brim-subscription-billing.get-subscription"
+              with:
+                subscriptionId: "rest.subscriptionId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/plans
+          name: plans
+          description: "Subscription plan catalog."
+          operations:
+            - method: GET
+              name: list-plans
+              description: "List available subscription plans."
+              call: "sap-brim-subscription-billing.list-plans"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers
+          name: customers
+          description: "Customer accounts."
+          operations:
+            - method: GET
+              name: list-customers
+              description: "List customers."
+              call: "sap-brim-subscription-billing.list-customers"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/customers/{customerId}
+          name: customer
+          description: "Single customer account."
+          operations:
+            - method: GET
+              name: get-customer
+              description: "Get customer account details."
+              call: "sap-brim-subscription-billing.get-customer"
+              with:
+                customerId: "rest.customerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9080
+      namespace: sap-brim-subscription-lifecycle-mcp
+      transport: http
+      description: "MCP server for AI-assisted SAP BRIM subscription lifecycle management."
+      tools:
+        - name: list-subscriptions
+          description: "List customer subscriptions with filtering by status, plan, or customer."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-brim-subscription-billing.list-subscriptions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-subscription
+          description: "Get full lifecycle details of a specific subscription."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "sap-brim-subscription-billing.get-subscription"
+          with:
+            subscriptionId: "tools.subscriptionId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-subscription
+          description: "Create a new subscription for a customer on a selected plan."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "sap-brim-subscription-billing.create-subscription"
+          with:
+            customerId: "tools.customerId"
+            planId: "tools.planId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: suspend-subscription
+          description: "Suspend an active subscription (e.g., for non-payment)."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "sap-brim-subscription-billing.suspend-subscription"
+          with:
+            subscriptionId: "tools.subscriptionId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: cancel-subscription
+          description: "Cancel and terminate a customer subscription."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "sap-brim-subscription-billing.cancel-subscription"
+          with:
+            subscriptionId: "tools.subscriptionId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-plans
+          description: "List all available subscription plans in the BRIM catalog."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-brim-subscription-billing.list-plans"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-customer
+          description: "Get customer account details and subscription history."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "sap-brim-subscription-billing.get-customer"
+          with:
+            customerId: "tools.customerId"
+          outputParameters:
+            - type: object
+              mapping: "$."

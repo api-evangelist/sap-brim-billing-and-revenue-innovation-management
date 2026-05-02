@@ -1,0 +1,131 @@
+name: SAP BRIM Vocabulary
+description: Domain vocabulary for SAP BRIM (Billing and Revenue Innovation Management) including convergent charging, subscription billing, invoicing, and revenue management.
+version: '1.0'
+created: '2026-05-02'
+modified: '2026-05-02'
+
+terms:
+  - term: BRIM
+    definition: >-
+      SAP BRIM (Billing and Revenue Innovation Management) is SAP's comprehensive
+      solution for order-to-cash processes. It encompasses subscription management,
+      usage-based pricing, convergent charging, invoicing, and revenue recognition.
+    category: Platform
+    synonyms:
+      - Billing and Revenue Innovation Management
+      - HYBRIS Revenue Cloud
+
+  - term: Convergent Charging
+    definition: >-
+      The SAP BRIM component responsible for real-time charging and rating of
+      usage-based services. It evaluates usage events against pricing plans and
+      delivers calculated charges for prepaid and postpaid scenarios.
+    category: Charging
+
+  - term: Rating
+    definition: >-
+      The process of calculating the monetary value of a usage event by applying
+      applicable pricing plans, rate cards, and tariff structures. Rating determines
+      the charge for each unit of consumed service.
+    category: Charging
+
+  - term: Usage Event
+    definition: >-
+      A record of a consumed service instance submitted to the charging engine for
+      rating. Usage events contain the service type, quantity, timestamp, and
+      subscriber details needed to calculate charges.
+    category: Charging
+    synonyms:
+      - Usage Record
+      - CDR (Call Detail Record)
+
+  - term: Pricing Plan
+    definition: >-
+      A structured definition of how services are priced within SAP BRIM Convergent
+      Charging. Pricing plans define tiers, volume discounts, time-of-use rates,
+      and service-specific rate cards applied during rating.
+    category: Charging
+
+  - term: Balance
+    definition: >-
+      In the context of prepaid charging, a balance represents the remaining
+      credit or units available to a subscriber. Balances can be monetary
+      (EUR, USD) or unit-based (MB, minutes).
+    category: Charging
+
+  - term: Subscription
+    definition: >-
+      A contractual agreement between a business and customer for ongoing access
+      to products or services in exchange for recurring payments. Subscriptions
+      in SAP BRIM have defined start/end dates, billing cycles, and lifecycle states.
+    category: Subscription Management
+
+  - term: Subscription Status
+    definition: >-
+      The current lifecycle state of a subscription. Valid states in SAP BRIM
+      include ACTIVE, SUSPENDED, CANCELLED, EXPIRED, PENDING, and TRIAL.
+    category: Subscription Management
+
+  - term: Convergent Invoicing
+    definition: >-
+      The SAP BRIM component that consolidates charges from multiple sources
+      (convergent charging, subscriptions, order management) into unified invoices.
+      Supports various output formats and delivery channels.
+    category: Invoicing
+
+  - term: Order-to-Cash
+    definition: >-
+      The end-to-end business process from receiving a customer order through
+      delivery, invoicing, and payment collection. SAP BRIM supports the full
+      O2C cycle for subscription and usage-based business models.
+    category: Business Process
+    synonyms:
+      - O2C
+
+  - term: Mediation
+    definition: >-
+      The process of collecting, normalizing, and routing raw usage data records
+      from network elements and service platforms to the charging system. SAP BRIM
+      Usage Data Intake handles mediation.
+    category: Data
+
+  - term: Revenue Recognition
+    definition: >-
+      The accounting process of recording revenue in compliance with standards
+      such as IFRS 15 and ASC 606. SAP BRIM Revenue Accounting and Reporting
+      manages performance obligations and revenue allocation.
+    category: Finance
+
+  - term: Prepaid
+    definition: >-
+      A payment model where customers pay in advance for services. SAP BRIM
+      Convergent Charging manages prepaid balance deduction in real-time as
+      services are consumed.
+    category: Charging
+
+  - term: Postpaid
+    definition: >-
+      A payment model where customers are billed after services are consumed.
+      Postpaid charging accumulates usage records during a billing period and
+      generates invoices at period end.
+    category: Charging
+
+  - term: Plan
+    definition: >-
+      A subscription plan defines the products, services, pricing structure,
+      and billing terms offered to customers. Plans contain plan items that
+      map to chargeable services with associated pricing.
+    category: Subscription Management
+    synonyms:
+      - Offering
+      - Product Offering
+
+  - term: Recurring Revenue
+    definition: >-
+      Revenue that is expected to continue over time from subscription-based
+      customer relationships. SAP BRIM tracks and manages recurring revenue
+      streams including MRR (Monthly Recurring Revenue) and ARR (Annual Recurring Revenue).
+    category: Finance
+    synonyms:
+      - MRR
+      - ARR

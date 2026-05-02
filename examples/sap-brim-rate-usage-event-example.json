@@ -1,0 +1,30 @@
+{
+  "request": {
+    "accountId": "CUST-98765",
+    "serviceType": "DATA",
+    "eventId": "EVT-20260502-001",
+    "timestamp": "2026-05-02T10:15:30Z",
+    "quantity": 1536,
+    "unit": "MB",
+    "direction": "OUTBOUND",
+    "attributes": {
+      "roaming": false,
+      "apn": "internet",
+      "networkType": "5G"
+    }
+  },
+  "response": {
+    "eventId": "EVT-20260502-001",
+    "accountId": "CUST-98765",
+    "serviceType": "DATA",
+    "quantity": 1536,
+    "unit": "MB",
+    "appliedPlanId": "PLAN-DATA-UNLIMITED",
+    "chargedAmount": 0.00,
+    "currency": "EUR",
+    "remainingBalance": 4500,
+    "balanceUnit": "MB",
+    "ratingTimestamp": "2026-05-02T10:15:30.150Z",
+    "status": "SUCCESS"
+  }
+}

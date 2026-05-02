@@ -7,7 +7,7 @@ description: >-
 image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
 url: https://www.sap.com/products/financial-management/billing-revenue-innovation-mgmt.html
 created: '2024-01-15'
-modified: '2025-03-04'
+modified: '2026-05-02'
 specificationVersion: '0.18'
 tags:
   - Billing
@@ -185,8 +185,22 @@ apis:
 common:
   - type: Portal
     url: https://api.sap.com
-  - type: JSON-LD Context
+  - type: JSON-LD
     url: json-ld/sap-brim-context.jsonld
+  - type: JSONSchema
+    url: json-schema/sap-brim-subscription-schema.json
+  - type: JSONStructure
+    url: json-structure/sap-brim-subscription-structure.json
+  - type: JSONStructure
+    url: json-structure/sap-brim-rating-request-structure.json
+  - type: SpectralRules
+    url: rules/sap-brim-rules.yml
+  - type: NaftikoCapability
+    url: capabilities/subscription-lifecycle-management.yaml
+  - type: NaftikoCapability
+    url: capabilities/usage-based-charging.yaml
+  - type: Vocabulary
+    url: vocabulary/sap-brim-vocabulary.yml
   - type: Getting Started
     url: https://help.sap.com/docs/SAP_BRIM/getting-started
   - type: Authentication

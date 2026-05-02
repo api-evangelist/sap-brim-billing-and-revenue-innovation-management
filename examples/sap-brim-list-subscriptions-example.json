@@ -1,0 +1,41 @@
+{
+  "results": [
+    {
+      "id": "SUB-00012345",
+      "customerId": "CUST-98765",
+      "planId": "PLAN-ENTERPRISE-MONTHLY",
+      "status": "ACTIVE",
+      "startDate": "2025-01-01",
+      "nextBillingDate": "2026-06-01",
+      "billingFrequency": "MONTHLY",
+      "currency": "EUR",
+      "items": [
+        {
+          "id": "ITEM-001",
+          "productId": "PROD-CLOUD-STORAGE-1TB",
+          "quantity": 1,
+          "unitPrice": 299.00
+        },
+        {
+          "id": "ITEM-002",
+          "productId": "PROD-SUPPORT-ENTERPRISE",
+          "quantity": 1,
+          "unitPrice": 150.00
+        }
+      ]
+    },
+    {
+      "id": "SUB-00012346",
+      "customerId": "CUST-98766",
+      "planId": "PLAN-STARTER-MONTHLY",
+      "status": "TRIAL",
+      "startDate": "2026-04-15",
+      "endDate": "2026-05-15",
+      "billingFrequency": "MONTHLY",
+      "currency": "USD"
+    }
+  ],
+  "totalCount": 2,
+  "offset": 0,
+  "limit": 50
+}

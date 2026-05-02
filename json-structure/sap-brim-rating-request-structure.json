@@ -1,0 +1,21 @@
+{
+  "name": "RatingRequest",
+  "description": "SAP BRIM Convergent Charging rating request for real-time usage event processing",
+  "fields": [
+    { "name": "accountId", "type": "string", "required": true, "description": "Customer account identifier to charge" },
+    { "name": "serviceType", "type": "string", "required": true, "description": "Type of service being charged (e.g., DATA, VOICE, SMS)" },
+    { "name": "eventId", "type": "string", "required": false, "description": "Unique event identifier for idempotency" },
+    { "name": "timestamp", "type": "datetime", "required": true, "description": "Timestamp when the usage event occurred" },
+    { "name": "quantity", "type": "number", "required": true, "description": "Volume of usage (bytes, seconds, units)" },
+    { "name": "unit", "type": "string", "required": false, "description": "Unit of measurement (MB, seconds, calls)" },
+    { "name": "direction", "type": "string", "required": false, "description": "Usage direction for telecommunications", "enum": ["INBOUND", "OUTBOUND"] },
+    { "name": "destinationId", "type": "string", "required": false, "description": "Destination for routing-based pricing (e.g., phone number, zone)" },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "Additional custom attributes for pricing model evaluation",
+      "fields": []
+    }
+  ]
+}
