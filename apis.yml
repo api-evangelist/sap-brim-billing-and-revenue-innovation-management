@@ -185,6 +185,10 @@ apis:
 common:
   - type: Portal
     url: https://api.sap.com
+  - type: OpenAPI
+    url: openapi/sap-brim-convergent-charging-openapi.yml
+  - type: OpenAPI
+    url: openapi/sap-brim-subscription-billing-openapi.yml
   - type: JSON-LD
     url: json-ld/sap-brim-context.jsonld
   - type: JSONSchema
