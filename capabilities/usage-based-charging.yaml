@@ -1,129 +1,220 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "SAP BRIM Usage-Based Charging"
-  description: "Workflow capability for real-time usage rating, charging, and balance management in SAP BRIM Convergent Charging. Enables usage event submission, real-time rating against pricing plans, prepaid balance management, and pricing plan governance. Used by telecom engineers, IoT billing teams, and revenue managers."
+  label: SAP BRIM Usage-Based Charging
+  description: Workflow capability for real-time usage rating, charging, and balance management in SAP BRIM Convergent Charging.
+    Enables usage event submission, real-time rating against pricing plans, prepaid balance management, and pricing plan governance.
+    Used by telecom engineers, IoT billing teams, and revenue managers.
   tags:
-    - Billing
-    - Charging
-    - Revenue Management
-    - SAP
-    - Usage-Based Pricing
-  created: "2026-05-02"
-  modified: "2026-05-02"
-
+  - Billing
+  - Charging
+  - Revenue Management
+  - SAP
+  - Usage-Based Pricing
+  created: '2026-05-02'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      SAP_BRIM_OAUTH_TOKEN: SAP_BRIM_OAUTH_TOKEN
-
+- namespace: env
+  keys:
+    SAP_BRIM_OAUTH_TOKEN: SAP_BRIM_OAUTH_TOKEN
 capability:
   consumes:
-    - import: sap-brim-convergent-charging
-      location: ./shared/convergent-charging.yaml
-
+  - type: http
+    namespace: sap-brim-convergent-charging
+    baseUri: https://api.sap.com/convergent-charging/v1
+    description: SAP BRIM Convergent Charging API for real-time usage rating and balance management.
+    authentication:
+      type: bearer
+      token: '{{SAP_BRIM_OAUTH_TOKEN}}'
+    resources:
+    - name: rating
+      path: /rating/rate
+      description: Rate usage events against pricing plans.
+      operations:
+      - name: rate-usage-event
+        method: POST
+        description: Rate a single usage event against the applicable pricing plan.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            accountId: '{{tools.accountId}}'
+            serviceType: '{{tools.serviceType}}'
+            quantity: '{{tools.quantity}}'
+      - name: rate-usage-batch
+        method: POST
+        description: Rate a batch of usage events in a single request.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            events: '{{tools.events}}'
+    - name: balances
+      path: /balances
+      description: Account balance inquiries and adjustments.
+      operations:
+      - name: get-balance
+        method: GET
+        description: Get the current balance for an account.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          required: true
+          description: The account identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: adjust-balance
+        method: POST
+        description: Adjust the balance for an account (credit or debit).
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            accountId: '{{tools.accountId}}'
+            amount: '{{tools.amount}}'
+            adjustmentType: '{{tools.adjustmentType}}'
+    - name: pricing-plans
+      path: /pricing-plans
+      description: Manage pricing plans and rate cards.
+      operations:
+      - name: list-pricing-plans
+        method: GET
+        description: List available pricing plans.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-pricing-plan
+        method: GET
+        description: Get details of a specific pricing plan.
+        inputParameters:
+        - name: planId
+          in: path
+          type: string
+          required: true
+          description: The pricing plan identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8081
-      namespace: sap-brim-usage-charging-api
-      description: "Unified REST API for SAP BRIM usage-based charging and balance management."
-      resources:
-        - path: /v1/balances/{accountId}
-          name: account-balance
-          description: "Account balance inquiries."
-          operations:
-            - method: GET
-              name: get-balance
-              description: "Get current account balance."
-              call: "sap-brim-convergent-charging.get-balance"
-              with:
-                accountId: "rest.accountId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/pricing-plans
-          name: pricing-plans
-          description: "Pricing plan catalog."
-          operations:
-            - method: GET
-              name: list-pricing-plans
-              description: "List available pricing plans."
-              call: "sap-brim-convergent-charging.list-pricing-plans"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9081
-      namespace: sap-brim-usage-charging-mcp
-      transport: http
-      description: "MCP server for AI-assisted SAP BRIM usage-based charging operations."
-      tools:
-        - name: rate-usage-event
-          description: "Rate a single usage event against the applicable SAP BRIM pricing plan."
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "sap-brim-convergent-charging.rate-usage-event"
-          with:
-            accountId: "tools.accountId"
-            serviceType: "tools.serviceType"
-            quantity: "tools.quantity"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: rate-usage-batch
-          description: "Rate a batch of usage events in a single request for high-throughput scenarios."
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "sap-brim-convergent-charging.rate-usage-batch"
-          with:
-            events: "tools.events"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-account-balance
-          description: "Get the current prepaid or postpaid balance for a customer account."
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "sap-brim-convergent-charging.get-account-balance"
-          with:
-            accountId: "tools.accountId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: adjust-balance
-          description: "Apply a credit or debit adjustment to a customer account balance."
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "sap-brim-convergent-charging.adjust-balance"
-          with:
-            accountId: "tools.accountId"
-            amount: "tools.amount"
-            adjustmentType: "tools.adjustmentType"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-pricing-plans
-          description: "List available pricing plans and rate cards in the charging engine."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "sap-brim-convergent-charging.list-pricing-plans"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-pricing-plan
-          description: "Get detailed configuration of a specific pricing plan."
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "sap-brim-convergent-charging.get-pricing-plan"
-          with:
-            planId: "tools.planId"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8081
+    namespace: sap-brim-usage-charging-api
+    description: Unified REST API for SAP BRIM usage-based charging and balance management.
+    resources:
+    - path: /v1/balances/{accountId}
+      name: account-balance
+      description: Account balance inquiries.
+      operations:
+      - method: GET
+        name: get-balance
+        description: Get current account balance.
+        call: sap-brim-convergent-charging.get-balance
+        with:
+          accountId: rest.accountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pricing-plans
+      name: pricing-plans
+      description: Pricing plan catalog.
+      operations:
+      - method: GET
+        name: list-pricing-plans
+        description: List available pricing plans.
+        call: sap-brim-convergent-charging.list-pricing-plans
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9081
+    namespace: sap-brim-usage-charging-mcp
+    transport: http
+    description: MCP server for AI-assisted SAP BRIM usage-based charging operations.
+    tools:
+    - name: rate-usage-event
+      description: Rate a single usage event against the applicable SAP BRIM pricing plan.
+      hints:
+        readOnly: false
+        idempotent: false
+      call: sap-brim-convergent-charging.rate-usage-event
+      with:
+        accountId: tools.accountId
+        serviceType: tools.serviceType
+        quantity: tools.quantity
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rate-usage-batch
+      description: Rate a batch of usage events in a single request for high-throughput scenarios.
+      hints:
+        readOnly: false
+        idempotent: false
+      call: sap-brim-convergent-charging.rate-usage-batch
+      with:
+        events: tools.events
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-account-balance
+      description: Get the current prepaid or postpaid balance for a customer account.
+      hints:
+        readOnly: true
+        openWorld: false
+      call: sap-brim-convergent-charging.get-account-balance
+      with:
+        accountId: tools.accountId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adjust-balance
+      description: Apply a credit or debit adjustment to a customer account balance.
+      hints:
+        readOnly: false
+        idempotent: false
+      call: sap-brim-convergent-charging.adjust-balance
+      with:
+        accountId: tools.accountId
+        amount: tools.amount
+        adjustmentType: tools.adjustmentType
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-pricing-plans
+      description: List available pricing plans and rate cards in the charging engine.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: sap-brim-convergent-charging.list-pricing-plans
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-pricing-plan
+      description: Get detailed configuration of a specific pricing plan.
+      hints:
+        readOnly: true
+        openWorld: false
+      call: sap-brim-convergent-charging.get-pricing-plan
+      with:
+        planId: tools.planId
+      outputParameters:
+      - type: object
+        mapping: $.
