@@ -87,7 +87,7 @@ apis:
         url: https://api.sap.com/api/subscription_billing/console
       - type: Reference
         url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
-      - type: Getting Started
+      - type: GettingStarted
         url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
       - type: JSONSchema
         url: json-schema/sap-brim-subscription-schema.json
@@ -189,7 +189,7 @@ common:
     url: openapi/sap-brim-convergent-charging-openapi.yml
   - type: OpenAPI
     url: openapi/sap-brim-subscription-billing-openapi.yml
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/sap-brim-context.jsonld
   - type: JSONSchema
     url: json-schema/sap-brim-subscription-schema.json
@@ -205,17 +205,17 @@ common:
     url: capabilities/usage-based-charging.yaml
   - type: Vocabulary
     url: vocabulary/sap-brim-vocabulary.yml
-  - type: Getting Started
+  - type: GettingStarted
     url: https://help.sap.com/docs/SAP_BRIM/getting-started
   - type: Authentication
     url: https://help.sap.com/docs/SAP_BRIM/authentication
   - type: Support
     url: https://support.sap.com
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.sap.com/about/legal/terms-of-use.html
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.sap.com/about/legal/privacy.html
-  - type: Status Page
+  - type: StatusPage
     url: https://www.sap.com/about/trust-center/cloud-service-status.html
   - type: Community
     url: https://community.sap.com
@@ -227,11 +227,11 @@ common:
     url: https://help.sap.com/docs/BRIM
   - type: SDKs
     url: https://developers.sap.com/
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/SAP
-  - type: Stack Overflow
+  - type: StackOverflow
     url: https://stackoverflow.com/questions/tagged/sap
-  - type: Sign Up
+  - type: SignUp
     url: https://developers.sap.com/
   - type: YouTube
     url: https://www.youtube.com/@sapdevs
