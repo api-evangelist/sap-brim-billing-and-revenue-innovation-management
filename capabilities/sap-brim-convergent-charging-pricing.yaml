@@ -1,0 +1,284 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging API — Pricing
+  description: 'SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging API — Pricing. 7 operations.
+    Lead operation: SAP BRIM (Billing and Revenue Innovation Management) List pricing plans. Self-contained Naftiko capability
+    covering one Sap Brim Billing And Revenue Innovation Management business surface.'
+  tags:
+  - Sap Brim Billing And Revenue Innovation Management
+  - Pricing
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BRIM_BILLING_AND_REVENUE_INNOVATION_MANAGEMENT_API_KEY: SAP_BRIM_BILLING_AND_REVENUE_INNOVATION_MANAGEMENT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sap-brim-convergent-charging-pricing
+    baseUri: https://api.sap.com/convergent-charging/v1
+    description: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging API — Pricing business
+      capability. Self-contained, no shared references.
+    resources:
+    - name: pricing-plans
+      path: /pricing/plans
+      operations:
+      - name: listpricingplans
+        method: GET
+        description: SAP BRIM (Billing and Revenue Innovation Management) List pricing plans
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+        - name: serviceType
+          in: query
+          type: string
+        - name: effectiveDate
+          in: query
+          type: string
+      - name: createpricingplan
+        method: POST
+        description: SAP BRIM (Billing and Revenue Innovation Management) Create a pricing plan
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: pricing-plans-planId
+      path: /pricing/plans/{planId}
+      operations:
+      - name: getpricingplan
+        method: GET
+        description: SAP BRIM (Billing and Revenue Innovation Management) Get a pricing plan
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatepricingplan
+        method: PUT
+        description: SAP BRIM (Billing and Revenue Innovation Management) Update a pricing plan
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletepricingplan
+        method: DELETE
+        description: SAP BRIM (Billing and Revenue Innovation Management) Delete a pricing plan
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: pricing-plans-planId-rate-cards
+      path: /pricing/plans/{planId}/rate-cards
+      operations:
+      - name: listratecards
+        method: GET
+        description: SAP BRIM (Billing and Revenue Innovation Management) List rate cards for a pricing plan
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createratecard
+        method: POST
+        description: SAP BRIM (Billing and Revenue Innovation Management) Add a rate card to a pricing plan
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SAP_BRIM_BILLING_AND_REVENUE_INNOVATION_MANAGEMENT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sap-brim-convergent-charging-pricing-rest
+    port: 8080
+    description: REST adapter for SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging API —
+      Pricing. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/pricing/plans
+      name: pricing-plans
+      description: REST surface for pricing-plans.
+      operations:
+      - method: GET
+        name: listpricingplans
+        description: SAP BRIM (Billing and Revenue Innovation Management) List pricing plans
+        call: sap-brim-convergent-charging-pricing.listpricingplans
+        with:
+          status: rest.status
+          serviceType: rest.serviceType
+          effectiveDate: rest.effectiveDate
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createpricingplan
+        description: SAP BRIM (Billing and Revenue Innovation Management) Create a pricing plan
+        call: sap-brim-convergent-charging-pricing.createpricingplan
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pricing/plans/{planid}
+      name: pricing-plans-planid
+      description: REST surface for pricing-plans-planId.
+      operations:
+      - method: GET
+        name: getpricingplan
+        description: SAP BRIM (Billing and Revenue Innovation Management) Get a pricing plan
+        call: sap-brim-convergent-charging-pricing.getpricingplan
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatepricingplan
+        description: SAP BRIM (Billing and Revenue Innovation Management) Update a pricing plan
+        call: sap-brim-convergent-charging-pricing.updatepricingplan
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletepricingplan
+        description: SAP BRIM (Billing and Revenue Innovation Management) Delete a pricing plan
+        call: sap-brim-convergent-charging-pricing.deletepricingplan
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/pricing/plans/{planid}/rate-cards
+      name: pricing-plans-planid-rate-cards
+      description: REST surface for pricing-plans-planId-rate-cards.
+      operations:
+      - method: GET
+        name: listratecards
+        description: SAP BRIM (Billing and Revenue Innovation Management) List rate cards for a pricing plan
+        call: sap-brim-convergent-charging-pricing.listratecards
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createratecard
+        description: SAP BRIM (Billing and Revenue Innovation Management) Add a rate card to a pricing plan
+        call: sap-brim-convergent-charging-pricing.createratecard
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sap-brim-convergent-charging-pricing-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging API — Pricing.
+      One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: sap-brim-billing-and-revenue
+      description: SAP BRIM (Billing and Revenue Innovation Management) List pricing plans
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-brim-convergent-charging-pricing.listpricingplans
+      with:
+        status: tools.status
+        serviceType: tools.serviceType
+        effectiveDate: tools.effectiveDate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-brim-billing-and-revenue-2
+      description: SAP BRIM (Billing and Revenue Innovation Management) Create a pricing plan
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sap-brim-convergent-charging-pricing.createpricingplan
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-brim-billing-and-revenue-3
+      description: SAP BRIM (Billing and Revenue Innovation Management) Get a pricing plan
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-brim-convergent-charging-pricing.getpricingplan
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-brim-billing-and-revenue-4
+      description: SAP BRIM (Billing and Revenue Innovation Management) Update a pricing plan
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sap-brim-convergent-charging-pricing.updatepricingplan
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-brim-billing-and-revenue-5
+      description: SAP BRIM (Billing and Revenue Innovation Management) Delete a pricing plan
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sap-brim-convergent-charging-pricing.deletepricingplan
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-brim-billing-and-revenue-6
+      description: SAP BRIM (Billing and Revenue Innovation Management) List rate cards for a pricing plan
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-brim-convergent-charging-pricing.listratecards
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-brim-billing-and-revenue-7
+      description: SAP BRIM (Billing and Revenue Innovation Management) Add a rate card to a pricing plan
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sap-brim-convergent-charging-pricing.createratecard
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

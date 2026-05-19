@@ -1,0 +1,240 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging API — Charging
+  description: 'SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging API — Charging. 5 operations.
+    Lead operation: SAP BRIM (Billing and Revenue Innovation Management) Authorize a charge reservation. Self-contained Naftiko
+    capability covering one Sap Brim Billing And Revenue Innovation Management business surface.'
+  tags:
+  - Sap Brim Billing And Revenue Innovation Management
+  - Charging
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BRIM_BILLING_AND_REVENUE_INNOVATION_MANAGEMENT_API_KEY: SAP_BRIM_BILLING_AND_REVENUE_INNOVATION_MANAGEMENT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sap-brim-convergent-charging-charging
+    baseUri: https://api.sap.com/convergent-charging/v1
+    description: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging API — Charging business
+      capability. Self-contained, no shared references.
+    resources:
+    - name: charging-authorize
+      path: /charging/authorize
+      operations:
+      - name: authorizecharge
+        method: POST
+        description: SAP BRIM (Billing and Revenue Innovation Management) Authorize a charge reservation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: charging-authorize-authorizationId-confirm
+      path: /charging/authorize/{authorizationId}/confirm
+      operations:
+      - name: confirmauthorization
+        method: POST
+        description: SAP BRIM (Billing and Revenue Innovation Management) Confirm a charge authorization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: charging-authorize-authorizationId-release
+      path: /charging/authorize/{authorizationId}/release
+      operations:
+      - name: releaseauthorization
+        method: POST
+        description: SAP BRIM (Billing and Revenue Innovation Management) Release a charge authorization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: charging-charge
+      path: /charging/charge
+      operations:
+      - name: chargeaccount
+        method: POST
+        description: SAP BRIM (Billing and Revenue Innovation Management) Charge an account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: charging-refund
+      path: /charging/refund
+      operations:
+      - name: refundcharge
+        method: POST
+        description: SAP BRIM (Billing and Revenue Innovation Management) Refund a previous charge
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SAP_BRIM_BILLING_AND_REVENUE_INNOVATION_MANAGEMENT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sap-brim-convergent-charging-charging-rest
+    port: 8080
+    description: REST adapter for SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging API —
+      Charging. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/charging/authorize
+      name: charging-authorize
+      description: REST surface for charging-authorize.
+      operations:
+      - method: POST
+        name: authorizecharge
+        description: SAP BRIM (Billing and Revenue Innovation Management) Authorize a charge reservation
+        call: sap-brim-convergent-charging-charging.authorizecharge
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/charging/authorize/{authorizationid}/confirm
+      name: charging-authorize-authorizationid-confirm
+      description: REST surface for charging-authorize-authorizationId-confirm.
+      operations:
+      - method: POST
+        name: confirmauthorization
+        description: SAP BRIM (Billing and Revenue Innovation Management) Confirm a charge authorization
+        call: sap-brim-convergent-charging-charging.confirmauthorization
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/charging/authorize/{authorizationid}/release
+      name: charging-authorize-authorizationid-release
+      description: REST surface for charging-authorize-authorizationId-release.
+      operations:
+      - method: POST
+        name: releaseauthorization
+        description: SAP BRIM (Billing and Revenue Innovation Management) Release a charge authorization
+        call: sap-brim-convergent-charging-charging.releaseauthorization
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/charging/charge
+      name: charging-charge
+      description: REST surface for charging-charge.
+      operations:
+      - method: POST
+        name: chargeaccount
+        description: SAP BRIM (Billing and Revenue Innovation Management) Charge an account
+        call: sap-brim-convergent-charging-charging.chargeaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/charging/refund
+      name: charging-refund
+      description: REST surface for charging-refund.
+      operations:
+      - method: POST
+        name: refundcharge
+        description: SAP BRIM (Billing and Revenue Innovation Management) Refund a previous charge
+        call: sap-brim-convergent-charging-charging.refundcharge
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sap-brim-convergent-charging-charging-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging API — Charging.
+      One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: sap-brim-billing-and-revenue
+      description: SAP BRIM (Billing and Revenue Innovation Management) Authorize a charge reservation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sap-brim-convergent-charging-charging.authorizecharge
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-brim-billing-and-revenue-2
+      description: SAP BRIM (Billing and Revenue Innovation Management) Confirm a charge authorization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sap-brim-convergent-charging-charging.confirmauthorization
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-brim-billing-and-revenue-3
+      description: SAP BRIM (Billing and Revenue Innovation Management) Release a charge authorization
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sap-brim-convergent-charging-charging.releaseauthorization
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-brim-billing-and-revenue-4
+      description: SAP BRIM (Billing and Revenue Innovation Management) Charge an account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sap-brim-convergent-charging-charging.chargeaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-brim-billing-and-revenue-5
+      description: SAP BRIM (Billing and Revenue Innovation Management) Refund a previous charge
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sap-brim-convergent-charging-charging.refundcharge
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

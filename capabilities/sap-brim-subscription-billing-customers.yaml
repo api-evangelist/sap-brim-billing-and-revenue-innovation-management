@@ -1,0 +1,112 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Subscription Billing API — Customers
+  description: 'SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Subscription Billing API — Customers. 2 operations.
+    Lead operation: SAP BRIM (Billing and Revenue Innovation Management) Get billing summary for a customer. Self-contained
+    Naftiko capability covering one Sap Brim Billing And Revenue Innovation Management business surface.'
+  tags:
+  - Sap Brim Billing And Revenue Innovation Management
+  - Customers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BRIM_BILLING_AND_REVENUE_INNOVATION_MANAGEMENT_API_KEY: SAP_BRIM_BILLING_AND_REVENUE_INNOVATION_MANAGEMENT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sap-brim-subscription-billing-customers
+    baseUri: https://api.sap.com/subscription-billing/v1
+    description: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Subscription Billing API — Customers business
+      capability. Self-contained, no shared references.
+    resources:
+    - name: customers-customerId-billing-summary
+      path: /customers/{customerId}/billing-summary
+      operations:
+      - name: getcustomerbillingsummary
+        method: GET
+        description: SAP BRIM (Billing and Revenue Innovation Management) Get billing summary for a customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: customers-customerId-subscriptions
+      path: /customers/{customerId}/subscriptions
+      operations:
+      - name: listcustomersubscriptions
+        method: GET
+        description: SAP BRIM (Billing and Revenue Innovation Management) List subscriptions for a customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+    authentication:
+      type: bearer
+      token: '{{env.SAP_BRIM_BILLING_AND_REVENUE_INNOVATION_MANAGEMENT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sap-brim-subscription-billing-customers-rest
+    port: 8080
+    description: REST adapter for SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Subscription Billing API —
+      Customers. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/customers/{customerid}/billing-summary
+      name: customers-customerid-billing-summary
+      description: REST surface for customers-customerId-billing-summary.
+      operations:
+      - method: GET
+        name: getcustomerbillingsummary
+        description: SAP BRIM (Billing and Revenue Innovation Management) Get billing summary for a customer
+        call: sap-brim-subscription-billing-customers.getcustomerbillingsummary
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{customerid}/subscriptions
+      name: customers-customerid-subscriptions
+      description: REST surface for customers-customerId-subscriptions.
+      operations:
+      - method: GET
+        name: listcustomersubscriptions
+        description: SAP BRIM (Billing and Revenue Innovation Management) List subscriptions for a customer
+        call: sap-brim-subscription-billing-customers.listcustomersubscriptions
+        with:
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sap-brim-subscription-billing-customers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Subscription Billing API —
+      Customers. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: sap-brim-billing-and-revenue
+      description: SAP BRIM (Billing and Revenue Innovation Management) Get billing summary for a customer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-brim-subscription-billing-customers.getcustomerbillingsummary
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-brim-billing-and-revenue-2
+      description: SAP BRIM (Billing and Revenue Innovation Management) List subscriptions for a customer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-brim-subscription-billing-customers.listcustomersubscriptions
+      with:
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
