@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChargingRequest",
+  "title": "ChargingRequest",
+  "type": "object",
+  "required": [
+    "accountId",
+    "amount",
+    "chargeType"
+  ],
+  "properties": {
+    "accountId": {
+      "type": "string",
+      "description": "Account to charge"
+    },
+    "amount": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "chargeType": {
+      "type": "string",
+      "enum": [
+        "PREPAID",
+        "POSTPAID"
+      ],
+      "description": "Charging model"
+    },
+    "serviceType": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "externalReference": {
+      "type": "string",
+      "description": "External transaction reference"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

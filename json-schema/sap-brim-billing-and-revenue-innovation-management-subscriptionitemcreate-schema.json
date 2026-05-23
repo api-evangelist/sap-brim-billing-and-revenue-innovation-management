@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SubscriptionItemCreate",
+  "title": "SubscriptionItemCreate",
+  "type": "object",
+  "required": [
+    "productId",
+    "quantity"
+  ],
+  "properties": {
+    "productId": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "billingType": {
+      "type": "string",
+      "enum": [
+        "RECURRING",
+        "ONE_TIME",
+        "USAGE_BASED"
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

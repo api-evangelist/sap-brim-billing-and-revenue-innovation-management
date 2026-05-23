@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Plan",
+  "title": "Plan",
+  "type": "object",
+  "properties": {
+    "planId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE",
+        "DRAFT"
+      ]
+    },
+    "billingFrequency": {
+      "type": "string",
+      "enum": [
+        "MONTHLY",
+        "QUARTERLY",
+        "SEMI_ANNUAL",
+        "ANNUAL",
+        "CUSTOM"
+      ]
+    },
+    "price": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "setupFee": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "trialPeriodDays": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "contractTermMonths": {
+      "type": "integer",
+      "description": "Minimum contract term in months"
+    },
+    "autoRenewDefault": {
+      "type": "boolean"
+    },
+    "includedItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer"
+          },
+          "billingType": {
+            "type": "string",
+            "enum": [
+              "RECURRING",
+              "ONE_TIME",
+              "USAGE_BASED"
+            ]
+          }
+        }
+      }
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of features included in this plan"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

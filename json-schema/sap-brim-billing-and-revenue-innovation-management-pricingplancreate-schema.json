@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PricingPlanCreate",
+  "title": "PricingPlanCreate",
+  "type": "object",
+  "required": [
+    "name",
+    "serviceType",
+    "pricingModel",
+    "effectiveFrom",
+    "currency"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "serviceType": {
+      "type": "string"
+    },
+    "pricingModel": {
+      "type": "string",
+      "enum": [
+        "FLAT",
+        "TIERED",
+        "VOLUME",
+        "STAIRCASE",
+        "PERCENTAGE"
+      ]
+    },
+    "effectiveFrom": {
+      "type": "string",
+      "format": "date"
+    },
+    "effectiveTo": {
+      "type": "string",
+      "format": "date"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    }
+  }
+}

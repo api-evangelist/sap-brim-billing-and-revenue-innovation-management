@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PricingPlan",
+  "title": "PricingPlan",
+  "type": "object",
+  "properties": {
+    "planId": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE",
+        "DRAFT"
+      ]
+    },
+    "serviceType": {
+      "type": "string"
+    },
+    "pricingModel": {
+      "type": "string",
+      "enum": [
+        "FLAT",
+        "TIERED",
+        "VOLUME",
+        "STAIRCASE",
+        "PERCENTAGE"
+      ]
+    },
+    "effectiveFrom": {
+      "type": "string",
+      "format": "date"
+    },
+    "effectiveTo": {
+      "type": "string",
+      "format": "date"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "rateCards": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RateCard"
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

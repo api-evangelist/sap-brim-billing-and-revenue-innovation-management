@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AuthorizationRequest",
+  "title": "AuthorizationRequest",
+  "type": "object",
+  "required": [
+    "accountId",
+    "amount"
+  ],
+  "properties": {
+    "accountId": {
+      "type": "string"
+    },
+    "amount": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "expiresIn": {
+      "type": "integer",
+      "description": "Authorization expiry in seconds",
+      "default": 3600
+    },
+    "serviceType": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

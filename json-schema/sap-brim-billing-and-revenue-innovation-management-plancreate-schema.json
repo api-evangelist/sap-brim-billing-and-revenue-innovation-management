@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlanCreate",
+  "title": "PlanCreate",
+  "type": "object",
+  "required": [
+    "name",
+    "billingFrequency",
+    "price"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "billingFrequency": {
+      "type": "string",
+      "enum": [
+        "MONTHLY",
+        "QUARTERLY",
+        "SEMI_ANNUAL",
+        "ANNUAL",
+        "CUSTOM"
+      ]
+    },
+    "price": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "setupFee": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "trialPeriodDays": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0
+    },
+    "contractTermMonths": {
+      "type": "integer"
+    },
+    "autoRenewDefault": {
+      "type": "boolean",
+      "default": true
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

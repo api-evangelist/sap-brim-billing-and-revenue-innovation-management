@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SubscriptionUpdate",
+  "title": "SubscriptionUpdate",
+  "type": "object",
+  "properties": {
+    "autoRenew": {
+      "type": "boolean"
+    },
+    "paymentMethod": {
+      "type": "string"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

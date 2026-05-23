@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AccountBalance",
+  "title": "AccountBalance",
+  "type": "object",
+  "properties": {
+    "accountId": {
+      "type": "string"
+    },
+    "accountType": {
+      "type": "string",
+      "enum": [
+        "PREPAID",
+        "POSTPAID"
+      ]
+    },
+    "availableBalance": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "reservedAmount": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "totalBalance": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "creditLimit": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Subscription",
+  "title": "Subscription",
+  "type": "object",
+  "properties": {
+    "subscriptionId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "customerId": {
+      "type": "string"
+    },
+    "planId": {
+      "type": "string"
+    },
+    "planName": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "SUSPENDED",
+        "CANCELLED",
+        "EXPIRED",
+        "PENDING",
+        "TRIAL"
+      ]
+    },
+    "billingFrequency": {
+      "type": "string",
+      "enum": [
+        "MONTHLY",
+        "QUARTERLY",
+        "SEMI_ANNUAL",
+        "ANNUAL",
+        "CUSTOM"
+      ]
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "trialEndDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "currentPeriodStart": {
+      "type": "string",
+      "format": "date"
+    },
+    "currentPeriodEnd": {
+      "type": "string",
+      "format": "date"
+    },
+    "nextBillingDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "autoRenew": {
+      "type": "boolean"
+    },
+    "renewalCount": {
+      "type": "integer",
+      "description": "Number of times this subscription has been renewed"
+    },
+    "cancellationDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "cancellationReason": {
+      "type": "string"
+    },
+    "recurringCharge": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SubscriptionItem"
+      }
+    },
+    "paymentMethod": {
+      "type": "string",
+      "description": "Identifier of the payment method on file"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

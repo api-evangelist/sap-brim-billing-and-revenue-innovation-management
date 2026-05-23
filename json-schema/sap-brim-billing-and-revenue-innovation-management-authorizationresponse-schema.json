@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AuthorizationResponse",
+  "title": "AuthorizationResponse",
+  "type": "object",
+  "properties": {
+    "authorizationId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "reservedAmount": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "AUTHORIZED",
+        "EXPIRED",
+        "CONFIRMED",
+        "RELEASED"
+      ]
+    },
+    "expiresAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

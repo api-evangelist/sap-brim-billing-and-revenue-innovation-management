@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RatingResponse",
+  "title": "RatingResponse",
+  "type": "object",
+  "properties": {
+    "ratingId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "subscriberId": {
+      "type": "string"
+    },
+    "serviceType": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "number",
+      "format": "double"
+    },
+    "charge": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "pricingPlanId": {
+      "type": "string"
+    },
+    "rateApplied": {
+      "type": "number",
+      "format": "double",
+      "description": "The unit rate applied"
+    },
+    "tierApplied": {
+      "type": "string",
+      "description": "Name of the pricing tier that was applied"
+    },
+    "ratedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "RATED",
+        "FAILED",
+        "ZERO_RATED"
+      ]
+    },
+    "details": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tierName": {
+            "type": "string"
+          },
+          "unitsInTier": {
+            "type": "number",
+            "format": "double"
+          },
+          "ratePerUnit": {
+            "type": "number",
+            "format": "double"
+          },
+          "tierCharge": {
+            "$ref": "#/components/schemas/MonetaryAmount"
+          }
+        }
+      }
+    }
+  }
+}

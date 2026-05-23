@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChargingResponse",
+  "title": "ChargingResponse",
+  "type": "object",
+  "properties": {
+    "chargeId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "amount": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "chargeType": {
+      "type": "string",
+      "enum": [
+        "PREPAID",
+        "POSTPAID"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "COMPLETED",
+        "PENDING",
+        "FAILED"
+      ]
+    },
+    "remainingBalance": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "chargedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

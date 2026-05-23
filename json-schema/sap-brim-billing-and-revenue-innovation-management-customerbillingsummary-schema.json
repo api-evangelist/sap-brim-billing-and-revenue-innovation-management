@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CustomerBillingSummary",
+  "title": "CustomerBillingSummary",
+  "type": "object",
+  "properties": {
+    "customerId": {
+      "type": "string"
+    },
+    "activeSubscriptions": {
+      "type": "integer"
+    },
+    "totalRecurringCharge": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "outstandingBalance": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "nextBillingDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "nextBillingAmount": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "paymentStatus": {
+      "type": "string",
+      "enum": [
+        "CURRENT",
+        "OVERDUE",
+        "DELINQUENT"
+      ]
+    },
+    "lastPaymentDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "lastPaymentAmount": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+name: SAP BRIM (Billing and Revenue Innovation Management) Domain Vocabulary
+provider: SAP BRIM (Billing and Revenue Innovation Management)
+providerId: sap-brim-billing-and-revenue-innovation-management
+description: Tag-derived vocabulary for the SAP BRIM (Billing and Revenue Innovation Management) API surface; sourced from
+  openapi/ tags.
+terms:
+- term: Billing
+  description: Billing cycle and invoice generation operations
+- term: Customers
+  description: Customer account management for subscriptions
+- term: Plans
+  description: Subscription plan and offer catalog management
+- term: Subscription Items
+  description: Management of individual items within a subscription
+- term: Subscriptions
+  description: Subscription lifecycle management operations

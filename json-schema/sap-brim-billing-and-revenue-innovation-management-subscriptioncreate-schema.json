@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SubscriptionCreate",
+  "title": "SubscriptionCreate",
+  "type": "object",
+  "required": [
+    "customerId",
+    "planId"
+  ],
+  "properties": {
+    "customerId": {
+      "type": "string"
+    },
+    "planId": {
+      "type": "string"
+    },
+    "billingFrequency": {
+      "type": "string",
+      "enum": [
+        "MONTHLY",
+        "QUARTERLY",
+        "SEMI_ANNUAL",
+        "ANNUAL",
+        "CUSTOM"
+      ]
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Defaults to today if not specified"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "trialPeriodDays": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of trial days before billing begins"
+    },
+    "autoRenew": {
+      "type": "boolean",
+      "default": true
+    },
+    "quantity": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1
+    },
+    "paymentMethod": {
+      "type": "string"
+    },
+    "couponCode": {
+      "type": "string",
+      "description": "Promotional coupon to apply"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BillingRecord",
+  "title": "BillingRecord",
+  "type": "object",
+  "properties": {
+    "billingRecordId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "subscriptionId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "invoiceNumber": {
+      "type": "string"
+    },
+    "billingPeriodStart": {
+      "type": "string",
+      "format": "date"
+    },
+    "billingPeriodEnd": {
+      "type": "string",
+      "format": "date"
+    },
+    "subtotal": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "tax": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "total": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "ISSUED",
+        "PAID",
+        "OVERDUE",
+        "VOID"
+      ]
+    },
+    "issuedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "dueDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "paidAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lineItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number"
+          },
+          "unitPrice": {
+            "$ref": "#/components/schemas/MonetaryAmount"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/MonetaryAmount"
+          }
+        }
+      }
+    }
+  }
+}

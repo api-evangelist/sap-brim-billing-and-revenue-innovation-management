@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RefundRequest",
+  "title": "RefundRequest",
+  "type": "object",
+  "required": [
+    "originalChargeId"
+  ],
+  "properties": {
+    "originalChargeId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identifier of the original charge to refund"
+    },
+    "amount": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for the refund"
+    }
+  }
+}

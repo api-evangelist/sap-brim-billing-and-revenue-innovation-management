@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RatingRequest",
+  "title": "RatingRequest",
+  "type": "object",
+  "required": [
+    "subscriberId",
+    "serviceType",
+    "quantity",
+    "usageTimestamp"
+  ],
+  "properties": {
+    "subscriberId": {
+      "type": "string",
+      "description": "Unique identifier of the subscriber"
+    },
+    "serviceType": {
+      "type": "string",
+      "description": "Type of service being consumed"
+    },
+    "quantity": {
+      "type": "number",
+      "format": "double",
+      "description": "Quantity of usage units"
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit of measurement (e.g., MB, minutes, events)"
+    },
+    "usageTimestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the usage occurred"
+    },
+    "pricingPlanId": {
+      "type": "string",
+      "description": "Optional override for the pricing plan to use"
+    },
+    "attributes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Additional attributes for rating context"
+    }
+  }
+}

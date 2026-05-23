@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UsageEventDetail",
+  "title": "UsageEventDetail",
+  "type": "object",
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "externalId": {
+      "type": "string"
+    },
+    "subscriberId": {
+      "type": "string"
+    },
+    "serviceType": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "number",
+      "format": "double"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "usageTimestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ACCEPTED",
+        "QUEUED",
+        "RATED",
+        "CHARGED",
+        "FAILED"
+      ]
+    },
+    "ratingResult": {
+      "$ref": "#/components/schemas/RatingResponse"
+    },
+    "receivedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "processedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

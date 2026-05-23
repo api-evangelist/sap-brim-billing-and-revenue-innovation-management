@@ -1,0 +1,307 @@
+{
+  "provider": "SAP BRIM (Billing and Revenue Innovation Management)",
+  "providerId": "sap-brim-billing-and-revenue-innovation-management",
+  "kind": "json-structure",
+  "description": "Structural overview of the SAP BRIM (Billing and Revenue Innovation Management) API surface; extracted from openapi/.",
+  "schemaCount": 11,
+  "operationCount": 24,
+  "schemas": [
+    {
+      "name": "MonetaryAmount",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "value",
+        "currency"
+      ]
+    },
+    {
+      "name": "Subscription",
+      "type": "object",
+      "propertyCount": 22,
+      "required": []
+    },
+    {
+      "name": "SubscriptionCreate",
+      "type": "object",
+      "propertyCount": 11,
+      "required": [
+        "customerId",
+        "planId"
+      ]
+    },
+    {
+      "name": "SubscriptionUpdate",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "SubscriptionItem",
+      "type": "object",
+      "propertyCount": 11,
+      "required": []
+    },
+    {
+      "name": "SubscriptionItemCreate",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "productId",
+        "quantity"
+      ]
+    },
+    {
+      "name": "Plan",
+      "type": "object",
+      "propertyCount": 14,
+      "required": []
+    },
+    {
+      "name": "PlanCreate",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "name",
+        "billingFrequency",
+        "price"
+      ]
+    },
+    {
+      "name": "BillingRecord",
+      "type": "object",
+      "propertyCount": 13,
+      "required": []
+    },
+    {
+      "name": "CustomerBillingSummary",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "ErrorResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/subscriptions",
+      "operationId": "listSubscriptions",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) List subscriptions",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions",
+      "operationId": "createSubscription",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Create a subscription",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/subscriptions/{subscriptionId}",
+      "operationId": "getSubscription",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Get a subscription",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/subscriptions/{subscriptionId}",
+      "operationId": "deleteSubscription",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Delete a subscription",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/subscriptions/{subscriptionId}",
+      "operationId": "updateSubscription",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Update a subscription",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions/{subscriptionId}/activate",
+      "operationId": "activateSubscription",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Activate a subscription",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions/{subscriptionId}/suspend",
+      "operationId": "suspendSubscription",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Suspend a subscription",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions/{subscriptionId}/cancel",
+      "operationId": "cancelSubscription",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Cancel a subscription",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions/{subscriptionId}/renew",
+      "operationId": "renewSubscription",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Renew a subscription",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions/{subscriptionId}/change-plan",
+      "operationId": "changeSubscriptionPlan",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Change subscription plan",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/subscriptions/{subscriptionId}/items",
+      "operationId": "listSubscriptionItems",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) List subscription items",
+      "tags": [
+        "Subscription Items"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions/{subscriptionId}/items",
+      "operationId": "addSubscriptionItem",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Add an item to a subscription",
+      "tags": [
+        "Subscription Items"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/subscriptions/{subscriptionId}/items/{itemId}",
+      "operationId": "getSubscriptionItem",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Get a subscription item",
+      "tags": [
+        "Subscription Items"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/subscriptions/{subscriptionId}/items/{itemId}",
+      "operationId": "removeSubscriptionItem",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Remove a subscription item",
+      "tags": [
+        "Subscription Items"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/subscriptions/{subscriptionId}/items/{itemId}",
+      "operationId": "updateSubscriptionItem",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Update a subscription item",
+      "tags": [
+        "Subscription Items"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/subscriptions/{subscriptionId}/billing-history",
+      "operationId": "getSubscriptionBillingHistory",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Get subscription billing history",
+      "tags": [
+        "Billing"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions/{subscriptionId}/generate-invoice",
+      "operationId": "generateInvoice",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Generate an invoice for a subscription",
+      "tags": [
+        "Billing"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/plans",
+      "operationId": "listPlans",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) List subscription plans",
+      "tags": [
+        "Plans"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/plans",
+      "operationId": "createPlan",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Create a subscription plan",
+      "tags": [
+        "Plans"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/plans/{planId}",
+      "operationId": "getPlan",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Get a subscription plan",
+      "tags": [
+        "Plans"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/plans/{planId}",
+      "operationId": "updatePlan",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Update a subscription plan",
+      "tags": [
+        "Plans"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/plans/{planId}",
+      "operationId": "deletePlan",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Delete a subscription plan",
+      "tags": [
+        "Plans"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/customers/{customerId}/subscriptions",
+      "operationId": "listCustomerSubscriptions",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) List subscriptions for a customer",
+      "tags": [
+        "Customers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/customers/{customerId}/billing-summary",
+      "operationId": "getCustomerBillingSummary",
+      "summary": "SAP BRIM (Billing and Revenue Innovation Management) Get billing summary for a customer",
+      "tags": [
+        "Customers"
+      ]
+    }
+  ]
+}

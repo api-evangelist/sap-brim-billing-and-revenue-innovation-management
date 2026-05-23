@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PricingTier",
+  "title": "PricingTier",
+  "type": "object",
+  "required": [
+    "fromQuantity",
+    "ratePerUnit"
+  ],
+  "properties": {
+    "tierName": {
+      "type": "string"
+    },
+    "fromQuantity": {
+      "type": "number",
+      "format": "double"
+    },
+    "toQuantity": {
+      "type": "number",
+      "format": "double",
+      "description": "Upper bound of the tier (null for unlimited)"
+    },
+    "ratePerUnit": {
+      "type": "number",
+      "format": "double"
+    },
+    "flatFee": {
+      "$ref": "#/components/schemas/MonetaryAmount"
+    }
+  }
+}
