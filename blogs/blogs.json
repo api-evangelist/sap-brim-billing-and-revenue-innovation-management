@@ -2,12 +2,17 @@
   "repo": "sap-brim-billing-and-revenue-innovation-management",
   "feeds": [
     {
-      "source": "https://blogs.sap.com",
+      "source": "https://community.sap.com/khhcw49343/rss/Category?category.id=all-blogs&interaction.style=forum",
       "feed_url": "https://community.sap.com/khhcw49343/rss/Category?category.id=all-blogs&interaction.style=forum",
-      "title": "New board topics in All SAP Community Blogs",
-      "saved": 0
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://community.sap.com",
+      "error": "HTTPError"
     }
   ],
-  "fetched": "2026-05-17T20:48:52Z",
+  "fetched": "2026-06-01T23:35:02Z",
   "post_count": 0
 }
