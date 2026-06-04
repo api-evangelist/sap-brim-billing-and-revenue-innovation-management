@@ -193,6 +193,57 @@ apis:
     email: support@sap.com
     url: https://support.sap.com
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-add-item-and-invoice-workflow.yml
+    name: SAP BRIM Add a Subscription Item and Invoice It
+    summary: Add a line item to a subscription, read it back, and generate an on-demand invoice.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-authorize-confirm-charge-workflow.yml
+    name: SAP BRIM Authorize and Confirm a Charge Reservation
+    summary: Reserve an amount against a prepaid balance, confirm it into a final charge, and read the balance.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-authorize-or-release-workflow.yml
+    name: SAP BRIM Authorize a Charge or Release on Insufficient Balance
+    summary: Check the balance, reserve an amount, and release the reservation when it is not needed.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-batch-rate-and-charge-workflow.yml
+    name: SAP BRIM Batch Rate Usage and Charge the Total
+    summary: Rate a batch of usage events in one call, then charge the account for the aggregate total.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-cancel-and-cleanup-workflow.yml
+    name: SAP BRIM Cancel and Clean Up a Subscription
+    summary: Cancel a subscription, verify the cancelled state, then optionally delete it.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-charge-and-refund-workflow.yml
+    name: SAP BRIM Charge an Account and Refund It
+    summary: Execute a charge against an account, refund that charge, and confirm the balance.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-customer-billing-overview-workflow.yml
+    name: SAP BRIM Customer Billing Overview
+    summary: List a customer's subscriptions, read their billing summary, and pull billing history.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-manual-renewal-invoice-workflow.yml
+    name: SAP BRIM Renew a Subscription and Invoice the New Term
+    summary: Manually renew a subscription, invoice the renewed term, and read the billing history.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-prepaid-topup-and-charge-workflow.yml
+    name: SAP BRIM Top Up and Charge a Prepaid Account
+    summary: Read a prepaid balance, top it up, execute a charge, and confirm the new balance.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-pricing-plan-with-rate-card-workflow.yml
+    name: SAP BRIM Build a Pricing Plan with a Rate Card
+    summary: Create a pricing plan, attach a rate card, list its rate cards, and read the plan back.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-provision-subscription-workflow.yml
+    name: SAP BRIM Provision a New Subscription
+    summary: Create a subscription plan, subscribe a customer, activate the subscription, and confirm its state.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-simulate-rate-and-charge-workflow.yml
+    name: SAP BRIM Simulate, Rate, and Charge Usage
+    summary: Simulate the price of a usage event, commit the rating, then charge the rated amount.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-subscription-upgrade-workflow.yml
+    name: SAP BRIM Upgrade or Downgrade a Subscription Plan
+    summary: Read a subscription, switch it to a new plan with proration, and confirm the change.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-suspend-and-resume-workflow.yml
+    name: SAP BRIM Suspend and Resume a Subscription
+    summary: Suspend an active subscription, confirm the paused state, then reactivate it.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-update-item-quantity-and-invoice-workflow.yml
+    name: SAP BRIM Update a Subscription Item Quantity and Re-invoice
+    summary: List a subscription's items, update the quantity of one, confirm it, and generate an invoice.
+  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-usage-event-rating-poll-workflow.yml
+    name: SAP BRIM Submit a Usage Event and Poll for Rating
+    summary: Submit a usage event for processing, then poll its status until it has been rated.
 - type: Portal
   url: https://api.sap.com
 - type: OpenAPI

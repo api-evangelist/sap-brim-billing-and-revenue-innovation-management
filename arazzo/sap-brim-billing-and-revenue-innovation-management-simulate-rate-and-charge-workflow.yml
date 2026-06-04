@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: SAP BRIM Simulate, Rate, and Charge Usage
+  summary: Simulate the price of a usage event, commit the rating, then charge the rated amount.
+  description: >-
+    Turns a unit of usage into a committed charge on SAP BRIM Convergent
+    Charging. The workflow first simulates the rating to obtain a quote without
+    committing, then rates the same usage event for real, and finally charges
+    the account for the rated amount. The currency carried into the charge comes
+    from the committed rating result. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convergentChargingApi
+  url: ../openapi/sap-brim-convergent-charging-openapi.yml
+  type: openapi
+workflows:
+- workflowId: simulate-rate-and-charge
+  summary: Simulate rating, commit the rating, and charge the rated amount.
+  description: >-
+    Simulates the rating of a usage event for a quote, commits the rating, and
+    charges the account for the resulting amount.
+  inputs:
+    type: object
+    required:
+    - accountId
+    - subscriberId
+    - serviceType
+    - quantity
+    - usageTimestamp
+    properties:
+      accountId:
+        type: string
+        description: Identifier of the account to charge after rating.
+      subscriberId:
+        type: string
+        description: Identifier of the subscriber whose usage is rated.
+      serviceType:
+        type: string
+        description: Type of service being consumed.
+      quantity:
+        type: number
+        description: Quantity of usage units.
+      unit:
+        type: string
+        description: Unit of measurement (e.g. MB, minutes, events).
+      usageTimestamp:
+        type: string
+        description: Timestamp when the usage occurred (date-time).
+      pricingPlanId:
+        type: string
+        description: Optional override for the pricing plan to use.
+  steps:
+  - stepId: simulateRating
+    description: Simulate the rating of the usage event to obtain a non-committal quote.
+    operationId: simulateRating
+    requestBody:
+      contentType: application/json
+      payload:
+        subscriberId: $inputs.subscriberId
+        serviceType: $inputs.serviceType
+        quantity: $inputs.quantity
+        unit: $inputs.unit
+        usageTimestamp: $inputs.usageTimestamp
+        pricingPlanId: $inputs.pricingPlanId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      quotedCharge: $response.body#/charge
+      tierApplied: $response.body#/tierApplied
+  - stepId: rate
+    description: Commit the rating of the usage event against the applicable pricing plan.
+    operationId: rateUsageEvent
+    requestBody:
+      contentType: application/json
+      payload:
+        subscriberId: $inputs.subscriberId
+        serviceType: $inputs.serviceType
+        quantity: $inputs.quantity
+        unit: $inputs.unit
+        usageTimestamp: $inputs.usageTimestamp
+        pricingPlanId: $inputs.pricingPlanId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "RATED"
+      type: jsonpath
+    outputs:
+      ratingId: $response.body#/ratingId
+      chargeValue: $response.body#/charge/value
+      chargeCurrency: $response.body#/charge/currency
+  - stepId: charge
+    description: Charge the account for the committed rated amount.
+    operationId: chargeAccount
+    requestBody:
+      contentType: application/json
+      payload:
+        accountId: $inputs.accountId
+        amount:
+          value: $steps.rate.outputs.chargeValue
+          currency: $steps.rate.outputs.chargeCurrency
+        chargeType: POSTPAID
+        serviceType: $inputs.serviceType
+        externalReference: $steps.rate.outputs.ratingId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      chargeId: $response.body#/chargeId
+      status: $response.body#/status
+  outputs:
+    quotedCharge: $steps.simulateRating.outputs.quotedCharge
+    ratingId: $steps.rate.outputs.ratingId
+    chargeId: $steps.charge.outputs.chargeId

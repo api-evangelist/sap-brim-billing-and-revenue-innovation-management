@@ -1,0 +1,97 @@
+arazzo: 1.0.1
+info:
+  title: SAP BRIM Authorize a Charge or Release on Insufficient Balance
+  summary: Check the balance, reserve an amount, and release the reservation when it is not needed.
+  description: >-
+    Reserves an amount against a prepaid account on SAP BRIM Convergent Charging
+    and then releases that reservation, returning the funds. The workflow reads
+    the current balance, authorizes a reservation, and releases it so the held
+    amount is restored to the available balance. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convergentChargingApi
+  url: ../openapi/sap-brim-convergent-charging-openapi.yml
+  type: openapi
+workflows:
+- workflowId: authorize-or-release
+  summary: Authorize a reservation and release it to restore the held funds.
+  description: >-
+    Reads the account balance, authorizes a reservation, and releases the
+    authorization so the reserved amount returns to the available balance.
+  inputs:
+    type: object
+    required:
+    - accountId
+    - amountValue
+    - currency
+    properties:
+      accountId:
+        type: string
+        description: Identifier of the subscriber account.
+      amountValue:
+        type: number
+        description: Amount value to reserve against the account.
+      currency:
+        type: string
+        description: ISO 4217 currency code for the reservation.
+      serviceType:
+        type: string
+        description: Optional service type associated with the authorization.
+  steps:
+  - stepId: getBalance
+    description: Read the current balance for the account before reserving.
+    operationId: getAccountBalance
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      availableBalance: $response.body#/availableBalance
+  - stepId: authorize
+    description: Reserve the amount against the prepaid balance.
+    operationId: authorizeCharge
+    requestBody:
+      contentType: application/json
+      payload:
+        accountId: $inputs.accountId
+        amount:
+          value: $inputs.amountValue
+          currency: $inputs.currency
+        serviceType: $inputs.serviceType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      authorizationId: $response.body#/authorizationId
+      status: $response.body#/status
+    onSuccess:
+    - name: reserved
+      type: goto
+      stepId: release
+      criteria:
+      - context: $response.body
+        condition: $.status == "AUTHORIZED"
+        type: jsonpath
+  - stepId: release
+    description: Release the authorization, restoring the reserved amount to the balance.
+    operationId: releaseAuthorization
+    parameters:
+    - name: authorizationId
+      in: path
+      value: $steps.authorize.outputs.authorizationId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "RELEASED"
+      type: jsonpath
+    outputs:
+      authorizationId: $response.body#/authorizationId
+      status: $response.body#/status
+      releasedAt: $response.body#/releasedAt
+  outputs:
+    authorizationId: $steps.release.outputs.authorizationId
+    releaseStatus: $steps.release.outputs.status
+    releasedAt: $steps.release.outputs.releasedAt

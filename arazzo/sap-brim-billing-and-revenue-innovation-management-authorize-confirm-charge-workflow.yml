@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: SAP BRIM Authorize and Confirm a Charge Reservation
+  summary: Reserve an amount against a prepaid balance, confirm it into a final charge, and read the balance.
+  description: >-
+    Runs the reserve-then-capture charging pattern on SAP BRIM Convergent
+    Charging. The workflow authorizes (reserves) an amount against a prepaid
+    balance, confirms the authorization to convert the reservation into a final
+    charge, and reads the account balance to observe the result. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convergentChargingApi
+  url: ../openapi/sap-brim-convergent-charging-openapi.yml
+  type: openapi
+workflows:
+- workflowId: authorize-confirm-charge
+  summary: Authorize a reservation and confirm it into a final charge.
+  description: >-
+    Reserves an amount against the account, confirms the reservation as a final
+    charge, and reads the resulting account balance.
+  inputs:
+    type: object
+    required:
+    - accountId
+    - amountValue
+    - currency
+    properties:
+      accountId:
+        type: string
+        description: Identifier of the subscriber account.
+      amountValue:
+        type: number
+        description: Amount value to reserve against the account.
+      currency:
+        type: string
+        description: ISO 4217 currency code for the reservation.
+      finalValue:
+        type: number
+        description: Optional final amount value to capture at confirmation.
+      serviceType:
+        type: string
+        description: Optional service type associated with the authorization.
+  steps:
+  - stepId: authorize
+    description: Reserve the amount against the prepaid balance.
+    operationId: authorizeCharge
+    requestBody:
+      contentType: application/json
+      payload:
+        accountId: $inputs.accountId
+        amount:
+          value: $inputs.amountValue
+          currency: $inputs.currency
+        serviceType: $inputs.serviceType
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "AUTHORIZED"
+      type: jsonpath
+    outputs:
+      authorizationId: $response.body#/authorizationId
+      reservedAmount: $response.body#/reservedAmount
+  - stepId: confirm
+    description: Confirm the authorization, capturing the reserved amount as a charge.
+    operationId: confirmAuthorization
+    parameters:
+    - name: authorizationId
+      in: path
+      value: $steps.authorize.outputs.authorizationId
+    requestBody:
+      contentType: application/json
+      payload:
+        finalAmount:
+          value: $inputs.finalValue
+          currency: $inputs.currency
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      chargeId: $response.body#/chargeId
+      status: $response.body#/status
+      remainingBalance: $response.body#/remainingBalance
+  - stepId: getBalance
+    description: Read the account balance after the charge is captured.
+    operationId: getAccountBalance
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      availableBalance: $response.body#/availableBalance
+      reservedAmount: $response.body#/reservedAmount
+  outputs:
+    authorizationId: $steps.authorize.outputs.authorizationId
+    chargeId: $steps.confirm.outputs.chargeId
+    availableBalance: $steps.getBalance.outputs.availableBalance

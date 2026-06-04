@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: SAP BRIM Top Up and Charge a Prepaid Account
+  summary: Read a prepaid balance, top it up, execute a charge, and confirm the new balance.
+  description: >-
+    Drives a prepaid charging cycle on SAP BRIM Convergent Charging. The workflow
+    reads the account balance, adds funds with a top-up, executes a prepaid
+    charge against the account, and reads the balance back to confirm the
+    deduction. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convergentChargingApi
+  url: ../openapi/sap-brim-convergent-charging-openapi.yml
+  type: openapi
+workflows:
+- workflowId: prepaid-topup-and-charge
+  summary: Top up a prepaid balance and execute a charge against it.
+  description: >-
+    Reads the current balance, tops up the prepaid account, charges it, and
+    reads the balance again to confirm the charge was applied.
+  inputs:
+    type: object
+    required:
+    - accountId
+    - topUpValue
+    - chargeValue
+    - currency
+    properties:
+      accountId:
+        type: string
+        description: Identifier of the subscriber account.
+      topUpValue:
+        type: number
+        description: Amount value to add to the prepaid balance.
+      chargeValue:
+        type: number
+        description: Amount value to charge against the account.
+      currency:
+        type: string
+        description: ISO 4217 currency code for both the top-up and the charge.
+      serviceType:
+        type: string
+        description: Optional service type associated with the charge.
+      reference:
+        type: string
+        description: Optional external payment reference for the top-up.
+  steps:
+  - stepId: getInitialBalance
+    description: Read the current balance information for the prepaid account.
+    operationId: getAccountBalance
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      availableBalance: $response.body#/availableBalance
+      accountType: $response.body#/accountType
+  - stepId: topUp
+    description: Add funds to the prepaid account balance.
+    operationId: topUpBalance
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    requestBody:
+      contentType: application/json
+      payload:
+        amount:
+          value: $inputs.topUpValue
+          currency: $inputs.currency
+        reference: $inputs.reference
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      availableBalance: $response.body#/availableBalance
+  - stepId: charge
+    description: Execute a prepaid charge against the funded account.
+    operationId: chargeAccount
+    requestBody:
+      contentType: application/json
+      payload:
+        accountId: $inputs.accountId
+        amount:
+          value: $inputs.chargeValue
+          currency: $inputs.currency
+        chargeType: PREPAID
+        serviceType: $inputs.serviceType
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.status == "COMPLETED"
+      type: jsonpath
+    outputs:
+      chargeId: $response.body#/chargeId
+      remainingBalance: $response.body#/remainingBalance
+  - stepId: getFinalBalance
+    description: Read the balance back to confirm the charge was deducted.
+    operationId: getAccountBalance
+    parameters:
+    - name: accountId
+      in: path
+      value: $inputs.accountId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      availableBalance: $response.body#/availableBalance
+      lastUpdated: $response.body#/lastUpdated
+  outputs:
+    chargeId: $steps.charge.outputs.chargeId
+    remainingBalance: $steps.charge.outputs.remainingBalance
+    finalAvailableBalance: $steps.getFinalBalance.outputs.availableBalance

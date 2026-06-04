@@ -1,0 +1,103 @@
+arazzo: 1.0.1
+info:
+  title: SAP BRIM Cancel and Clean Up a Subscription
+  summary: Cancel a subscription, verify the cancelled state, then optionally delete it.
+  description: >-
+    Retires a subscription on SAP BRIM Subscription Billing. The workflow cancels
+    the subscription with a documented cancellation type and refund policy, reads
+    it back to confirm it reached the CANCELLED state, and then branches: when
+    the subscription is CANCELLED it is permanently deleted, otherwise the flow
+    ends without deletion. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: subscriptionBillingApi
+  url: ../openapi/sap-brim-subscription-billing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cancel-and-cleanup
+  summary: Cancel a subscription and delete it once it is in the CANCELLED state.
+  description: >-
+    Cancels a subscription, confirms the CANCELLED status, and deletes the
+    subscription record when cancellation succeeded.
+  inputs:
+    type: object
+    required:
+    - subscriptionId
+    - reason
+    - cancellationType
+    properties:
+      subscriptionId:
+        type: string
+        description: Identifier of the subscription to cancel.
+      reason:
+        type: string
+        description: Reason recorded for the cancellation.
+      cancellationType:
+        type: string
+        description: When cancellation takes effect (IMMEDIATE, END_OF_TERM, SPECIFIC_DATE).
+      effectiveDate:
+        type: string
+        description: Required when cancellationType is SPECIFIC_DATE (YYYY-MM-DD).
+      refundPolicy:
+        type: string
+        description: Refund handling (NO_REFUND, PRORATED, FULL).
+  steps:
+  - stepId: cancelSubscription
+    description: Cancel the active or suspended subscription.
+    operationId: cancelSubscription
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $inputs.subscriptionId
+    requestBody:
+      contentType: application/json
+      payload:
+        reason: $inputs.reason
+        cancellationType: $inputs.cancellationType
+        effectiveDate: $inputs.effectiveDate
+        refundPolicy: $inputs.refundPolicy
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+  - stepId: confirmCancelled
+    description: Read the subscription back to confirm whether it is CANCELLED.
+    operationId: getSubscription
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $inputs.subscriptionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: cancelled
+      type: goto
+      stepId: deleteSubscription
+      criteria:
+      - context: $response.body
+        condition: $.status == "CANCELLED"
+        type: jsonpath
+    - name: notCancelled
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status != "CANCELLED"
+        type: jsonpath
+  - stepId: deleteSubscription
+    description: Permanently delete the cancelled subscription record.
+    operationId: deleteSubscription
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $inputs.subscriptionId
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      deletedSubscriptionId: $inputs.subscriptionId
+  outputs:
+    subscriptionId: $inputs.subscriptionId
+    finalStatus: $steps.confirmCancelled.outputs.status
+    deletedSubscriptionId: $steps.deleteSubscription.outputs.deletedSubscriptionId

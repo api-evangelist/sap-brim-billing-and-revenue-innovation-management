@@ -1,0 +1,109 @@
+arazzo: 1.0.1
+info:
+  title: SAP BRIM Update a Subscription Item Quantity and Re-invoice
+  summary: List a subscription's items, update the quantity of one, confirm it, and generate an invoice.
+  description: >-
+    Adjusts a subscription line item and rebills on SAP BRIM Subscription
+    Billing. The workflow lists the items on a subscription to pick the target
+    item, updates that item's quantity, reads the item back to confirm the new
+    quantity, and generates an on-demand invoice reflecting the change. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: subscriptionBillingApi
+  url: ../openapi/sap-brim-subscription-billing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: update-item-quantity-and-invoice
+  summary: Update a subscription item's quantity and generate an invoice for it.
+  description: >-
+    Lists subscription items, updates the supplied item's quantity, confirms the
+    new quantity, and generates an on-demand invoice for the subscription.
+  inputs:
+    type: object
+    required:
+    - subscriptionId
+    - itemId
+    - quantity
+    properties:
+      subscriptionId:
+        type: string
+        description: Identifier of the subscription containing the item.
+      itemId:
+        type: string
+        description: Identifier of the item to update.
+      quantity:
+        type: integer
+        description: New quantity for the item.
+  steps:
+  - stepId: listItems
+    description: List the subscription items to confirm the target item exists.
+    operationId: listSubscriptionItems
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $inputs.subscriptionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      items: $response.body#/results
+  - stepId: updateItem
+    description: Update the quantity of the target subscription item.
+    operationId: updateSubscriptionItem
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $inputs.subscriptionId
+    - name: itemId
+      in: path
+      value: $inputs.itemId
+    requestBody:
+      contentType: application/json
+      payload:
+        quantity: $inputs.quantity
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      itemId: $response.body#/itemId
+      quantity: $response.body#/quantity
+  - stepId: confirmItem
+    description: Read the item back to confirm the updated quantity and total price.
+    operationId: getSubscriptionItem
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $inputs.subscriptionId
+    - name: itemId
+      in: path
+      value: $inputs.itemId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.quantity == $inputs.quantity
+      type: jsonpath
+    outputs:
+      quantity: $response.body#/quantity
+      totalPrice: $response.body#/totalPrice
+  - stepId: generateInvoice
+    description: Generate an on-demand invoice reflecting the updated item quantity.
+    operationId: generateInvoice
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $inputs.subscriptionId
+    requestBody:
+      contentType: application/json
+      payload:
+        includeUsageCharges: true
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      billingRecordId: $response.body#/billingRecordId
+      invoiceNumber: $response.body#/invoiceNumber
+      total: $response.body#/total
+  outputs:
+    itemId: $steps.updateItem.outputs.itemId
+    updatedQuantity: $steps.confirmItem.outputs.quantity
+    billingRecordId: $steps.generateInvoice.outputs.billingRecordId
+    invoiceNumber: $steps.generateInvoice.outputs.invoiceNumber

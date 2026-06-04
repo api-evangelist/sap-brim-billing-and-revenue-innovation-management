@@ -1,0 +1,119 @@
+arazzo: 1.0.1
+info:
+  title: SAP BRIM Build a Pricing Plan with a Rate Card
+  summary: Create a pricing plan, attach a rate card, list its rate cards, and read the plan back.
+  description: >-
+    Stands up a complete pricing structure on SAP BRIM Convergent Charging. The
+    workflow creates a pricing plan, adds a rate card with tier definitions to
+    that plan, lists the plan's rate cards to confirm the attachment, and reads
+    the plan back. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convergentChargingApi
+  url: ../openapi/sap-brim-convergent-charging-openapi.yml
+  type: openapi
+workflows:
+- workflowId: pricing-plan-with-rate-card
+  summary: Create a pricing plan, add a rate card, and verify the attachment.
+  description: >-
+    Creates a pricing plan, attaches a rate card to it, lists the rate cards on
+    the plan, and reads the plan back to confirm the final structure.
+  inputs:
+    type: object
+    required:
+    - planName
+    - serviceType
+    - pricingModel
+    - effectiveFrom
+    - currency
+    - rateCardName
+    - unit
+    - baseRate
+    properties:
+      planName:
+        type: string
+        description: Display name for the pricing plan.
+      serviceType:
+        type: string
+        description: Service type the plan prices.
+      pricingModel:
+        type: string
+        description: Pricing model (FLAT, TIERED, VOLUME, STAIRCASE, PERCENTAGE).
+      effectiveFrom:
+        type: string
+        description: Date the plan becomes effective (YYYY-MM-DD).
+      currency:
+        type: string
+        description: ISO 4217 currency code for the plan.
+      rateCardName:
+        type: string
+        description: Name for the rate card to attach.
+      unit:
+        type: string
+        description: Unit of measurement priced by the rate card.
+      baseRate:
+        type: number
+        description: Base per-unit rate for the rate card.
+  steps:
+  - stepId: createPricingPlan
+    description: Create the pricing plan that the rate card will attach to.
+    operationId: createPricingPlan
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.planName
+        serviceType: $inputs.serviceType
+        pricingModel: $inputs.pricingModel
+        effectiveFrom: $inputs.effectiveFrom
+        currency: $inputs.currency
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      planId: $response.body#/planId
+      status: $response.body#/status
+  - stepId: createRateCard
+    description: Attach a rate card defining unit prices to the new plan.
+    operationId: createRateCard
+    parameters:
+    - name: planId
+      in: path
+      value: $steps.createPricingPlan.outputs.planId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.rateCardName
+        unit: $inputs.unit
+        baseRate: $inputs.baseRate
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      rateCardId: $response.body#/rateCardId
+  - stepId: listRateCards
+    description: List the rate cards on the plan to confirm the attachment.
+    operationId: listRateCards
+    parameters:
+    - name: planId
+      in: path
+      value: $steps.createPricingPlan.outputs.planId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rateCards: $response.body#/results
+  - stepId: getPricingPlan
+    description: Read the pricing plan back to confirm its final structure.
+    operationId: getPricingPlan
+    parameters:
+    - name: planId
+      in: path
+      value: $steps.createPricingPlan.outputs.planId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      planId: $response.body#/planId
+      name: $response.body#/name
+      rateCards: $response.body#/rateCards
+  outputs:
+    planId: $steps.getPricingPlan.outputs.planId
+    rateCardId: $steps.createRateCard.outputs.rateCardId
+    rateCards: $steps.getPricingPlan.outputs.rateCards

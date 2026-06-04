@@ -1,0 +1,85 @@
+arazzo: 1.0.1
+info:
+  title: SAP BRIM Customer Billing Overview
+  summary: List a customer's subscriptions, read their billing summary, and pull billing history.
+  description: >-
+    Builds a consolidated billing picture for a single customer on SAP BRIM
+    Subscription Billing. The workflow lists the customer's subscriptions, reads
+    the customer-level billing summary for outstanding balances and next billing
+    dates, and then pulls the billing history for the first subscription. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: subscriptionBillingApi
+  url: ../openapi/sap-brim-subscription-billing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: customer-billing-overview
+  summary: Assemble a customer's subscriptions, billing summary, and billing history.
+  description: >-
+    Lists subscriptions for a customer, reads the customer billing summary, and
+    retrieves the billing history of the first returned subscription.
+  inputs:
+    type: object
+    required:
+    - customerId
+    properties:
+      customerId:
+        type: string
+        description: Identifier of the customer to build the billing overview for.
+      status:
+        type: string
+        description: Optional subscription status filter (e.g. ACTIVE).
+  steps:
+  - stepId: listCustomerSubscriptions
+    description: List all subscriptions belonging to the customer.
+    operationId: listCustomerSubscriptions
+    parameters:
+    - name: customerId
+      in: path
+      value: $inputs.customerId
+    - name: status
+      in: query
+      value: $inputs.status
+    - name: limit
+      in: query
+      value: 50
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      subscriptions: $response.body#/results
+      firstSubscriptionId: $response.body#/results/0/subscriptionId
+      totalCount: $response.body#/totalCount
+  - stepId: getBillingSummary
+    description: Read the customer-level billing summary across all subscriptions.
+    operationId: getCustomerBillingSummary
+    parameters:
+    - name: customerId
+      in: path
+      value: $inputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      outstandingBalance: $response.body#/outstandingBalance
+      nextBillingDate: $response.body#/nextBillingDate
+      paymentStatus: $response.body#/paymentStatus
+  - stepId: getFirstSubscriptionHistory
+    description: Pull the billing history for the first subscription in the list.
+    operationId: getSubscriptionBillingHistory
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $steps.listCustomerSubscriptions.outputs.firstSubscriptionId
+    - name: limit
+      in: query
+      value: 10
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      billingHistory: $response.body#/results
+  outputs:
+    subscriptions: $steps.listCustomerSubscriptions.outputs.subscriptions
+    outstandingBalance: $steps.getBillingSummary.outputs.outstandingBalance
+    paymentStatus: $steps.getBillingSummary.outputs.paymentStatus
+    billingHistory: $steps.getFirstSubscriptionHistory.outputs.billingHistory

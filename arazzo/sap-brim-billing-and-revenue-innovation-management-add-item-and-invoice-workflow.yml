@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: SAP BRIM Add a Subscription Item and Invoice It
+  summary: Add a line item to a subscription, read it back, and generate an on-demand invoice.
+  description: >-
+    Adds a billable line item to an existing subscription on SAP BRIM
+    Subscription Billing and immediately bills for it. The workflow adds the
+    item, reads the created item back to confirm its pricing, and then triggers
+    an ad-hoc invoice for the subscription so the new item is charged outside
+    the normal billing cycle. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: subscriptionBillingApi
+  url: ../openapi/sap-brim-subscription-billing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: add-item-and-invoice
+  summary: Add an item to a subscription and generate an invoice for it.
+  description: >-
+    Adds a new line item to a subscription, reads the item back to confirm its
+    pricing, and generates an on-demand invoice that includes the new charge.
+  inputs:
+    type: object
+    required:
+    - subscriptionId
+    - productId
+    - quantity
+    properties:
+      subscriptionId:
+        type: string
+        description: Identifier of the subscription to add the item to.
+      productId:
+        type: string
+        description: Identifier of the product to add as a line item.
+      quantity:
+        type: integer
+        description: Quantity of the product to bill.
+      billingType:
+        type: string
+        description: How the item is billed (RECURRING, ONE_TIME, USAGE_BASED).
+  steps:
+  - stepId: addItem
+    description: Add the product as a new line item on the subscription.
+    operationId: addSubscriptionItem
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $inputs.subscriptionId
+    requestBody:
+      contentType: application/json
+      payload:
+        productId: $inputs.productId
+        quantity: $inputs.quantity
+        billingType: $inputs.billingType
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      itemId: $response.body#/itemId
+  - stepId: getItem
+    description: Read the created item back to confirm its quantity and pricing.
+    operationId: getSubscriptionItem
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $inputs.subscriptionId
+    - name: itemId
+      in: path
+      value: $steps.addItem.outputs.itemId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      itemId: $response.body#/itemId
+      totalPrice: $response.body#/totalPrice
+      billingType: $response.body#/billingType
+  - stepId: generateInvoice
+    description: Generate an on-demand invoice that includes the newly added item.
+    operationId: generateInvoice
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $inputs.subscriptionId
+    requestBody:
+      contentType: application/json
+      payload:
+        includeUsageCharges: true
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      billingRecordId: $response.body#/billingRecordId
+      invoiceNumber: $response.body#/invoiceNumber
+      total: $response.body#/total
+      invoiceStatus: $response.body#/status
+  outputs:
+    itemId: $steps.getItem.outputs.itemId
+    billingRecordId: $steps.generateInvoice.outputs.billingRecordId
+    invoiceNumber: $steps.generateInvoice.outputs.invoiceNumber
+    total: $steps.generateInvoice.outputs.total

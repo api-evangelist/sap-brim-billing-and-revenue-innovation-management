@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: SAP BRIM Submit a Usage Event and Poll for Rating
+  summary: Submit a usage event for processing, then poll its status until it has been rated.
+  description: >-
+    Submits a usage event into SAP BRIM Convergent Charging and waits for the
+    asynchronous rating to complete. The workflow submits the event, then reads
+    the event status and branches: while the event is still ACCEPTED or QUEUED it
+    loops back to re-read, and once it reaches RATED or CHARGED the flow ends.
+    Every step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convergentChargingApi
+  url: ../openapi/sap-brim-convergent-charging-openapi.yml
+  type: openapi
+workflows:
+- workflowId: usage-event-rating-poll
+  summary: Submit a usage event and poll its status until rating completes.
+  description: >-
+    Submits a usage event for asynchronous processing and polls the event status
+    until it transitions out of the ACCEPTED/QUEUED states.
+  inputs:
+    type: object
+    required:
+    - subscriberId
+    - serviceType
+    - quantity
+    - usageTimestamp
+    properties:
+      subscriberId:
+        type: string
+        description: Identifier of the subscriber generating the usage.
+      serviceType:
+        type: string
+        description: Type of service being consumed.
+      quantity:
+        type: number
+        description: Quantity of usage units.
+      unit:
+        type: string
+        description: Unit of measurement (e.g. MB, minutes, events).
+      usageTimestamp:
+        type: string
+        description: Timestamp when the usage occurred (date-time).
+      externalId:
+        type: string
+        description: Optional external identifier for deduplication.
+  steps:
+  - stepId: submitUsageEvent
+    description: Submit the usage event for rating and charging.
+    operationId: submitUsageEvent
+    requestBody:
+      contentType: application/json
+      payload:
+        externalId: $inputs.externalId
+        subscriberId: $inputs.subscriberId
+        serviceType: $inputs.serviceType
+        quantity: $inputs.quantity
+        unit: $inputs.unit
+        usageTimestamp: $inputs.usageTimestamp
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      eventId: $response.body#/eventId
+      status: $response.body#/status
+  - stepId: pollUsageEvent
+    description: >-
+      Read the usage event status and loop while it is still ACCEPTED or QUEUED,
+      ending once it has been rated or charged.
+    operationId: getUsageEvent
+    parameters:
+    - name: eventId
+      in: path
+      value: $steps.submitUsageEvent.outputs.eventId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      ratingResult: $response.body#/ratingResult
+      processedAt: $response.body#/processedAt
+    onSuccess:
+    - name: stillProcessing
+      type: goto
+      stepId: pollUsageEvent
+      criteria:
+      - context: $response.body
+        condition: $.status == "ACCEPTED" || $.status == "QUEUED"
+        type: jsonpath
+    - name: done
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "RATED" || $.status == "CHARGED" || $.status == "FAILED"
+        type: jsonpath
+  outputs:
+    eventId: $steps.submitUsageEvent.outputs.eventId
+    finalStatus: $steps.pollUsageEvent.outputs.status
+    ratingResult: $steps.pollUsageEvent.outputs.ratingResult

@@ -1,0 +1,93 @@
+arazzo: 1.0.1
+info:
+  title: SAP BRIM Upgrade or Downgrade a Subscription Plan
+  summary: Read a subscription, switch it to a new plan with proration, and confirm the change.
+  description: >-
+    Moves an existing subscription onto a different plan on SAP BRIM
+    Subscription Billing. The workflow reads the current subscription to capture
+    the plan it is on, applies the plan change with proration handled
+    automatically by the platform, and then reads the subscription back to
+    confirm the new plan is in effect. Every step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: subscriptionBillingApi
+  url: ../openapi/sap-brim-subscription-billing-openapi.yml
+  type: openapi
+workflows:
+- workflowId: change-subscription-plan
+  summary: Change the plan on a subscription and verify the new plan took effect.
+  description: >-
+    Reads the current subscription, changes it to the supplied new plan with
+    proration, and reads the subscription again to confirm the planId changed.
+  inputs:
+    type: object
+    required:
+    - subscriptionId
+    - newPlanId
+    properties:
+      subscriptionId:
+        type: string
+        description: Identifier of the subscription to change.
+      newPlanId:
+        type: string
+        description: Identifier of the plan the subscription should move to.
+      effectiveDate:
+        type: string
+        description: Optional date the plan change takes effect (YYYY-MM-DD).
+      prorateCharges:
+        type: boolean
+        description: Whether to prorate charges for the current period (defaults to true).
+  steps:
+  - stepId: getCurrentSubscription
+    description: Read the subscription to capture the plan it is currently on.
+    operationId: getSubscription
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $inputs.subscriptionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentPlanId: $response.body#/planId
+      status: $response.body#/status
+  - stepId: changePlan
+    description: Switch the subscription onto the new plan, prorating the current period.
+    operationId: changeSubscriptionPlan
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $inputs.subscriptionId
+    requestBody:
+      contentType: application/json
+      payload:
+        newPlanId: $inputs.newPlanId
+        effectiveDate: $inputs.effectiveDate
+        prorateCharges: $inputs.prorateCharges
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      planId: $response.body#/planId
+  - stepId: confirmPlanChange
+    description: Read the subscription back to confirm the new plan is in effect.
+    operationId: getSubscription
+    parameters:
+    - name: subscriptionId
+      in: path
+      value: $inputs.subscriptionId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.planId == "$inputs.newPlanId"
+      type: jsonpath
+    outputs:
+      subscriptionId: $response.body#/subscriptionId
+      planId: $response.body#/planId
+      planName: $response.body#/planName
+      recurringCharge: $response.body#/recurringCharge
+  outputs:
+    subscriptionId: $steps.confirmPlanChange.outputs.subscriptionId
+    previousPlanId: $steps.getCurrentSubscription.outputs.currentPlanId
+    newPlanId: $steps.confirmPlanChange.outputs.planId
+    recurringCharge: $steps.confirmPlanChange.outputs.recurringCharge

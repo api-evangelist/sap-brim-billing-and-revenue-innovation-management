@@ -1,0 +1,79 @@
+arazzo: 1.0.1
+info:
+  title: SAP BRIM Batch Rate Usage and Charge the Total
+  summary: Rate a batch of usage events in one call, then charge the account for the aggregate total.
+  description: >-
+    Rates many usage events at once on SAP BRIM Convergent Charging and bills the
+    aggregate. The workflow submits a batch of usage events for rating, reads the
+    batch summary total it returns, and charges the account for that total amount.
+    The charge amount is taken directly from the batch rating summary. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convergentChargingApi
+  url: ../openapi/sap-brim-convergent-charging-openapi.yml
+  type: openapi
+workflows:
+- workflowId: batch-rate-and-charge
+  summary: Rate a batch of usage events and charge the aggregate total.
+  description: >-
+    Rates a batch of usage events in a single request and charges the account
+    for the total charge reported in the batch summary.
+  inputs:
+    type: object
+    required:
+    - accountId
+    - events
+    properties:
+      accountId:
+        type: string
+        description: Identifier of the account to charge for the batch total.
+      events:
+        type: array
+        description: >-
+          Array of rating requests, each with subscriberId, serviceType,
+          quantity, and usageTimestamp (and optional unit, pricingPlanId).
+        items:
+          type: object
+      chargeType:
+        type: string
+        description: Charging model for the aggregate charge (PREPAID or POSTPAID).
+  steps:
+  - stepId: rateBatch
+    description: Rate the full batch of usage events in a single request.
+    operationId: rateUsageEventBatch
+    requestBody:
+      contentType: application/json
+      payload:
+        events: $inputs.events
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      results: $response.body#/results
+      totalChargeValue: $response.body#/summary/totalCharge/value
+      totalChargeCurrency: $response.body#/summary/totalCharge/currency
+      successCount: $response.body#/summary/successCount
+  - stepId: chargeTotal
+    description: Charge the account for the aggregate total returned by the batch.
+    operationId: chargeAccount
+    requestBody:
+      contentType: application/json
+      payload:
+        accountId: $inputs.accountId
+        amount:
+          value: $steps.rateBatch.outputs.totalChargeValue
+          currency: $steps.rateBatch.outputs.totalChargeCurrency
+        chargeType: $inputs.chargeType
+        description: Aggregate charge for batch-rated usage events
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      chargeId: $response.body#/chargeId
+      status: $response.body#/status
+      remainingBalance: $response.body#/remainingBalance
+  outputs:
+    successCount: $steps.rateBatch.outputs.successCount
+    totalChargeValue: $steps.rateBatch.outputs.totalChargeValue
+    chargeId: $steps.chargeTotal.outputs.chargeId
+    remainingBalance: $steps.chargeTotal.outputs.remainingBalance
