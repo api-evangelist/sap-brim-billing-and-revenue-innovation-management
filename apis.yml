@@ -1,302 +1,293 @@
 name: SAP BRIM (Billing and Revenue Innovation Management)
-description: SAP BRIM (Billing and Revenue Innovation Management) is a comprehensive solution for order-to-cash processes,
-  subscription management, usage-based pricing, and revenue management. It enables businesses to manage complex billing scenarios,
-  subscription lifecycle, and revenue recognition.
+description: >-
+  SAP BRIM (Billing and Revenue Innovation Management) is a comprehensive solution for order-to-cash processes,
+  subscription management, usage-based pricing, and revenue management. It enables businesses to manage complex billing
+  scenarios, subscription lifecycle, and revenue recognition.
 image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
 url: https://www.sap.com/products/financial-management/billing-revenue-innovation-mgmt.html
 created: '2024-01-15'
 modified: '2026-05-19'
 specificationVersion: '0.18'
 tags:
-- Billing
-- Enterprise
-- Order to Cash
-- Revenue Management
-- SAP
-- Subscription Management
-- Usage-Based Pricing
-apis:
-- name: SAP Convergent Charging API
-  description: API for real-time charging and rating of usage-based services. Supports complex pricing models, prepaid and
-    postpaid scenarios.
-  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
-  baseURL: https://api.sap.com/convergent-charging
-  tags:
-  - Charging
-  - Rating
-  - Real-Time
+  - Billing
+  - Enterprise
+  - Order to Cash
+  - Revenue Management
+  - SAP
+  - Subscription Management
   - Usage-Based Pricing
-  properties:
-  - type: Documentation
-    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
-  - type: OpenAPI
-    url: https://api.sap.com/api/convergent_charging/overview
+apis:
+  - name: SAP Convergent Charging API
+    description: >-
+      API for real-time charging and rating of usage-based services. Supports complex pricing models, prepaid and
+      postpaid scenarios.
+    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+    humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+    baseURL: https://api.sap.com/convergent-charging
+    tags:
+      - Charging
+      - Rating
+      - Real-Time
+      - Usage-Based Pricing
+    properties:
+      - type: Documentation
+        url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+      - type: OpenAPI
+        url: https://api.sap.com/api/convergent_charging/overview
+      - type: OpenAPI
+        url: openapi/sap-brim-convergent-charging-openapi.yml
+      - type: Authentication
+        url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
+    contact:
+      - FN: SAP Support
+        email: support@sap.com
+        url: https://support.sap.com
+  - name: SAP Convergent Invoicing API
+    description: >-
+      API for creating, managing, and processing invoices from multiple sources. Supports complex billing scenarios,
+      invoice consolidation, and flexible output formats.
+    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+    humanURL: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+    baseURL: https://api.sap.com/convergent-invoicing
+    tags:
+      - Billing
+      - Invoice Management
+      - Invoicing
+    properties:
+      - type: Documentation
+        url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+      - type: OpenAPI
+        url: https://api.sap.com/api/convergent_invoicing/overview
+      - type: Sandbox
+        url: https://api.sap.com/api/convergent_invoicing/tryout
+    contact:
+      - FN: SAP Support
+        email: support@sap.com
+        url: https://support.sap.com
+  - name: SAP Subscription Billing API
+    description: >-
+      API for managing subscription lifecycle, including creation, modification, renewal, and cancellation. Supports
+      various billing frequencies and subscription models.
+    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+    humanURL: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+    baseURL: https://api.sap.com/subscription-billing
+    tags:
+      - Lifecycle Management
+      - Recurring Billing
+      - Subscriptions
+    properties:
+      - type: Documentation
+        url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+      - type: OpenAPI
+        url: https://api.sap.com/api/subscription_billing/overview
+      - type: OpenAPI
+        url: openapi/sap-brim-subscription-billing-openapi.yml
+      - type: API Console
+        url: https://api.sap.com/api/subscription_billing/console
+      - type: Reference
+        url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
+      - type: GettingStarted
+        url: >-
+          https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+      - type: JSONSchema
+        url: json-schema/sap-brim-subscription-schema.json
+    contact:
+      - FN: SAP Support
+        email: support@sap.com
+        url: https://support.sap.com
+  - name: SAP Contract Accounts Receivable and Payable API
+    description: >-
+      API for managing customer accounts, payment processing, dunning, and dispute management. Core component for
+      financial customer relationship management.
+    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+    humanURL: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+    baseURL: https://api.sap.com/fica
+    tags:
+      - Accounts Receivable
+      - Dunning
+      - Financial Accounting
+      - Payments
+    properties:
+      - type: Documentation
+        url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+      - type: OpenAPI
+        url: https://api.sap.com/api/fica/overview
+      - type: Integration Guide
+        url: https://help.sap.com/docs/SAP_FICA/integration
+    contact:
+      - FN: SAP Support
+        email: support@sap.com
+        url: https://support.sap.com
+  - name: SAP BRIM Usage Data Intake API
+    description: >-
+      API for ingesting high-volume usage data from various sources. Supports batch and real-time processing of usage
+      events for rating and billing.
+    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+    humanURL: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+    baseURL: https://api.sap.com/usage-data-intake
+    tags:
+      - Data Ingestion
+      - Mediation
+      - Usage Data
+    properties:
+      - type: Documentation
+        url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+      - type: OpenAPI
+        url: https://api.sap.com/api/usage_data_intake/overview
+      - type: Technical Specifications
+        url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
+    contact:
+      - FN: SAP Support
+        email: support@sap.com
+        url: https://support.sap.com
+  - name: SAP Revenue Accounting and Reporting API
+    description: >-
+      API for revenue recognition according to IFRS 15 and ASC 606 standards. Manages performance obligations, revenue
+      allocation, and compliance reporting.
+    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+    humanURL: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+    baseURL: https://api.sap.com/revenue-accounting
+    tags:
+      - ASC 606
+      - Compliance
+      - IFRS 15
+      - Revenue Recognition
+    properties:
+      - type: Documentation
+        url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+      - type: OpenAPI
+        url: https://api.sap.com/api/revenue_accounting/overview
+      - type: Compliance Guide
+        url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
+    contact:
+      - FN: SAP Support
+        email: support@sap.com
+        url: https://support.sap.com
+  - name: SAP Subscription Order Management API
+    description: >-
+      API for managing subscription-based orders within the SAP BRIM suite, supporting complex offerings that combine
+      physical products, services, and usage-based fees with full lifecycle management.
+    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+    humanURL: https://help.sap.com/docs/BRIM
+    baseURL: https://api.sap.com/subscription-order-management
+    tags:
+      - Lifecycle Management
+      - Order Management
+      - Subscription Orders
+    properties:
+      - type: Documentation
+        url: https://help.sap.com/docs/BRIM
+    contact:
+      - FN: SAP Support
+        email: support@sap.com
+        url: https://support.sap.com
+common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/sap-brim-billing-and-revenue-innovation-management/overview
+  - type: ArazzoWorkflows
+    url: arazzo/
+    workflows:
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-add-item-and-invoice-workflow.yml
+        name: SAP BRIM Add a Subscription Item and Invoice It
+        summary: Add a line item to a subscription, read it back, and generate an on-demand invoice.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-authorize-confirm-charge-workflow.yml
+        name: SAP BRIM Authorize and Confirm a Charge Reservation
+        summary: Reserve an amount against a prepaid balance, confirm it into a final charge, and read the balance.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-authorize-or-release-workflow.yml
+        name: SAP BRIM Authorize a Charge or Release on Insufficient Balance
+        summary: Check the balance, reserve an amount, and release the reservation when it is not needed.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-batch-rate-and-charge-workflow.yml
+        name: SAP BRIM Batch Rate Usage and Charge the Total
+        summary: Rate a batch of usage events in one call, then charge the account for the aggregate total.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-cancel-and-cleanup-workflow.yml
+        name: SAP BRIM Cancel and Clean Up a Subscription
+        summary: Cancel a subscription, verify the cancelled state, then optionally delete it.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-charge-and-refund-workflow.yml
+        name: SAP BRIM Charge an Account and Refund It
+        summary: Execute a charge against an account, refund that charge, and confirm the balance.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-customer-billing-overview-workflow.yml
+        name: SAP BRIM Customer Billing Overview
+        summary: List a customer's subscriptions, read their billing summary, and pull billing history.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-manual-renewal-invoice-workflow.yml
+        name: SAP BRIM Renew a Subscription and Invoice the New Term
+        summary: Manually renew a subscription, invoice the renewed term, and read the billing history.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-prepaid-topup-and-charge-workflow.yml
+        name: SAP BRIM Top Up and Charge a Prepaid Account
+        summary: Read a prepaid balance, top it up, execute a charge, and confirm the new balance.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-pricing-plan-with-rate-card-workflow.yml
+        name: SAP BRIM Build a Pricing Plan with a Rate Card
+        summary: Create a pricing plan, attach a rate card, list its rate cards, and read the plan back.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-provision-subscription-workflow.yml
+        name: SAP BRIM Provision a New Subscription
+        summary: Create a subscription plan, subscribe a customer, activate the subscription, and confirm its state.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-simulate-rate-and-charge-workflow.yml
+        name: SAP BRIM Simulate, Rate, and Charge Usage
+        summary: Simulate the price of a usage event, commit the rating, then charge the rated amount.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-subscription-upgrade-workflow.yml
+        name: SAP BRIM Upgrade or Downgrade a Subscription Plan
+        summary: Read a subscription, switch it to a new plan with proration, and confirm the change.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-suspend-and-resume-workflow.yml
+        name: SAP BRIM Suspend and Resume a Subscription
+        summary: Suspend an active subscription, confirm the paused state, then reactivate it.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-update-item-quantity-and-invoice-workflow.yml
+        name: SAP BRIM Update a Subscription Item Quantity and Re-invoice
+        summary: List a subscription's items, update the quantity of one, confirm it, and generate an invoice.
+      - url: arazzo/sap-brim-billing-and-revenue-innovation-management-usage-event-rating-poll-workflow.yml
+        name: SAP BRIM Submit a Usage Event and Poll for Rating
+        summary: Submit a usage event for processing, then poll its status until it has been rated.
+  - type: Portal
+    url: https://api.sap.com
   - type: OpenAPI
     url: openapi/sap-brim-convergent-charging-openapi.yml
-  - type: Authentication
-    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
-  - type: NaftikoCapability
-    url: capabilities/sap-brim-convergent-charging-balances.yaml
-  - type: NaftikoCapability
-    url: capabilities/sap-brim-convergent-charging-charging.yaml
-  - type: NaftikoCapability
-    url: capabilities/sap-brim-convergent-charging-pricing.yaml
-  - type: NaftikoCapability
-    url: capabilities/sap-brim-convergent-charging-rating.yaml
-  - type: NaftikoCapability
-    url: capabilities/sap-brim-convergent-charging-usage-events.yaml
-  - type: NaftikoCapability
-    url: capabilities/sap-brim-subscription-billing-billing.yaml
-  - type: NaftikoCapability
-    url: capabilities/sap-brim-subscription-billing-customers.yaml
-  - type: NaftikoCapability
-    url: capabilities/sap-brim-subscription-billing-plans.yaml
-  - type: NaftikoCapability
-    url: capabilities/sap-brim-subscription-billing-subscription-items.yaml
-  - type: NaftikoCapability
-    url: capabilities/sap-brim-subscription-billing-subscriptions.yaml
-  contact:
-  - FN: SAP Support
-    email: support@sap.com
-    url: https://support.sap.com
-- name: SAP Convergent Invoicing API
-  description: API for creating, managing, and processing invoices from multiple sources. Supports complex billing scenarios,
-    invoice consolidation, and flexible output formats.
-  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
-  baseURL: https://api.sap.com/convergent-invoicing
-  tags:
-  - Billing
-  - Invoice Management
-  - Invoicing
-  properties:
-  - type: Documentation
-    url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
-  - type: OpenAPI
-    url: https://api.sap.com/api/convergent_invoicing/overview
-  - type: Sandbox
-    url: https://api.sap.com/api/convergent_invoicing/tryout
-  contact:
-  - FN: SAP Support
-    email: support@sap.com
-    url: https://support.sap.com
-- name: SAP Subscription Billing API
-  description: API for managing subscription lifecycle, including creation, modification, renewal, and cancellation. Supports
-    various billing frequencies and subscription models.
-  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-  humanURL: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
-  baseURL: https://api.sap.com/subscription-billing
-  tags:
-  - Lifecycle Management
-  - Recurring Billing
-  - Subscriptions
-  properties:
-  - type: Documentation
-    url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
-  - type: OpenAPI
-    url: https://api.sap.com/api/subscription_billing/overview
   - type: OpenAPI
     url: openapi/sap-brim-subscription-billing-openapi.yml
-  - type: API Console
-    url: https://api.sap.com/api/subscription_billing/console
-  - type: Reference
-    url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
-  - type: GettingStarted
-    url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+  - type: JSONLD
+    url: json-ld/sap-brim-context.jsonld
   - type: JSONSchema
     url: json-schema/sap-brim-subscription-schema.json
-  contact:
-  - FN: SAP Support
-    email: support@sap.com
+  - type: JSONStructure
+    url: json-structure/sap-brim-subscription-structure.json
+  - type: JSONStructure
+    url: json-structure/sap-brim-rating-request-structure.json
+  - type: SpectralRules
+    url: rules/sap-brim-rules.yml
+  - type: Vocabulary
+    url: vocabulary/sap-brim-vocabulary.yml
+  - type: GettingStarted
+    url: https://help.sap.com/docs/SAP_BRIM/getting-started
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_BRIM/authentication
+  - type: Support
     url: https://support.sap.com
-- name: SAP Contract Accounts Receivable and Payable API
-  description: API for managing customer accounts, payment processing, dunning, and dispute management. Core component for
-    financial customer relationship management.
-  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-  humanURL: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
-  baseURL: https://api.sap.com/fica
-  tags:
-  - Accounts Receivable
-  - Dunning
-  - Financial Accounting
-  - Payments
-  properties:
-  - type: Documentation
-    url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
-  - type: OpenAPI
-    url: https://api.sap.com/api/fica/overview
-  - type: Integration Guide
-    url: https://help.sap.com/docs/SAP_FICA/integration
-  contact:
-  - FN: SAP Support
-    email: support@sap.com
-    url: https://support.sap.com
-- name: SAP BRIM Usage Data Intake API
-  description: API for ingesting high-volume usage data from various sources. Supports batch and real-time processing of usage
-    events for rating and billing.
-  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-  humanURL: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
-  baseURL: https://api.sap.com/usage-data-intake
-  tags:
-  - Data Ingestion
-  - Mediation
-  - Usage Data
-  properties:
-  - type: Documentation
-    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
-  - type: OpenAPI
-    url: https://api.sap.com/api/usage_data_intake/overview
-  - type: Technical Specifications
-    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
-  contact:
-  - FN: SAP Support
-    email: support@sap.com
-    url: https://support.sap.com
-- name: SAP Revenue Accounting and Reporting API
-  description: API for revenue recognition according to IFRS 15 and ASC 606 standards. Manages performance obligations, revenue
-    allocation, and compliance reporting.
-  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-  humanURL: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
-  baseURL: https://api.sap.com/revenue-accounting
-  tags:
-  - ASC 606
-  - Compliance
-  - IFRS 15
-  - Revenue Recognition
-  properties:
-  - type: Documentation
-    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
-  - type: OpenAPI
-    url: https://api.sap.com/api/revenue_accounting/overview
-  - type: Compliance Guide
-    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
-  contact:
-  - FN: SAP Support
-    email: support@sap.com
-    url: https://support.sap.com
-- name: SAP Subscription Order Management API
-  description: API for managing subscription-based orders within the SAP BRIM suite, supporting complex offerings that combine
-    physical products, services, and usage-based fees with full lifecycle management.
-  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-  humanURL: https://help.sap.com/docs/BRIM
-  baseURL: https://api.sap.com/subscription-order-management
-  tags:
-  - Lifecycle Management
-  - Order Management
-  - Subscription Orders
-  properties:
+  - type: TermsOfService
+    url: https://www.sap.com/about/legal/terms-of-use.html
+  - type: PrivacyPolicy
+    url: https://www.sap.com/about/legal/privacy.html
+  - type: StatusPage
+    url: https://www.sap.com/about/trust-center/cloud-service-status.html
+  - type: Community
+    url: https://community.sap.com
+  - type: Blog
+    url: https://blogs.sap.com
+  - type: Website
+    url: https://www.sap.com/products/financial-management/billing-revenue-innovation-management.html
   - type: Documentation
     url: https://help.sap.com/docs/BRIM
-  contact:
-  - FN: SAP Support
-    email: support@sap.com
-    url: https://support.sap.com
-common:
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-add-item-and-invoice-workflow.yml
-    name: SAP BRIM Add a Subscription Item and Invoice It
-    summary: Add a line item to a subscription, read it back, and generate an on-demand invoice.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-authorize-confirm-charge-workflow.yml
-    name: SAP BRIM Authorize and Confirm a Charge Reservation
-    summary: Reserve an amount against a prepaid balance, confirm it into a final charge, and read the balance.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-authorize-or-release-workflow.yml
-    name: SAP BRIM Authorize a Charge or Release on Insufficient Balance
-    summary: Check the balance, reserve an amount, and release the reservation when it is not needed.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-batch-rate-and-charge-workflow.yml
-    name: SAP BRIM Batch Rate Usage and Charge the Total
-    summary: Rate a batch of usage events in one call, then charge the account for the aggregate total.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-cancel-and-cleanup-workflow.yml
-    name: SAP BRIM Cancel and Clean Up a Subscription
-    summary: Cancel a subscription, verify the cancelled state, then optionally delete it.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-charge-and-refund-workflow.yml
-    name: SAP BRIM Charge an Account and Refund It
-    summary: Execute a charge against an account, refund that charge, and confirm the balance.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-customer-billing-overview-workflow.yml
-    name: SAP BRIM Customer Billing Overview
-    summary: List a customer's subscriptions, read their billing summary, and pull billing history.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-manual-renewal-invoice-workflow.yml
-    name: SAP BRIM Renew a Subscription and Invoice the New Term
-    summary: Manually renew a subscription, invoice the renewed term, and read the billing history.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-prepaid-topup-and-charge-workflow.yml
-    name: SAP BRIM Top Up and Charge a Prepaid Account
-    summary: Read a prepaid balance, top it up, execute a charge, and confirm the new balance.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-pricing-plan-with-rate-card-workflow.yml
-    name: SAP BRIM Build a Pricing Plan with a Rate Card
-    summary: Create a pricing plan, attach a rate card, list its rate cards, and read the plan back.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-provision-subscription-workflow.yml
-    name: SAP BRIM Provision a New Subscription
-    summary: Create a subscription plan, subscribe a customer, activate the subscription, and confirm its state.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-simulate-rate-and-charge-workflow.yml
-    name: SAP BRIM Simulate, Rate, and Charge Usage
-    summary: Simulate the price of a usage event, commit the rating, then charge the rated amount.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-subscription-upgrade-workflow.yml
-    name: SAP BRIM Upgrade or Downgrade a Subscription Plan
-    summary: Read a subscription, switch it to a new plan with proration, and confirm the change.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-suspend-and-resume-workflow.yml
-    name: SAP BRIM Suspend and Resume a Subscription
-    summary: Suspend an active subscription, confirm the paused state, then reactivate it.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-update-item-quantity-and-invoice-workflow.yml
-    name: SAP BRIM Update a Subscription Item Quantity and Re-invoice
-    summary: List a subscription's items, update the quantity of one, confirm it, and generate an invoice.
-  - url: arazzo/sap-brim-billing-and-revenue-innovation-management-usage-event-rating-poll-workflow.yml
-    name: SAP BRIM Submit a Usage Event and Poll for Rating
-    summary: Submit a usage event for processing, then poll its status until it has been rated.
-- type: Portal
-  url: https://api.sap.com
-- type: OpenAPI
-  url: openapi/sap-brim-convergent-charging-openapi.yml
-- type: OpenAPI
-  url: openapi/sap-brim-subscription-billing-openapi.yml
-- type: JSONLD
-  url: json-ld/sap-brim-context.jsonld
-- type: JSONSchema
-  url: json-schema/sap-brim-subscription-schema.json
-- type: JSONStructure
-  url: json-structure/sap-brim-subscription-structure.json
-- type: JSONStructure
-  url: json-structure/sap-brim-rating-request-structure.json
-- type: SpectralRules
-  url: rules/sap-brim-rules.yml
-- type: Vocabulary
-  url: vocabulary/sap-brim-vocabulary.yml
-- type: GettingStarted
-  url: https://help.sap.com/docs/SAP_BRIM/getting-started
-- type: Authentication
-  url: https://help.sap.com/docs/SAP_BRIM/authentication
-- type: Support
-  url: https://support.sap.com
-- type: TermsOfService
-  url: https://www.sap.com/about/legal/terms-of-use.html
-- type: PrivacyPolicy
-  url: https://www.sap.com/about/legal/privacy.html
-- type: StatusPage
-  url: https://www.sap.com/about/trust-center/cloud-service-status.html
-- type: Community
-  url: https://community.sap.com
-- type: Blog
-  url: https://blogs.sap.com
-- type: Website
-  url: https://www.sap.com/products/financial-management/billing-revenue-innovation-management.html
-- type: Documentation
-  url: https://help.sap.com/docs/BRIM
-- type: SDKs
-  url: https://developers.sap.com/
-- type: GitHubOrganization
-  url: https://github.com/SAP
-- type: StackOverflow
-  url: https://stackoverflow.com/questions/tagged/sap
-- type: SignUp
-  url: https://developers.sap.com/
-- type: YouTube
-  url: https://www.youtube.com/@sapdevs
-- type: Learning
-  url: https://learning.sap.com/
-- type: Onboarding
-  url: https://support.sap.com/en/product/onboarding-resource-center/brim.html
+  - type: SDKs
+    url: https://developers.sap.com/
+  - type: GitHubOrganization
+    url: https://github.com/SAP
+  - type: StackOverflow
+    url: https://stackoverflow.com/questions/tagged/sap
+  - type: SignUp
+    url: https://developers.sap.com/
+  - type: YouTube
+    url: https://www.youtube.com/@sapdevs
+  - type: Learning
+    url: https://learning.sap.com/
+  - type: Onboarding
+    url: https://support.sap.com/en/product/onboarding-resource-center/brim.html
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-  url: https://apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
