@@ -1,0 +1,29 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/sap-brim-convergent-charging-openapi.yml, openapi/sap-brim-subscription-billing-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/sap-brim-convergent-charging-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.sap.com/oauth/token
+- name: OAuth2
+  source: openapi/sap-brim-subscription-billing-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.sap.com/oauth/token
+scopes:
+- scope: read
+  description: Read access to charging and rating resources
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/sap-brim-convergent-charging-openapi.yml
+  - openapi/sap-brim-subscription-billing-openapi.yml
+- scope: write
+  description: Write access to charging and rating resources
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/sap-brim-convergent-charging-openapi.yml
+  - openapi/sap-brim-subscription-billing-openapi.yml

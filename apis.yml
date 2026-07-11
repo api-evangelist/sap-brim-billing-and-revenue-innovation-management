@@ -182,6 +182,10 @@ apis:
         email: support@sap.com
         url: https://support.sap.com
 common:
+  - type: Authentication
+    url: authentication/sap-brim-billing-and-revenue-innovation-management-authentication.yml
+  - type: OAuthScopes
+    url: scopes/sap-brim-billing-and-revenue-innovation-management-scopes.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/sap-brim-billing-and-revenue-innovation-management/overview
   - type: Arazzo
