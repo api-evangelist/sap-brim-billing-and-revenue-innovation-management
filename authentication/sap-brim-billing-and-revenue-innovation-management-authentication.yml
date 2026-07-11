@@ -1,0 +1,28 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/sap-brim-convergent-charging-openapi.yml, openapi/sap-brim-subscription-billing-openapi.yml
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.sap.com/oauth/token
+    scopes: 2
+  sources:
+  - openapi/sap-brim-convergent-charging-openapi.yml
+  - openapi/sap-brim-subscription-billing-openapi.yml
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: APIKey
+  sources:
+  - openapi/sap-brim-convergent-charging-openapi.yml
+  - openapi/sap-brim-subscription-billing-openapi.yml
