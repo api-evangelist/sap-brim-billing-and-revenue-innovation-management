@@ -3,19 +3,17 @@
   "feeds": [
     {
       "source": "https://community.sap.com/khhcw49343/rss/Category?category.id=all-blogs&interaction.style=forum",
-      "feed_url": "https://community.sap.com/khhcw49343/rss/Category?category.id=all-blogs&interaction.style=forum",
-      "title": "",
-      "saved": 0,
-      "method": "feed"
+      "error": "HTTPError"
+    },
+    {
+      "source": "https://community.sap.com/khhcw49343/rss/Community?interaction.style=forum",
+      "error": "HTTPError"
     },
     {
       "source": "https://community.sap.com",
-      "feed_url": "https://community.sap.com/khhcw49343/rss/Community?interaction.style=forum",
-      "title": "",
-      "saved": 14,
-      "method": "discovered"
+      "error": "HTTPError"
     }
   ],
-  "fetched": "2026-06-27T12:03:07Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "post_count": 14
 }
