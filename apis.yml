@@ -182,6 +182,8 @@ apis:
         email: support@sap.com
         url: https://support.sap.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/sap-brim-billing-and-revenue-innovation-management-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/sap-brim-billing-and-revenue-innovation-management-vulnerability-disclosure.yml
   - type: DomainSecurity
