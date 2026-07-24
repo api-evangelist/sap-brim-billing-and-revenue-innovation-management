@@ -1,0 +1,476 @@
+openapi: 3.0.3
+info:
+  title: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Pricing API
+  description: API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/legal/terms-of-use.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Production
+- url: https://sandbox.api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Sandbox
+security:
+- OAuth2:
+  - read
+  - write
+- ApiKeyAuth: []
+tags:
+- name: Pricing
+  description: Management of pricing plans, rate cards, and pricing structures
+paths:
+  /pricing/plans:
+    get:
+      operationId: listPricingPlans
+      summary: SAP BRIM (Billing and Revenue Innovation Management) List pricing plans
+      description: Retrieves a paginated list of pricing plans. Supports filtering by status, service type, and effective date.
+      tags:
+      - Pricing
+      parameters:
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Limit'
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - DRAFT
+      - name: serviceType
+        in: query
+        schema:
+          type: string
+      - name: effectiveDate
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: List of pricing plans
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PricingPlan'
+                  totalCount:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createPricingPlan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Create a pricing plan
+      description: Creates a new pricing plan with associated rate cards and pricing tiers.
+      tags:
+      - Pricing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PricingPlanCreate'
+      responses:
+        '201':
+          description: Pricing plan created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingPlan'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Pricing plan with the same identifier already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /pricing/plans/{planId}:
+    get:
+      operationId: getPricingPlan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get a pricing plan
+      description: Retrieves the details of a specific pricing plan by its identifier.
+      tags:
+      - Pricing
+      parameters:
+      - $ref: '#/components/parameters/PlanId'
+      responses:
+        '200':
+          description: Pricing plan details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingPlan'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      operationId: updatePricingPlan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Update a pricing plan
+      description: Updates an existing pricing plan. Only DRAFT plans can be fully updated; ACTIVE plans support limited modifications.
+      tags:
+      - Pricing
+      parameters:
+      - $ref: '#/components/parameters/PlanId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PricingPlanCreate'
+      responses:
+        '200':
+          description: Pricing plan updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingPlan'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: deletePricingPlan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Delete a pricing plan
+      description: Deletes a pricing plan. Only DRAFT or INACTIVE plans can be deleted.
+      tags:
+      - Pricing
+      parameters:
+      - $ref: '#/components/parameters/PlanId'
+      responses:
+        '204':
+          description: Pricing plan deleted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /pricing/plans/{planId}/rate-cards:
+    get:
+      operationId: listRateCards
+      summary: SAP BRIM (Billing and Revenue Innovation Management) List rate cards for a pricing plan
+      description: Retrieves all rate cards associated with a pricing plan.
+      tags:
+      - Pricing
+      parameters:
+      - $ref: '#/components/parameters/PlanId'
+      responses:
+        '200':
+          description: List of rate cards
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RateCard'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createRateCard
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Add a rate card to a pricing plan
+      description: Creates a new rate card and associates it with the specified pricing plan. Rate cards define the unit prices and tier structures.
+      tags:
+      - Pricing
+      parameters:
+      - $ref: '#/components/parameters/PlanId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RateCardCreate'
+      responses:
+        '201':
+          description: Rate card created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateCard'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    PricingTier:
+      type: object
+      required:
+      - fromQuantity
+      - ratePerUnit
+      properties:
+        tierName:
+          type: string
+        fromQuantity:
+          type: number
+          format: double
+        toQuantity:
+          type: number
+          format: double
+          description: Upper bound of the tier (null for unlimited)
+        ratePerUnit:
+          type: number
+          format: double
+        flatFee:
+          $ref: '#/components/schemas/MonetaryAmount'
+    PricingPlanCreate:
+      type: object
+      required:
+      - name
+      - serviceType
+      - pricingModel
+      - effectiveFrom
+      - currency
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        serviceType:
+          type: string
+        pricingModel:
+          type: string
+          enum:
+          - FLAT
+          - TIERED
+          - VOLUME
+          - STAIRCASE
+          - PERCENTAGE
+        effectiveFrom:
+          type: string
+          format: date
+        effectiveTo:
+          type: string
+          format: date
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+    RateCard:
+      type: object
+      properties:
+        rateCardId:
+          type: string
+        name:
+          type: string
+        unit:
+          type: string
+          description: Unit of measurement
+        baseRate:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingTier'
+        effectiveFrom:
+          type: string
+          format: date
+        effectiveTo:
+          type: string
+          format: date
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+    PricingPlan:
+      type: object
+      properties:
+        planId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - DRAFT
+        serviceType:
+          type: string
+        pricingModel:
+          type: string
+          enum:
+          - FLAT
+          - TIERED
+          - VOLUME
+          - STAIRCASE
+          - PERCENTAGE
+        effectiveFrom:
+          type: string
+          format: date
+        effectiveTo:
+          type: string
+          format: date
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+        rateCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateCard'
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    MonetaryAmount:
+      type: object
+      required:
+      - value
+      - currency
+      properties:
+        value:
+          type: number
+          format: double
+          description: The monetary value
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 currency code
+    RateCardCreate:
+      type: object
+      required:
+      - name
+      - unit
+      - baseRate
+      properties:
+        name:
+          type: string
+        unit:
+          type: string
+        baseRate:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingTier'
+        effectiveFrom:
+          type: string
+          format: date
+        effectiveTo:
+          type: string
+          format: date
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 20
+        minimum: 1
+        maximum: 100
+    Offset:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    PlanId:
+      name: planId
+      in: path
+      required: true
+      description: Unique identifier of the pricing plan
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.sap.com/oauth/token
+          scopes:
+            read: Read access to charging and rating resources
+            write: Write access to charging and rating resources
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: APIKey

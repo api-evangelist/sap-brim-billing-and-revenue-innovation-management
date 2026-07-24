@@ -1,0 +1,302 @@
+openapi: 3.0.3
+info:
+  title: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Subscription Items API
+  description: API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/legal/terms-of-use.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Production
+- url: https://sandbox.api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Sandbox
+security:
+- OAuth2:
+  - read
+  - write
+- ApiKeyAuth: []
+tags:
+- name: Subscription Items
+  description: Management of individual items within a subscription
+paths:
+  /subscriptions/{subscriptionId}/items:
+    get:
+      operationId: listSubscriptionItems
+      summary: SAP BRIM (Billing and Revenue Innovation Management) List subscription items
+      description: Retrieves all items within a subscription, including their quantities, pricing, and status.
+      tags:
+      - Subscription Items
+      parameters:
+      - $ref: '#/components/parameters/SubscriptionId'
+      responses:
+        '200':
+          description: List of subscription items
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SubscriptionItem'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: addSubscriptionItem
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Add an item to a subscription
+      description: Adds a new line item to an existing subscription. The item is billed according to the subscription billing cycle.
+      tags:
+      - Subscription Items
+      parameters:
+      - $ref: '#/components/parameters/SubscriptionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionItemCreate'
+      responses:
+        '201':
+          description: Item added to subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionItem'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /subscriptions/{subscriptionId}/items/{itemId}:
+    get:
+      operationId: getSubscriptionItem
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get a subscription item
+      description: Retrieves details of a specific item within a subscription.
+      tags:
+      - Subscription Items
+      parameters:
+      - $ref: '#/components/parameters/SubscriptionId'
+      - $ref: '#/components/parameters/ItemId'
+      responses:
+        '200':
+          description: Subscription item details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionItem'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      operationId: updateSubscriptionItem
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Update a subscription item
+      description: Updates the quantity or configuration of a subscription item.
+      tags:
+      - Subscription Items
+      parameters:
+      - $ref: '#/components/parameters/SubscriptionId'
+      - $ref: '#/components/parameters/ItemId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+                  minimum: 1
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+      responses:
+        '200':
+          description: Item updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionItem'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: removeSubscriptionItem
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Remove a subscription item
+      description: Removes an item from a subscription. Prorated credits may be applied to the next billing cycle.
+      tags:
+      - Subscription Items
+      parameters:
+      - $ref: '#/components/parameters/SubscriptionId'
+      - $ref: '#/components/parameters/ItemId'
+      responses:
+        '204':
+          description: Item removed from subscription
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      required: true
+      description: Unique identifier of the subscription
+      schema:
+        type: string
+        format: uuid
+    ItemId:
+      name: itemId
+      in: path
+      required: true
+      description: Unique identifier of the subscription item
+      schema:
+        type: string
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+    SubscriptionItemCreate:
+      type: object
+      required:
+      - productId
+      - quantity
+      properties:
+        productId:
+          type: string
+        quantity:
+          type: integer
+          minimum: 1
+        billingType:
+          type: string
+          enum:
+          - RECURRING
+          - ONE_TIME
+          - USAGE_BASED
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    MonetaryAmount:
+      type: object
+      required:
+      - value
+      - currency
+      properties:
+        value:
+          type: number
+          format: double
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 currency code
+    SubscriptionItem:
+      type: object
+      properties:
+        itemId:
+          type: string
+        productId:
+          type: string
+        productName:
+          type: string
+        description:
+          type: string
+        quantity:
+          type: integer
+          minimum: 1
+        unitPrice:
+          $ref: '#/components/schemas/MonetaryAmount'
+        totalPrice:
+          $ref: '#/components/schemas/MonetaryAmount'
+        billingType:
+          type: string
+          enum:
+          - RECURRING
+          - ONE_TIME
+          - USAGE_BASED
+        includedUnits:
+          type: integer
+          description: Number of units included in the base price
+        overageRate:
+          type: number
+          format: double
+          description: Rate per unit above the included quantity
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.sap.com/oauth/token
+          scopes:
+            read: Read access to charging and rating resources
+            write: Write access to charging and rating resources
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: APIKey

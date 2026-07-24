@@ -1,0 +1,320 @@
+openapi: 3.0.3
+info:
+  title: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Customers API
+  description: API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/legal/terms-of-use.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Production
+- url: https://sandbox.api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Sandbox
+security:
+- OAuth2:
+  - read
+  - write
+- ApiKeyAuth: []
+tags:
+- name: Customers
+  description: Customer account management for subscriptions
+paths:
+  /customers/{customerId}/subscriptions:
+    get:
+      operationId: listCustomerSubscriptions
+      summary: SAP BRIM (Billing and Revenue Innovation Management) List subscriptions for a customer
+      description: Retrieves all subscriptions belonging to a specific customer.
+      tags:
+      - Customers
+      parameters:
+      - $ref: '#/components/parameters/CustomerId'
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Limit'
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - SUSPENDED
+          - CANCELLED
+          - EXPIRED
+          - PENDING
+          - TRIAL
+      responses:
+        '200':
+          description: List of customer subscriptions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscription'
+                  totalCount:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /customers/{customerId}/billing-summary:
+    get:
+      operationId: getCustomerBillingSummary
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get billing summary for a customer
+      description: Retrieves a billing summary across all of a customer's subscriptions, including outstanding amounts, next billing dates, and payment status.
+      tags:
+      - Customers
+      parameters:
+      - $ref: '#/components/parameters/CustomerId'
+      responses:
+        '200':
+          description: Customer billing summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerBillingSummary'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    CustomerBillingSummary:
+      type: object
+      properties:
+        customerId:
+          type: string
+        activeSubscriptions:
+          type: integer
+        totalRecurringCharge:
+          $ref: '#/components/schemas/MonetaryAmount'
+        outstandingBalance:
+          $ref: '#/components/schemas/MonetaryAmount'
+        nextBillingDate:
+          type: string
+          format: date
+        nextBillingAmount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        paymentStatus:
+          type: string
+          enum:
+          - CURRENT
+          - OVERDUE
+          - DELINQUENT
+        lastPaymentDate:
+          type: string
+          format: date
+        lastPaymentAmount:
+          $ref: '#/components/schemas/MonetaryAmount'
+    Subscription:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+          format: uuid
+        customerId:
+          type: string
+        planId:
+          type: string
+        planName:
+          type: string
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - SUSPENDED
+          - CANCELLED
+          - EXPIRED
+          - PENDING
+          - TRIAL
+        billingFrequency:
+          type: string
+          enum:
+          - MONTHLY
+          - QUARTERLY
+          - SEMI_ANNUAL
+          - ANNUAL
+          - CUSTOM
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        trialEndDate:
+          type: string
+          format: date
+        currentPeriodStart:
+          type: string
+          format: date
+        currentPeriodEnd:
+          type: string
+          format: date
+        nextBillingDate:
+          type: string
+          format: date
+        autoRenew:
+          type: boolean
+        renewalCount:
+          type: integer
+          description: Number of times this subscription has been renewed
+        cancellationDate:
+          type: string
+          format: date
+        cancellationReason:
+          type: string
+        recurringCharge:
+          $ref: '#/components/schemas/MonetaryAmount'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionItem'
+        paymentMethod:
+          type: string
+          description: Identifier of the payment method on file
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+    MonetaryAmount:
+      type: object
+      required:
+      - value
+      - currency
+      properties:
+        value:
+          type: number
+          format: double
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 currency code
+    SubscriptionItem:
+      type: object
+      properties:
+        itemId:
+          type: string
+        productId:
+          type: string
+        productName:
+          type: string
+        description:
+          type: string
+        quantity:
+          type: integer
+          minimum: 1
+        unitPrice:
+          $ref: '#/components/schemas/MonetaryAmount'
+        totalPrice:
+          $ref: '#/components/schemas/MonetaryAmount'
+        billingType:
+          type: string
+          enum:
+          - RECURRING
+          - ONE_TIME
+          - USAGE_BASED
+        includedUnits:
+          type: integer
+          description: Number of units included in the base price
+        overageRate:
+          type: number
+          format: double
+          description: Rate per unit above the included quantity
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 20
+        minimum: 1
+        maximum: 100
+    CustomerId:
+      name: customerId
+      in: path
+      required: true
+      description: Unique identifier of the customer
+      schema:
+        type: string
+    Offset:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.sap.com/oauth/token
+          scopes:
+            read: Read access to charging and rating resources
+            write: Write access to charging and rating resources
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: APIKey

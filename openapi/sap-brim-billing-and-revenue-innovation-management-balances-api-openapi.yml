@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances API
+  description: API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/legal/terms-of-use.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Production
+- url: https://sandbox.api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Sandbox
+security:
+- OAuth2:
+  - read
+  - write
+- ApiKeyAuth: []
+tags:
+- name: Balances
+  description: Account balance inquiries and adjustments
+paths:
+  /balances/{accountId}:
+    get:
+      operationId: getAccountBalance
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get account balance
+      description: Retrieves the current balance information for a subscriber account, including available balance, reserved amounts, and credit limits.
+      tags:
+      - Balances
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      responses:
+        '200':
+          description: Account balance details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBalance'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /balances/{accountId}/topup:
+    post:
+      operationId: topUpBalance
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Top up account balance
+      description: Adds funds to a prepaid account balance.
+      tags:
+      - Balances
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - amount
+              properties:
+                amount:
+                  $ref: '#/components/schemas/MonetaryAmount'
+                reference:
+                  type: string
+                  description: External payment reference
+                expiresAt:
+                  type: string
+                  format: date-time
+                  description: Expiry date for the topped-up balance
+      responses:
+        '200':
+          description: Balance topped up
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBalance'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    AccountBalance:
+      type: object
+      properties:
+        accountId:
+          type: string
+        accountType:
+          type: string
+          enum:
+          - PREPAID
+          - POSTPAID
+        availableBalance:
+          $ref: '#/components/schemas/MonetaryAmount'
+        reservedAmount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        totalBalance:
+          $ref: '#/components/schemas/MonetaryAmount'
+        creditLimit:
+          $ref: '#/components/schemas/MonetaryAmount'
+        lastUpdated:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+    MonetaryAmount:
+      type: object
+      required:
+      - value
+      - currency
+      properties:
+        value:
+          type: number
+          format: double
+          description: The monetary value
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 currency code
+  parameters:
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Unique identifier of the subscriber account
+      schema:
+        type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.sap.com/oauth/token
+          scopes:
+            read: Read access to charging and rating resources
+            write: Write access to charging and rating resources
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: APIKey

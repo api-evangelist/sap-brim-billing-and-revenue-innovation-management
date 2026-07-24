@@ -1,0 +1,394 @@
+openapi: 3.0.3
+info:
+  title: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Balances Charging API
+  description: API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/legal/terms-of-use.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Production
+- url: https://sandbox.api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Sandbox
+security:
+- OAuth2:
+  - read
+  - write
+- ApiKeyAuth: []
+tags:
+- name: Charging
+  description: Real-time charging operations for prepaid and postpaid accounts
+paths:
+  /charging/charge:
+    post:
+      operationId: chargeAccount
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Charge an account
+      description: Executes a real-time charge against a subscriber account. Supports prepaid balance deduction and postpaid charge accumulation.
+      tags:
+      - Charging
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargingRequest'
+      responses:
+        '200':
+          description: Charge executed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          description: Insufficient balance for prepaid charge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /charging/refund:
+    post:
+      operationId: refundCharge
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Refund a previous charge
+      description: Processes a full or partial refund for a previously executed charge. Restores prepaid balances or creates credit adjustments for postpaid.
+      tags:
+      - Charging
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundRequest'
+      responses:
+        '200':
+          description: Refund processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /charging/authorize:
+    post:
+      operationId: authorizeCharge
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Authorize a charge reservation
+      description: Reserves an amount against a prepaid balance without executing the final charge. The reservation can later be confirmed or released.
+      tags:
+      - Charging
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizationRequest'
+      responses:
+        '200':
+          description: Authorization successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          description: Insufficient balance for authorization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /charging/authorize/{authorizationId}/confirm:
+    post:
+      operationId: confirmAuthorization
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Confirm a charge authorization
+      description: Confirms a previously created authorization, converting the reserved amount into a final charge.
+      tags:
+      - Charging
+      parameters:
+      - $ref: '#/components/parameters/AuthorizationId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                finalAmount:
+                  $ref: '#/components/schemas/MonetaryAmount'
+      responses:
+        '200':
+          description: Authorization confirmed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /charging/authorize/{authorizationId}/release:
+    post:
+      operationId: releaseAuthorization
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Release a charge authorization
+      description: Releases a previously created authorization, restoring the reserved amount to the available balance.
+      tags:
+      - Charging
+      parameters:
+      - $ref: '#/components/parameters/AuthorizationId'
+      responses:
+        '200':
+          description: Authorization released
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  authorizationId:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                    - RELEASED
+                  releasedAt:
+                    type: string
+                    format: date-time
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    AuthorizationRequest:
+      type: object
+      required:
+      - accountId
+      - amount
+      properties:
+        accountId:
+          type: string
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        expiresIn:
+          type: integer
+          description: Authorization expiry in seconds
+          default: 3600
+        serviceType:
+          type: string
+        description:
+          type: string
+    AuthorizationResponse:
+      type: object
+      properties:
+        authorizationId:
+          type: string
+          format: uuid
+        accountId:
+          type: string
+        reservedAmount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        status:
+          type: string
+          enum:
+          - AUTHORIZED
+          - EXPIRED
+          - CONFIRMED
+          - RELEASED
+        expiresAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+    MonetaryAmount:
+      type: object
+      required:
+      - value
+      - currency
+      properties:
+        value:
+          type: number
+          format: double
+          description: The monetary value
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 currency code
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+    RefundRequest:
+      type: object
+      required:
+      - originalChargeId
+      properties:
+        originalChargeId:
+          type: string
+          format: uuid
+          description: Identifier of the original charge to refund
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        reason:
+          type: string
+          description: Reason for the refund
+    ChargingRequest:
+      type: object
+      required:
+      - accountId
+      - amount
+      - chargeType
+      properties:
+        accountId:
+          type: string
+          description: Account to charge
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        chargeType:
+          type: string
+          enum:
+          - PREPAID
+          - POSTPAID
+          description: Charging model
+        serviceType:
+          type: string
+        description:
+          type: string
+        externalReference:
+          type: string
+          description: External transaction reference
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    ChargingResponse:
+      type: object
+      properties:
+        chargeId:
+          type: string
+          format: uuid
+        accountId:
+          type: string
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        chargeType:
+          type: string
+          enum:
+          - PREPAID
+          - POSTPAID
+        status:
+          type: string
+          enum:
+          - COMPLETED
+          - PENDING
+          - FAILED
+        remainingBalance:
+          $ref: '#/components/schemas/MonetaryAmount'
+        chargedAt:
+          type: string
+          format: date-time
+    RefundResponse:
+      type: object
+      properties:
+        refundId:
+          type: string
+          format: uuid
+        originalChargeId:
+          type: string
+          format: uuid
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        status:
+          type: string
+          enum:
+          - COMPLETED
+          - PENDING
+        refundedAt:
+          type: string
+          format: date-time
+  responses:
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    AuthorizationId:
+      name: authorizationId
+      in: path
+      required: true
+      description: Unique identifier of the charge authorization
+      schema:
+        type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.sap.com/oauth/token
+          scopes:
+            read: Read access to charging and rating resources
+            write: Write access to charging and rating resources
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: APIKey

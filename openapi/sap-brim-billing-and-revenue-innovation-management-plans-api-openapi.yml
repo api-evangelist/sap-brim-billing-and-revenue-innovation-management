@@ -1,0 +1,370 @@
+openapi: 3.0.3
+info:
+  title: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Plans API
+  description: API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/legal/terms-of-use.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Production
+- url: https://sandbox.api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Sandbox
+security:
+- OAuth2:
+  - read
+  - write
+- ApiKeyAuth: []
+tags:
+- name: Plans
+  description: Subscription plan and offer catalog management
+paths:
+  /plans:
+    get:
+      operationId: listPlans
+      summary: SAP BRIM (Billing and Revenue Innovation Management) List subscription plans
+      description: Retrieves a paginated list of available subscription plans from the product catalog.
+      tags:
+      - Plans
+      parameters:
+      - $ref: '#/components/parameters/Offset'
+      - $ref: '#/components/parameters/Limit'
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - DRAFT
+      - name: billingFrequency
+        in: query
+        schema:
+          type: string
+          enum:
+          - MONTHLY
+          - QUARTERLY
+          - SEMI_ANNUAL
+          - ANNUAL
+          - CUSTOM
+      responses:
+        '200':
+          description: List of plans
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Plan'
+                  totalCount:
+                    type: integer
+                  offset:
+                    type: integer
+                  limit:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createPlan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Create a subscription plan
+      description: Creates a new subscription plan in the product catalog with pricing, billing frequency, and included items.
+      tags:
+      - Plans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanCreate'
+      responses:
+        '201':
+          description: Plan created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Plan with the same identifier already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /plans/{planId}:
+    get:
+      operationId: getPlan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get a subscription plan
+      description: Retrieves details of a specific subscription plan.
+      tags:
+      - Plans
+      parameters:
+      - $ref: '#/components/parameters/PlanId'
+      responses:
+        '200':
+          description: Plan details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      operationId: updatePlan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Update a subscription plan
+      description: Updates an existing subscription plan. Changes do not affect existing subscriptions unless explicitly propagated.
+      tags:
+      - Plans
+      parameters:
+      - $ref: '#/components/parameters/PlanId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanCreate'
+      responses:
+        '200':
+          description: Plan updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: deletePlan
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Delete a subscription plan
+      description: Deletes a subscription plan. Only DRAFT or INACTIVE plans with no active subscriptions can be deleted.
+      tags:
+      - Plans
+      parameters:
+      - $ref: '#/components/parameters/PlanId'
+      responses:
+        '204':
+          description: Plan deleted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 20
+        minimum: 1
+        maximum: 100
+    Offset:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    PlanId:
+      name: planId
+      in: path
+      required: true
+      description: Unique identifier of the subscription plan
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+    Plan:
+      type: object
+      properties:
+        planId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - DRAFT
+        billingFrequency:
+          type: string
+          enum:
+          - MONTHLY
+          - QUARTERLY
+          - SEMI_ANNUAL
+          - ANNUAL
+          - CUSTOM
+        price:
+          $ref: '#/components/schemas/MonetaryAmount'
+        setupFee:
+          $ref: '#/components/schemas/MonetaryAmount'
+        trialPeriodDays:
+          type: integer
+          minimum: 0
+        contractTermMonths:
+          type: integer
+          description: Minimum contract term in months
+        autoRenewDefault:
+          type: boolean
+        includedItems:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: string
+              productName:
+                type: string
+              quantity:
+                type: integer
+              billingType:
+                type: string
+                enum:
+                - RECURRING
+                - ONE_TIME
+                - USAGE_BASED
+        features:
+          type: array
+          items:
+            type: string
+          description: List of features included in this plan
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    PlanCreate:
+      type: object
+      required:
+      - name
+      - billingFrequency
+      - price
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        billingFrequency:
+          type: string
+          enum:
+          - MONTHLY
+          - QUARTERLY
+          - SEMI_ANNUAL
+          - ANNUAL
+          - CUSTOM
+        price:
+          $ref: '#/components/schemas/MonetaryAmount'
+        setupFee:
+          $ref: '#/components/schemas/MonetaryAmount'
+        trialPeriodDays:
+          type: integer
+          minimum: 0
+          default: 0
+        contractTermMonths:
+          type: integer
+        autoRenewDefault:
+          type: boolean
+          default: true
+        features:
+          type: array
+          items:
+            type: string
+    MonetaryAmount:
+      type: object
+      required:
+      - value
+      - currency
+      properties:
+        value:
+          type: number
+          format: double
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 currency code
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.sap.com/oauth/token
+          scopes:
+            read: Read access to charging and rating resources
+            write: Write access to charging and rating resources
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: APIKey

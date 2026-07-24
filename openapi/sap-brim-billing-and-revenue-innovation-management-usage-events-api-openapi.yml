@@ -1,0 +1,278 @@
+openapi: 3.0.3
+info:
+  title: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Usage Events API
+  description: API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/legal/terms-of-use.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Production
+- url: https://sandbox.api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Sandbox
+security:
+- OAuth2:
+  - read
+  - write
+- ApiKeyAuth: []
+tags:
+- name: Usage Events
+  description: Submission and management of usage event records
+paths:
+  /usage-events:
+    post:
+      operationId: submitUsageEvent
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Submit a usage event
+      description: Submits a usage event for rating and charging. The event is processed against the applicable pricing plan.
+      tags:
+      - Usage Events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsageEvent'
+      responses:
+        '202':
+          description: Usage event accepted for processing
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  eventId:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    enum:
+                    - ACCEPTED
+                    - QUEUED
+                  receivedAt:
+                    type: string
+                    format: date-time
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /usage-events/{eventId}:
+    get:
+      operationId: getUsageEvent
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Get usage event status
+      description: Retrieves the processing status and details of a previously submitted usage event.
+      tags:
+      - Usage Events
+      parameters:
+      - name: eventId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Usage event details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageEventDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    UsageEvent:
+      type: object
+      required:
+      - subscriberId
+      - serviceType
+      - quantity
+      - usageTimestamp
+      properties:
+        externalId:
+          type: string
+          description: External identifier for deduplication
+        subscriberId:
+          type: string
+        serviceType:
+          type: string
+        quantity:
+          type: number
+          format: double
+        unit:
+          type: string
+        usageTimestamp:
+          type: string
+          format: date-time
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+    RatingResponse:
+      type: object
+      properties:
+        ratingId:
+          type: string
+          format: uuid
+        subscriberId:
+          type: string
+        serviceType:
+          type: string
+        quantity:
+          type: number
+          format: double
+        charge:
+          $ref: '#/components/schemas/MonetaryAmount'
+        pricingPlanId:
+          type: string
+        rateApplied:
+          type: number
+          format: double
+          description: The unit rate applied
+        tierApplied:
+          type: string
+          description: Name of the pricing tier that was applied
+        ratedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - RATED
+          - FAILED
+          - ZERO_RATED
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              tierName:
+                type: string
+              unitsInTier:
+                type: number
+                format: double
+              ratePerUnit:
+                type: number
+                format: double
+              tierCharge:
+                $ref: '#/components/schemas/MonetaryAmount'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+    MonetaryAmount:
+      type: object
+      required:
+      - value
+      - currency
+      properties:
+        value:
+          type: number
+          format: double
+          description: The monetary value
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 currency code
+    UsageEventDetail:
+      type: object
+      properties:
+        eventId:
+          type: string
+          format: uuid
+        externalId:
+          type: string
+        subscriberId:
+          type: string
+        serviceType:
+          type: string
+        quantity:
+          type: number
+          format: double
+        unit:
+          type: string
+        usageTimestamp:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - ACCEPTED
+          - QUEUED
+          - RATED
+          - CHARGED
+          - FAILED
+        ratingResult:
+          $ref: '#/components/schemas/RatingResponse'
+        receivedAt:
+          type: string
+          format: date-time
+        processedAt:
+          type: string
+          format: date-time
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.sap.com/oauth/token
+          scopes:
+            read: Read access to charging and rating resources
+            write: Write access to charging and rating resources
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: APIKey

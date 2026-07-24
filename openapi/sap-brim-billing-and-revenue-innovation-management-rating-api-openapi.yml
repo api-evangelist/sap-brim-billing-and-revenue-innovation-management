@@ -1,0 +1,296 @@
+openapi: 3.0.3
+info:
+  title: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Rating API
+  description: API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/legal/terms-of-use.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Production
+- url: https://sandbox.api.sap.com/convergent-charging/v1
+  description: SAP API Business Hub - Sandbox
+security:
+- OAuth2:
+  - read
+  - write
+- ApiKeyAuth: []
+tags:
+- name: Rating
+  description: Operations for rating usage events against pricing plans
+paths:
+  /rating/rate:
+    post:
+      operationId: rateUsageEvent
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Rate a usage event
+      description: Rates a single usage event against the applicable pricing plan and returns the calculated charge. Supports real-time and batch rating scenarios.
+      tags:
+      - Rating
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RatingRequest'
+      responses:
+        '200':
+          description: Usage event rated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /rating/rate-batch:
+    post:
+      operationId: rateUsageEventBatch
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Rate a batch of usage events
+      description: Rates multiple usage events in a single request for high-throughput scenarios. Returns individual rating results for each event.
+      tags:
+      - Rating
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - events
+              properties:
+                events:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RatingRequest'
+                  minItems: 1
+                  maxItems: 1000
+      responses:
+        '200':
+          description: Batch rating completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RatingResponse'
+                  summary:
+                    type: object
+                    properties:
+                      totalEvents:
+                        type: integer
+                      successCount:
+                        type: integer
+                      failureCount:
+                        type: integer
+                      totalCharge:
+                        $ref: '#/components/schemas/MonetaryAmount'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /rating/simulate:
+    post:
+      operationId: simulateRating
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Simulate rating without committing
+      description: Simulates the rating of a usage event without persisting the result. Useful for quote generation and what-if analysis.
+      tags:
+      - Rating
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RatingRequest'
+      responses:
+        '200':
+          description: Simulation completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RatingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Request is valid but cannot be processed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    RatingResponse:
+      type: object
+      properties:
+        ratingId:
+          type: string
+          format: uuid
+        subscriberId:
+          type: string
+        serviceType:
+          type: string
+        quantity:
+          type: number
+          format: double
+        charge:
+          $ref: '#/components/schemas/MonetaryAmount'
+        pricingPlanId:
+          type: string
+        rateApplied:
+          type: number
+          format: double
+          description: The unit rate applied
+        tierApplied:
+          type: string
+          description: Name of the pricing tier that was applied
+        ratedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - RATED
+          - FAILED
+          - ZERO_RATED
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              tierName:
+                type: string
+              unitsInTier:
+                type: number
+                format: double
+              ratePerUnit:
+                type: number
+                format: double
+              tierCharge:
+                $ref: '#/components/schemas/MonetaryAmount'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+    MonetaryAmount:
+      type: object
+      required:
+      - value
+      - currency
+      properties:
+        value:
+          type: number
+          format: double
+          description: The monetary value
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 currency code
+    RatingRequest:
+      type: object
+      required:
+      - subscriberId
+      - serviceType
+      - quantity
+      - usageTimestamp
+      properties:
+        subscriberId:
+          type: string
+          description: Unique identifier of the subscriber
+        serviceType:
+          type: string
+          description: Type of service being consumed
+        quantity:
+          type: number
+          format: double
+          description: Quantity of usage units
+        unit:
+          type: string
+          description: Unit of measurement (e.g., MB, minutes, events)
+        usageTimestamp:
+          type: string
+          format: date-time
+          description: Timestamp when the usage occurred
+        pricingPlanId:
+          type: string
+          description: Optional override for the pricing plan to use
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional attributes for rating context
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.sap.com/oauth/token
+          scopes:
+            read: Read access to charging and rating resources
+            write: Write access to charging and rating resources
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: APIKey
