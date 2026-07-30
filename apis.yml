@@ -3,6 +3,19 @@ description: >-
   SAP BRIM (Billing and Revenue Innovation Management) is a comprehensive solution for order-to-cash processes,
   subscription management, usage-based pricing, and revenue management. It enables businesses to manage complex billing
   scenarios, subscription lifecycle, and revenue recognition.
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
 url: https://www.sap.com/products/financial-management/billing-revenue-innovation-mgmt.html
 created: '2024-01-15'
@@ -17,170 +30,445 @@ tags:
   - Subscription Management
   - Usage-Based Pricing
 apis:
-  - name: SAP Convergent Charging API
-    description: >-
-      API for real-time charging and rating of usage-based services. Supports complex pricing models, prepaid and
-      postpaid scenarios.
-    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-    humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
-    baseURL: https://api.sap.com/convergent-charging
-    tags:
-      - Charging
-      - Rating
-      - Real-Time
-      - Usage-Based Pricing
-    properties:
-      - type: Documentation
-        url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
-      - type: OpenAPI
-        url: https://api.sap.com/api/convergent_charging/overview
-      - type: OpenAPI
-        url: openapi/sap-brim-convergent-charging-openapi.yml
-      - type: Authentication
-        url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
-    contact:
-      - FN: SAP Support
-        email: support@sap.com
-        url: https://support.sap.com
-  - name: SAP Convergent Invoicing API
-    description: >-
-      API for creating, managing, and processing invoices from multiple sources. Supports complex billing scenarios,
-      invoice consolidation, and flexible output formats.
-    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-    humanURL: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
-    baseURL: https://api.sap.com/convergent-invoicing
-    tags:
-      - Billing
-      - Invoice Management
-      - Invoicing
-    properties:
-      - type: Documentation
-        url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
-      - type: OpenAPI
-        url: https://api.sap.com/api/convergent_invoicing/overview
-      - type: Sandbox
-        url: https://api.sap.com/api/convergent_invoicing/tryout
-    contact:
-      - FN: SAP Support
-        email: support@sap.com
-        url: https://support.sap.com
-  - name: SAP Subscription Billing API
-    description: >-
-      API for managing subscription lifecycle, including creation, modification, renewal, and cancellation. Supports
-      various billing frequencies and subscription models.
-    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-    humanURL: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
-    baseURL: https://api.sap.com/subscription-billing
-    tags:
-      - Lifecycle Management
-      - Recurring Billing
-      - Subscriptions
-    properties:
-      - type: Documentation
-        url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
-      - type: OpenAPI
-        url: https://api.sap.com/api/subscription_billing/overview
-      - type: OpenAPI
-        url: openapi/sap-brim-subscription-billing-openapi.yml
-      - type: Console
-        url: https://api.sap.com/api/subscription_billing/console
-      - type: Reference
-        url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
-      - type: GettingStarted
-        url: >-
-          https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
-      - type: JSONSchema
-        url: json-schema/sap-brim-subscription-schema.json
-    contact:
-      - FN: SAP Support
-        email: support@sap.com
-        url: https://support.sap.com
-  - name: SAP Contract Accounts Receivable and Payable API
-    description: >-
-      API for managing customer accounts, payment processing, dunning, and dispute management. Core component for
-      financial customer relationship management.
-    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-    humanURL: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
-    baseURL: https://api.sap.com/fica
-    tags:
-      - Accounts Receivable
-      - Dunning
-      - Financial Accounting
-      - Payments
-    properties:
-      - type: Documentation
-        url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
-      - type: OpenAPI
-        url: https://api.sap.com/api/fica/overview
-      - type: Integration Guide
-        url: https://help.sap.com/docs/SAP_FICA/integration
-    contact:
-      - FN: SAP Support
-        email: support@sap.com
-        url: https://support.sap.com
-  - name: SAP BRIM Usage Data Intake API
-    description: >-
-      API for ingesting high-volume usage data from various sources. Supports batch and real-time processing of usage
-      events for rating and billing.
-    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-    humanURL: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
-    baseURL: https://api.sap.com/usage-data-intake
-    tags:
-      - Data Ingestion
-      - Mediation
-      - Usage Data
-    properties:
-      - type: Documentation
-        url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
-      - type: OpenAPI
-        url: https://api.sap.com/api/usage_data_intake/overview
-      - type: Technical Specifications
-        url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
-    contact:
-      - FN: SAP Support
-        email: support@sap.com
-        url: https://support.sap.com
-  - name: SAP Revenue Accounting and Reporting API
-    description: >-
-      API for revenue recognition according to IFRS 15 and ASC 606 standards. Manages performance obligations, revenue
-      allocation, and compliance reporting.
-    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-    humanURL: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
-    baseURL: https://api.sap.com/revenue-accounting
-    tags:
-      - ASC 606
-      - Compliance
-      - IFRS 15
-      - Revenue Recognition
-    properties:
-      - type: Documentation
-        url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
-      - type: OpenAPI
-        url: https://api.sap.com/api/revenue_accounting/overview
-      - type: Compliance Guide
-        url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
-    contact:
-      - FN: SAP Support
-        email: support@sap.com
-        url: https://support.sap.com
-  - name: SAP Subscription Order Management API
-    description: >-
-      API for managing subscription-based orders within the SAP BRIM suite, supporting complex offerings that combine
-      physical products, services, and usage-based fees with full lifecycle management.
-    image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
-    humanURL: https://help.sap.com/docs/BRIM
-    baseURL: https://api.sap.com/subscription-order-management
-    tags:
-      - Lifecycle Management
-      - Order Management
-      - Subscription Orders
-    properties:
-      - type: Documentation
-        url: https://help.sap.com/docs/BRIM
-    contact:
-      - FN: SAP Support
-        email: support@sap.com
-        url: https://support.sap.com
+- name: SAP Subscription Order Management API
+  description: >-
+    API for managing subscription-based orders within the SAP BRIM suite, supporting complex offerings
+    that combine physical products, services, and usage-based fees with full lifecycle management.
+  image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
+  humanURL: https://help.sap.com/docs/BRIM
+  baseURL: https://api.sap.com/subscription-order-management
+  tags:
+  - Lifecycle Management
+  - Order Management
+  - Subscription Orders
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/BRIM
+  contact:
+  - FN: SAP Support
+    email: support@sap.com
+    url: https://support.sap.com
+- aid: >-
+    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-balances-api
+  name: SAP BRIM (Billing and Revenue Innovation Management) Balances API
+  description: Account balance inquiries and adjustments
+  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  baseURL: https://api.sap.com/convergent-charging
+  tags:
+  - Balances
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-brim-billing-and-revenue-innovation-management-balances-api-openapi.yml
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+  - type: Sandbox
+    url: https://api.sap.com/api/convergent_invoicing/tryout
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+  - type: Console
+    url: https://api.sap.com/api/subscription_billing/console
+  - type: Reference
+    url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
+  - type: GettingStarted
+    url: >-
+      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+  - type: JSONSchema
+    url: json-schema/sap-brim-subscription-schema.json
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+  - type: Integration Guide
+    url: https://help.sap.com/docs/SAP_FICA/integration
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+  - type: Technical Specifications
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+  - type: Compliance Guide
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
+- aid: >-
+    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-billing-api
+  name: SAP BRIM (Billing and Revenue Innovation Management) Billing API
+  description: Billing cycle and invoice generation operations
+  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  baseURL: https://api.sap.com/convergent-charging
+  tags:
+  - Billing
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-brim-billing-and-revenue-innovation-management-billing-api-openapi.yml
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+  - type: Sandbox
+    url: https://api.sap.com/api/convergent_invoicing/tryout
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+  - type: Console
+    url: https://api.sap.com/api/subscription_billing/console
+  - type: Reference
+    url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
+  - type: GettingStarted
+    url: >-
+      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+  - type: JSONSchema
+    url: json-schema/sap-brim-subscription-schema.json
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+  - type: Integration Guide
+    url: https://help.sap.com/docs/SAP_FICA/integration
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+  - type: Technical Specifications
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+  - type: Compliance Guide
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
+- aid: >-
+    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-charging-api
+  name: SAP BRIM (Billing and Revenue Innovation Management) Charging API
+  description: Real-time charging operations for prepaid and postpaid accounts
+  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  baseURL: https://api.sap.com/convergent-charging
+  tags:
+  - Charging
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-brim-billing-and-revenue-innovation-management-charging-api-openapi.yml
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+  - type: Sandbox
+    url: https://api.sap.com/api/convergent_invoicing/tryout
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+  - type: Console
+    url: https://api.sap.com/api/subscription_billing/console
+  - type: Reference
+    url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
+  - type: GettingStarted
+    url: >-
+      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+  - type: JSONSchema
+    url: json-schema/sap-brim-subscription-schema.json
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+  - type: Integration Guide
+    url: https://help.sap.com/docs/SAP_FICA/integration
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+  - type: Technical Specifications
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+  - type: Compliance Guide
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
+- aid: >-
+    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-customers-api
+  name: SAP BRIM (Billing and Revenue Innovation Management) Customers API
+  description: Customer account management for subscriptions
+  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  baseURL: https://api.sap.com/convergent-charging
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-brim-billing-and-revenue-innovation-management-customers-api-openapi.yml
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+  - type: Sandbox
+    url: https://api.sap.com/api/convergent_invoicing/tryout
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+  - type: Console
+    url: https://api.sap.com/api/subscription_billing/console
+  - type: Reference
+    url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
+  - type: GettingStarted
+    url: >-
+      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+  - type: JSONSchema
+    url: json-schema/sap-brim-subscription-schema.json
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+  - type: Integration Guide
+    url: https://help.sap.com/docs/SAP_FICA/integration
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+  - type: Technical Specifications
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+  - type: Compliance Guide
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
+- aid: >-
+    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-plans-api
+  name: SAP BRIM (Billing and Revenue Innovation Management) Plans API
+  description: Subscription plan and offer catalog management
+  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  baseURL: https://api.sap.com/convergent-charging
+  tags:
+  - Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-brim-billing-and-revenue-innovation-management-plans-api-openapi.yml
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+  - type: Sandbox
+    url: https://api.sap.com/api/convergent_invoicing/tryout
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+  - type: Console
+    url: https://api.sap.com/api/subscription_billing/console
+  - type: Reference
+    url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
+  - type: GettingStarted
+    url: >-
+      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+  - type: JSONSchema
+    url: json-schema/sap-brim-subscription-schema.json
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+  - type: Integration Guide
+    url: https://help.sap.com/docs/SAP_FICA/integration
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+  - type: Technical Specifications
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+  - type: Compliance Guide
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
+- aid: >-
+    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-pricing-api
+  name: SAP BRIM (Billing and Revenue Innovation Management) Pricing API
+  description: Management of pricing plans, rate cards, and pricing structures
+  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  baseURL: https://api.sap.com/convergent-charging
+  tags:
+  - Pricing
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-brim-billing-and-revenue-innovation-management-pricing-api-openapi.yml
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+  - type: Sandbox
+    url: https://api.sap.com/api/convergent_invoicing/tryout
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+  - type: Console
+    url: https://api.sap.com/api/subscription_billing/console
+  - type: Reference
+    url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
+  - type: GettingStarted
+    url: >-
+      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+  - type: JSONSchema
+    url: json-schema/sap-brim-subscription-schema.json
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+  - type: Integration Guide
+    url: https://help.sap.com/docs/SAP_FICA/integration
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+  - type: Technical Specifications
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+  - type: Compliance Guide
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
+- aid: >-
+    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-rating-api
+  name: SAP BRIM (Billing and Revenue Innovation Management) Rating API
+  description: Operations for rating usage events against pricing plans
+  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  baseURL: https://api.sap.com/convergent-charging
+  tags:
+  - Rating
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-brim-billing-and-revenue-innovation-management-rating-api-openapi.yml
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+  - type: Sandbox
+    url: https://api.sap.com/api/convergent_invoicing/tryout
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+  - type: Console
+    url: https://api.sap.com/api/subscription_billing/console
+  - type: Reference
+    url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
+  - type: GettingStarted
+    url: >-
+      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+  - type: JSONSchema
+    url: json-schema/sap-brim-subscription-schema.json
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+  - type: Integration Guide
+    url: https://help.sap.com/docs/SAP_FICA/integration
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+  - type: Technical Specifications
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+  - type: Compliance Guide
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
+- aid: >-
+    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-subscription-items-api
+  name: SAP BRIM (Billing and Revenue Innovation Management) Subscription Items API
+  description: Management of individual items within a subscription
+  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  baseURL: https://api.sap.com/convergent-charging
+  tags:
+  - Subscription Items
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/sap-brim-billing-and-revenue-innovation-management-subscription-items-api-openapi.yml
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+  - type: Sandbox
+    url: https://api.sap.com/api/convergent_invoicing/tryout
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+  - type: Console
+    url: https://api.sap.com/api/subscription_billing/console
+  - type: Reference
+    url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
+  - type: GettingStarted
+    url: >-
+      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+  - type: JSONSchema
+    url: json-schema/sap-brim-subscription-schema.json
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+  - type: Integration Guide
+    url: https://help.sap.com/docs/SAP_FICA/integration
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+  - type: Technical Specifications
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+  - type: Compliance Guide
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
+- aid: >-
+    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-subscriptions-api
+  name: SAP BRIM (Billing and Revenue Innovation Management) Subscriptions API
+  description: Subscription lifecycle management operations
+  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  baseURL: https://api.sap.com/convergent-charging
+  tags:
+  - Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-brim-billing-and-revenue-innovation-management-subscriptions-api-openapi.yml
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+  - type: Sandbox
+    url: https://api.sap.com/api/convergent_invoicing/tryout
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+  - type: Console
+    url: https://api.sap.com/api/subscription_billing/console
+  - type: Reference
+    url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
+  - type: GettingStarted
+    url: >-
+      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+  - type: JSONSchema
+    url: json-schema/sap-brim-subscription-schema.json
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+  - type: Integration Guide
+    url: https://help.sap.com/docs/SAP_FICA/integration
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+  - type: Technical Specifications
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+  - type: Compliance Guide
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
+- aid: >-
+    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-usage-events-api
+  name: SAP BRIM (Billing and Revenue Innovation Management) Usage Events API
+  description: Submission and management of usage event records
+  humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  baseURL: https://api.sap.com/convergent-charging
+  tags:
+  - Usage Events
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-brim-billing-and-revenue-innovation-management-usage-events-api-openapi.yml
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONVERGENT_INVOICING
+  - type: Sandbox
+    url: https://api.sap.com/api/convergent_invoicing/tryout
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING
+  - type: Console
+    url: https://api.sap.com/api/subscription_billing/console
+  - type: Reference
+    url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
+  - type: GettingStarted
+    url: >-
+      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+  - type: JSONSchema
+    url: json-schema/sap-brim-subscription-schema.json
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE
+  - type: Integration Guide
+    url: https://help.sap.com/docs/SAP_FICA/integration
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE
+  - type: Technical Specifications
+    url: https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
+  - type: Compliance Guide
+    url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
 common:
   - type: AgenticAccess
     url: agentic-access/sap-brim-billing-and-revenue-innovation-management-agentic-access.yml
