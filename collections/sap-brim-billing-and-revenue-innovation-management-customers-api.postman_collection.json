@@ -1,0 +1,580 @@
+{
+  "item": [
+    {
+      "id": "5a569567-efd5-408e-b7d7-b6e56e41eee9",
+      "name": "Customers",
+      "description": {
+        "content": "Customer account management for subscriptions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "613d9f2b-334c-443f-ab46-13c70972d68a",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) List subscriptions for a customer",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) List subscriptions for a customer",
+            "description": {
+              "content": "Retrieves all subscriptions belonging to a specific customer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of items to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) Unique identifier of the customer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f11fe8d0-1c69-46e3-8639-b4c09ae8a62d",
+              "name": "List of customer subscriptions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) Unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"subscriptionId\": \"f7227147-8bb4-4df3-4542-861f30a39177\",\n      \"customerId\": \"string\",\n      \"planId\": \"string\",\n      \"planName\": \"string\",\n      \"status\": \"SUSPENDED\",\n      \"billingFrequency\": \"ANNUAL\",\n      \"startDate\": \"1964-01-31\",\n      \"endDate\": \"1977-01-21\",\n      \"trialEndDate\": \"2009-02-05\",\n      \"currentPeriodStart\": \"1967-05-23\",\n      \"currentPeriodEnd\": \"1971-11-22\",\n      \"nextBillingDate\": \"1963-06-28\",\n      \"autoRenew\": true,\n      \"renewalCount\": 6759,\n      \"cancellationDate\": \"2010-02-17\",\n      \"cancellationReason\": \"string\",\n      \"recurringCharge\": {\n        \"value\": 6341.309046819658,\n        \"currency\": \"HZS\"\n      },\n      \"items\": [\n        {\n          \"itemId\": \"string\",\n          \"productId\": \"string\",\n          \"productName\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 5393,\n          \"unitPrice\": {\n            \"value\": 7356.137447634122,\n            \"currency\": \"VLY\"\n          },\n          \"totalPrice\": {\n            \"value\": 9065.418380162795,\n            \"currency\": \"LSO\"\n          },\n          \"billingType\": \"RECURRING\",\n          \"includedUnits\": 9474,\n          \"overageRate\": 9805.458066895906,\n          \"metadata\": {\n            \"key_0\": \"string\"\n          }\n        },\n        {\n          \"itemId\": \"string\",\n          \"productId\": \"string\",\n          \"productName\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 7163,\n          \"unitPrice\": {\n            \"value\": 7595.495806394801,\n            \"currency\": \"WEM\"\n          },\n          \"totalPrice\": {\n            \"value\": 653.9317115053777,\n            \"currency\": \"GVC\"\n          },\n          \"billingType\": \"ONE_TIME\",\n          \"includedUnits\": 2992,\n          \"overageRate\": 6033.952933740022,\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          }\n        }\n      ],\n      \"paymentMethod\": \"string\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"createdAt\": \"1996-11-16T23:56:20.117Z\",\n      \"modifiedAt\": \"1984-04-12T02:01:55.619Z\"\n    },\n    {\n      \"subscriptionId\": \"8fd512ff-c911-9697-2325-e31d7cdd5ae6\",\n      \"customerId\": \"string\",\n      \"planId\": \"string\",\n      \"planName\": \"string\",\n      \"status\": \"TRIAL\",\n      \"billingFrequency\": \"SEMI_ANNUAL\",\n      \"startDate\": \"2003-06-13\",\n      \"endDate\": \"1957-04-23\",\n      \"trialEndDate\": \"1972-11-30\",\n      \"currentPeriodStart\": \"1991-04-22\",\n      \"currentPeriodEnd\": \"1991-03-03\",\n      \"nextBillingDate\": \"2025-09-22\",\n      \"autoRenew\": false,\n      \"renewalCount\": 2354,\n      \"cancellationDate\": \"2019-12-13\",\n      \"cancellationReason\": \"string\",\n      \"recurringCharge\": {\n        \"value\": 6738.103388506475,\n        \"currency\": \"ZWX\"\n      },\n      \"items\": [\n        {\n          \"itemId\": \"string\",\n          \"productId\": \"string\",\n          \"productName\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 8236,\n          \"unitPrice\": {\n            \"value\": 1260.261177255576,\n            \"currency\": \"PHL\"\n          },\n          \"totalPrice\": {\n            \"value\": 32.66345745013166,\n            \"currency\": \"VSN\"\n          },\n          \"billingType\": \"RECURRING\",\n          \"includedUnits\": 8052,\n          \"overageRate\": 1618.649012145228,\n          \"metadata\": {\n            \"key_0\": \"string\"\n          }\n        },\n        {\n          \"itemId\": \"string\",\n          \"productId\": \"string\",\n          \"productName\": \"string\",\n          \"description\": \"string\",\n          \"quantity\": 1604,\n          \"unitPrice\": {\n            \"value\": 7343.2752882345185,\n            \"currency\": \"HGT\"\n          },\n          \"totalPrice\": {\n            \"value\": 4908.809987751633,\n            \"currency\": \"KPM\"\n          },\n          \"billingType\": \"RECURRING\",\n          \"includedUnits\": 2142,\n          \"overageRate\": 6427.768191520291,\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\",\n            \"key_3\": \"string\"\n          }\n        }\n      ],\n      \"paymentMethod\": \"string\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"createdAt\": \"2005-06-12T11:08:36.769Z\",\n      \"modifiedAt\": \"1973-10-24T19:40:42.608Z\"\n    }\n  ],\n  \"totalCount\": 4241\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3073265-f7f4-4711-a2fc-7fdc9b9fafdb",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) Unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08650cbf-943e-4afd-9ca7-c6573d83b9a9",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) Unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a9d20e8-b9aa-43c3-8bf8-4e0a44f51135",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) Unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f2e6c0d-8be9-45c1-baf4-9e710da75f5e",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Get billing summary for a customer",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Get billing summary for a customer",
+            "description": {
+              "content": "Retrieves a billing summary across all of a customer's subscriptions, including outstanding amounts, next billing dates, and payment status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId",
+                "billing-summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) Unique identifier of the customer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "450d34df-c8c9-4248-9c45-b3004fd432af",
+              "name": "Customer billing summary",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "billing-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) Unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customerId\": \"string\",\n  \"activeSubscriptions\": 8060,\n  \"totalRecurringCharge\": {\n    \"value\": 2583.741267815044,\n    \"currency\": \"YXZ\"\n  },\n  \"outstandingBalance\": {\n    \"value\": 9410.144660598893,\n    \"currency\": \"YUH\"\n  },\n  \"nextBillingDate\": \"1957-09-09\",\n  \"nextBillingAmount\": {\n    \"value\": 5573.158823030255,\n    \"currency\": \"ZQQ\"\n  },\n  \"paymentStatus\": \"OVERDUE\",\n  \"lastPaymentDate\": \"2010-04-06\",\n  \"lastPaymentAmount\": {\n    \"value\": 4323.74797756109,\n    \"currency\": \"TBD\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dce0ed89-8b7b-4e30-8751-4a9900f71757",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "billing-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) Unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90badc87-ff57-4879-8bd4-50269fc51c65",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId",
+                    "billing-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) Unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sap.com/convergent-charging/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "read write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.sap.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5ac650f3-3f79-4e73-8a21-134ed47c9600",
+    "name": "SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Customers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.\n\nContact Support:\n Name: SAP Support\n Email: support@sap.com",
+      "type": "text/plain"
+    }
+  }
+}

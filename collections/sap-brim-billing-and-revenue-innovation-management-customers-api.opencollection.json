@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Customers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://auth.sap.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) List subscriptions for a customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sap.com/convergent-charging/v1/customers/:customerId/subscriptions",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the customer"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip for pagination"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves all subscriptions belonging to a specific customer."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Get billing summary for a customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sap.com/convergent-charging/v1/customers/:customerId/billing-summary",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the customer"
+              }
+            ]
+          },
+          "docs": "Retrieves a billing summary across all of a customer's subscriptions, including outstanding amounts, next billing dates, and payment status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

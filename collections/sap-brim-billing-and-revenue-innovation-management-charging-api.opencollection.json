@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Balances Charging API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://auth.sap.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Charging",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Charge an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sap.com/convergent-charging/v1/charging/charge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a real-time charge against a subscriber account. Supports prepaid balance deduction and postpaid charge accumulation."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Refund a previous charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sap.com/convergent-charging/v1/charging/refund",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Processes a full or partial refund for a previously executed charge. Restores prepaid balances or creates credit adjustments for postpaid."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Authorize a charge reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sap.com/convergent-charging/v1/charging/authorize",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reserves an amount against a prepaid balance without executing the final charge. The reservation can later be confirmed or released."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Confirm a charge authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sap.com/convergent-charging/v1/charging/authorize/:authorizationId/confirm",
+            "params": [
+              {
+                "name": "authorizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the charge authorization"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Confirms a previously created authorization, converting the reserved amount into a final charge."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Release a charge authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sap.com/convergent-charging/v1/charging/authorize/:authorizationId/release",
+            "params": [
+              {
+                "name": "authorizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the charge authorization"
+              }
+            ]
+          },
+          "docs": "Releases a previously created authorization, restoring the reserved amount to the available balance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

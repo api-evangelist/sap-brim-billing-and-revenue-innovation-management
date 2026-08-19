@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://auth.sap.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Balances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Get account balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sap.com/convergent-charging/v1/balances/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the subscriber account"
+              }
+            ]
+          },
+          "docs": "Retrieves the current balance information for a subscriber account, including available balance, reserved amounts, and credit limits."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Top up account balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sap.com/convergent-charging/v1/balances/:accountId/topup",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the subscriber account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds funds to a prepaid account balance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

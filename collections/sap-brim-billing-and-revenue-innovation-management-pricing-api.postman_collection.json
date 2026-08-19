@@ -1,0 +1,2174 @@
+{
+  "item": [
+    {
+      "id": "a3b93487-fc9f-47a1-aad5-0f4b571a4120",
+      "name": "Pricing",
+      "description": {
+        "content": "Management of pricing plans, rate cards, and pricing structures",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "997338d9-470c-45d5-9737-e3ef6575e801",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) List pricing plans",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) List pricing plans",
+            "description": {
+              "content": "Retrieves a paginated list of pricing plans. Supports filtering by status, service type, and effective date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of items to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "serviceType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "effectiveDate",
+                  "value": "<date>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e6034a9-b776-46de-bbf0-b1bc3b9889fb",
+              "name": "List of pricing plans",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "serviceType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effectiveDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"planId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"serviceType\": \"string\",\n      \"pricingModel\": \"TIERED\",\n      \"effectiveFrom\": \"2016-02-04\",\n      \"effectiveTo\": \"1967-10-29\",\n      \"currency\": \"RCK\",\n      \"rateCards\": [\n        {\n          \"rateCardId\": \"string\",\n          \"name\": \"string\",\n          \"unit\": \"string\",\n          \"baseRate\": 4818.062324949469,\n          \"tiers\": [\n            {\n              \"fromQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ratePerUnit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tierName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"flatFee\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"fromQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ratePerUnit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tierName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"flatFee\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"effectiveFrom\": \"1994-06-27\",\n          \"effectiveTo\": \"1948-06-18\"\n        },\n        {\n          \"rateCardId\": \"string\",\n          \"name\": \"string\",\n          \"unit\": \"string\",\n          \"baseRate\": 9700.854114595866,\n          \"tiers\": [\n            {\n              \"fromQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ratePerUnit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tierName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"flatFee\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"fromQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ratePerUnit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tierName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"flatFee\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"effectiveFrom\": \"1979-01-07\",\n          \"effectiveTo\": \"1998-03-08\"\n        }\n      ],\n      \"createdAt\": \"2025-01-04T04:19:46.564Z\",\n      \"modifiedAt\": \"2006-06-22T02:42:23.895Z\"\n    },\n    {\n      \"planId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"status\": \"INACTIVE\",\n      \"serviceType\": \"string\",\n      \"pricingModel\": \"FLAT\",\n      \"effectiveFrom\": \"1962-08-19\",\n      \"effectiveTo\": \"2024-08-01\",\n      \"currency\": \"KBC\",\n      \"rateCards\": [\n        {\n          \"rateCardId\": \"string\",\n          \"name\": \"string\",\n          \"unit\": \"string\",\n          \"baseRate\": 2136.836826112224,\n          \"tiers\": [\n            {\n              \"fromQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ratePerUnit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tierName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"flatFee\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"fromQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ratePerUnit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tierName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"flatFee\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"effectiveFrom\": \"1956-02-20\",\n          \"effectiveTo\": \"2003-04-05\"\n        },\n        {\n          \"rateCardId\": \"string\",\n          \"name\": \"string\",\n          \"unit\": \"string\",\n          \"baseRate\": 9092.23463241481,\n          \"tiers\": [\n            {\n              \"fromQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ratePerUnit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tierName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"flatFee\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"fromQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ratePerUnit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"tierName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"toQuantity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"flatFee\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"effectiveFrom\": \"2012-05-28\",\n          \"effectiveTo\": \"2013-09-08\"\n        }\n      ],\n      \"createdAt\": \"1949-05-11T17:46:14.522Z\",\n      \"modifiedAt\": \"1987-08-11T21:01:03.017Z\"\n    }\n  ],\n  \"totalCount\": 6077,\n  \"offset\": 5289,\n  \"limit\": 4607\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5e474e7-1f96-494d-85fc-4deca6aed8ee",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "serviceType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effectiveDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b7269a5-5e37-4243-aaf6-bf072ef7d1e8",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "serviceType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effectiveDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b8a34b9-c847-4808-8fc0-37ccbcfad554",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Create a pricing plan",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Create a pricing plan",
+            "description": {
+              "content": "Creates a new pricing plan with associated rate cards and pricing tiers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"pricingModel\": \"<string>\",\n  \"effectiveFrom\": \"<date>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveTo\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "35dcf777-9a54-4b55-93a3-d9879d34a357",
+              "name": "Pricing plan created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"pricingModel\": \"<string>\",\n  \"effectiveFrom\": \"<date>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"planId\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"DRAFT\",\n  \"serviceType\": \"string\",\n  \"pricingModel\": \"PERCENTAGE\",\n  \"effectiveFrom\": \"1973-07-10\",\n  \"effectiveTo\": \"2007-01-21\",\n  \"currency\": \"APO\",\n  \"rateCards\": [\n    {\n      \"rateCardId\": \"string\",\n      \"name\": \"string\",\n      \"unit\": \"string\",\n      \"baseRate\": 8066.811993439956,\n      \"tiers\": [\n        {\n          \"fromQuantity\": 9750.919934349276,\n          \"ratePerUnit\": 2596.241227834376,\n          \"tierName\": \"string\",\n          \"toQuantity\": 7605.053049876287,\n          \"flatFee\": {\n            \"value\": 8864.562430770762,\n            \"currency\": \"PFQ\"\n          }\n        },\n        {\n          \"fromQuantity\": 8284.854946216874,\n          \"ratePerUnit\": 9861.726408560213,\n          \"tierName\": \"string\",\n          \"toQuantity\": 3076.7372265807767,\n          \"flatFee\": {\n            \"value\": 9831.822519430752,\n            \"currency\": \"LDB\"\n          }\n        }\n      ],\n      \"effectiveFrom\": \"1954-11-15\",\n      \"effectiveTo\": \"2001-10-26\"\n    },\n    {\n      \"rateCardId\": \"string\",\n      \"name\": \"string\",\n      \"unit\": \"string\",\n      \"baseRate\": 6518.692862828708,\n      \"tiers\": [\n        {\n          \"fromQuantity\": 9428.102839092926,\n          \"ratePerUnit\": 7120.651830659735,\n          \"tierName\": \"string\",\n          \"toQuantity\": 8465.950710598994,\n          \"flatFee\": {\n            \"value\": 2536.7171285642753,\n            \"currency\": \"UJP\"\n          }\n        },\n        {\n          \"fromQuantity\": 9645.848560077671,\n          \"ratePerUnit\": 8786.410428069925,\n          \"tierName\": \"string\",\n          \"toQuantity\": 7598.703209131645,\n          \"flatFee\": {\n            \"value\": 50.58474413665026,\n            \"currency\": \"KGP\"\n          }\n        }\n      ],\n      \"effectiveFrom\": \"1981-12-04\",\n      \"effectiveTo\": \"1980-05-11\"\n    }\n  ],\n  \"createdAt\": \"2003-05-25T21:25:45.146Z\",\n  \"modifiedAt\": \"1967-11-25T20:10:41.768Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f8fbd7d-0974-4301-b849-f04880488613",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"pricingModel\": \"<string>\",\n  \"effectiveFrom\": \"<date>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43b8025b-58c4-40fd-9ee0-43e0fd0e7c7b",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"pricingModel\": \"<string>\",\n  \"effectiveFrom\": \"<date>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "486b2704-77fe-444f-9ea0-dc402a4953ff",
+              "name": "Pricing plan with the same identifier already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"pricingModel\": \"<string>\",\n  \"effectiveFrom\": \"<date>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfc6b27d-6b86-47ba-b63b-2fb0c2fa5108",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"pricingModel\": \"<string>\",\n  \"effectiveFrom\": \"<date>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b94607a-6d99-4fcb-a234-cb81aff395eb",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Get a pricing plan",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Get a pricing plan",
+            "description": {
+              "content": "Retrieves the details of a specific pricing plan by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "plans",
+                ":planId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) Unique identifier of the pricing plan"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dfdac731-1ef7-431b-87cc-c566e7e2dc72",
+              "name": "Pricing plan details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"planId\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"DRAFT\",\n  \"serviceType\": \"string\",\n  \"pricingModel\": \"PERCENTAGE\",\n  \"effectiveFrom\": \"1973-07-10\",\n  \"effectiveTo\": \"2007-01-21\",\n  \"currency\": \"APO\",\n  \"rateCards\": [\n    {\n      \"rateCardId\": \"string\",\n      \"name\": \"string\",\n      \"unit\": \"string\",\n      \"baseRate\": 8066.811993439956,\n      \"tiers\": [\n        {\n          \"fromQuantity\": 9750.919934349276,\n          \"ratePerUnit\": 2596.241227834376,\n          \"tierName\": \"string\",\n          \"toQuantity\": 7605.053049876287,\n          \"flatFee\": {\n            \"value\": 8864.562430770762,\n            \"currency\": \"PFQ\"\n          }\n        },\n        {\n          \"fromQuantity\": 8284.854946216874,\n          \"ratePerUnit\": 9861.726408560213,\n          \"tierName\": \"string\",\n          \"toQuantity\": 3076.7372265807767,\n          \"flatFee\": {\n            \"value\": 9831.822519430752,\n            \"currency\": \"LDB\"\n          }\n        }\n      ],\n      \"effectiveFrom\": \"1954-11-15\",\n      \"effectiveTo\": \"2001-10-26\"\n    },\n    {\n      \"rateCardId\": \"string\",\n      \"name\": \"string\",\n      \"unit\": \"string\",\n      \"baseRate\": 6518.692862828708,\n      \"tiers\": [\n        {\n          \"fromQuantity\": 9428.102839092926,\n          \"ratePerUnit\": 7120.651830659735,\n          \"tierName\": \"string\",\n          \"toQuantity\": 8465.950710598994,\n          \"flatFee\": {\n            \"value\": 2536.7171285642753,\n            \"currency\": \"UJP\"\n          }\n        },\n        {\n          \"fromQuantity\": 9645.848560077671,\n          \"ratePerUnit\": 8786.410428069925,\n          \"tierName\": \"string\",\n          \"toQuantity\": 7598.703209131645,\n          \"flatFee\": {\n            \"value\": 50.58474413665026,\n            \"currency\": \"KGP\"\n          }\n        }\n      ],\n      \"effectiveFrom\": \"1981-12-04\",\n      \"effectiveTo\": \"1980-05-11\"\n    }\n  ],\n  \"createdAt\": \"2003-05-25T21:25:45.146Z\",\n  \"modifiedAt\": \"1967-11-25T20:10:41.768Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70c5f861-a2bd-4127-8c7a-7c68911bcc57",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a76ce579-d246-4c1f-a7d4-902359f450f2",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4ca813a-ce1b-4306-b247-bd49dc685c74",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c198e0f-ae5e-40bd-b69c-5f7d22018cc6",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Update a pricing plan",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Update a pricing plan",
+            "description": {
+              "content": "Updates an existing pricing plan. Only DRAFT plans can be fully updated; ACTIVE plans support limited modifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "plans",
+                ":planId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) Unique identifier of the pricing plan"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"pricingModel\": \"<string>\",\n  \"effectiveFrom\": \"<date>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveTo\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "74a3e1c2-2f4f-4953-8637-db58bd59d6a2",
+              "name": "Pricing plan updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"pricingModel\": \"<string>\",\n  \"effectiveFrom\": \"<date>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"planId\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"DRAFT\",\n  \"serviceType\": \"string\",\n  \"pricingModel\": \"PERCENTAGE\",\n  \"effectiveFrom\": \"1973-07-10\",\n  \"effectiveTo\": \"2007-01-21\",\n  \"currency\": \"APO\",\n  \"rateCards\": [\n    {\n      \"rateCardId\": \"string\",\n      \"name\": \"string\",\n      \"unit\": \"string\",\n      \"baseRate\": 8066.811993439956,\n      \"tiers\": [\n        {\n          \"fromQuantity\": 9750.919934349276,\n          \"ratePerUnit\": 2596.241227834376,\n          \"tierName\": \"string\",\n          \"toQuantity\": 7605.053049876287,\n          \"flatFee\": {\n            \"value\": 8864.562430770762,\n            \"currency\": \"PFQ\"\n          }\n        },\n        {\n          \"fromQuantity\": 8284.854946216874,\n          \"ratePerUnit\": 9861.726408560213,\n          \"tierName\": \"string\",\n          \"toQuantity\": 3076.7372265807767,\n          \"flatFee\": {\n            \"value\": 9831.822519430752,\n            \"currency\": \"LDB\"\n          }\n        }\n      ],\n      \"effectiveFrom\": \"1954-11-15\",\n      \"effectiveTo\": \"2001-10-26\"\n    },\n    {\n      \"rateCardId\": \"string\",\n      \"name\": \"string\",\n      \"unit\": \"string\",\n      \"baseRate\": 6518.692862828708,\n      \"tiers\": [\n        {\n          \"fromQuantity\": 9428.102839092926,\n          \"ratePerUnit\": 7120.651830659735,\n          \"tierName\": \"string\",\n          \"toQuantity\": 8465.950710598994,\n          \"flatFee\": {\n            \"value\": 2536.7171285642753,\n            \"currency\": \"UJP\"\n          }\n        },\n        {\n          \"fromQuantity\": 9645.848560077671,\n          \"ratePerUnit\": 8786.410428069925,\n          \"tierName\": \"string\",\n          \"toQuantity\": 7598.703209131645,\n          \"flatFee\": {\n            \"value\": 50.58474413665026,\n            \"currency\": \"KGP\"\n          }\n        }\n      ],\n      \"effectiveFrom\": \"1981-12-04\",\n      \"effectiveTo\": \"1980-05-11\"\n    }\n  ],\n  \"createdAt\": \"2003-05-25T21:25:45.146Z\",\n  \"modifiedAt\": \"1967-11-25T20:10:41.768Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc14b3df-9d06-4b11-b703-65b67afeacec",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"pricingModel\": \"<string>\",\n  \"effectiveFrom\": \"<date>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b91e9069-e81d-4d50-a769-89b4a91e1f4d",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"pricingModel\": \"<string>\",\n  \"effectiveFrom\": \"<date>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0de88fee-2fa8-48a1-8919-9087f352fdf9",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"pricingModel\": \"<string>\",\n  \"effectiveFrom\": \"<date>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f48c3129-c006-4023-939b-2b402da5e60e",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"pricingModel\": \"<string>\",\n  \"effectiveFrom\": \"<date>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de514872-2c14-4b18-8d6c-ed1941ed3b96",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Delete a pricing plan",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Delete a pricing plan",
+            "description": {
+              "content": "Deletes a pricing plan. Only DRAFT or INACTIVE plans can be deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "plans",
+                ":planId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) Unique identifier of the pricing plan"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09e55d4e-bf8b-4090-b9e3-c1278781ba9d",
+              "name": "Pricing plan deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d542157e-de8e-4c0d-af43-50c034ed8367",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db01fe3a-21af-4eb5-b486-95b267331837",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6ca6d95-6942-4cbf-ac42-3dbbf1a7aa83",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67f88d68-9f74-4efe-b621-0158f7fb729a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46aca300-a931-435d-8a6d-d66b17599a58",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) List rate cards for a pricing plan",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) List rate cards for a pricing plan",
+            "description": {
+              "content": "Retrieves all rate cards associated with a pricing plan.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "plans",
+                ":planId",
+                "rate-cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) Unique identifier of the pricing plan"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a24f0e71-e0ba-4f7d-af04-79fe2c3607fc",
+              "name": "List of rate cards",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId",
+                    "rate-cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"rateCardId\": \"string\",\n      \"name\": \"string\",\n      \"unit\": \"string\",\n      \"baseRate\": 9509.709512999943,\n      \"tiers\": [\n        {\n          \"fromQuantity\": 4841.860392632473,\n          \"ratePerUnit\": 2300.875885016037,\n          \"tierName\": \"string\",\n          \"toQuantity\": 2804.0584989138815,\n          \"flatFee\": {\n            \"value\": 8292.893508010946,\n            \"currency\": \"AHW\"\n          }\n        },\n        {\n          \"fromQuantity\": 7759.681137900809,\n          \"ratePerUnit\": 2798.2746148070128,\n          \"tierName\": \"string\",\n          \"toQuantity\": 2456.6738542554367,\n          \"flatFee\": {\n            \"value\": 9431.409044194472,\n            \"currency\": \"CRD\"\n          }\n        }\n      ],\n      \"effectiveFrom\": \"1982-02-27\",\n      \"effectiveTo\": \"2001-02-23\"\n    },\n    {\n      \"rateCardId\": \"string\",\n      \"name\": \"string\",\n      \"unit\": \"string\",\n      \"baseRate\": 7628.777155479336,\n      \"tiers\": [\n        {\n          \"fromQuantity\": 4840.59386228167,\n          \"ratePerUnit\": 6084.351159274077,\n          \"tierName\": \"string\",\n          \"toQuantity\": 9270.70465436597,\n          \"flatFee\": {\n            \"value\": 154.18712609466257,\n            \"currency\": \"ZLT\"\n          }\n        },\n        {\n          \"fromQuantity\": 6680.040774010927,\n          \"ratePerUnit\": 3689.7817212485993,\n          \"tierName\": \"string\",\n          \"toQuantity\": 1683.1874405680414,\n          \"flatFee\": {\n            \"value\": 1710.7284534355927,\n            \"currency\": \"YAU\"\n          }\n        }\n      ],\n      \"effectiveFrom\": \"2022-07-01\",\n      \"effectiveTo\": \"1991-10-06\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75c69dfb-c644-4569-a45c-a5a1f88ef8f3",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId",
+                    "rate-cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03da4820-e45f-4e0b-9c20-5b01babc4e37",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId",
+                    "rate-cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5dff4d8-1b05-45ba-b926-bb8000e1a0ea",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId",
+                    "rate-cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "857570e1-b67e-4f39-bcdf-8d652b0ea120",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Add a rate card to a pricing plan",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Add a rate card to a pricing plan",
+            "description": {
+              "content": "Creates a new rate card and associates it with the specified pricing plan. Rate cards define the unit prices and tier structures.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pricing",
+                "plans",
+                ":planId",
+                "rate-cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) Unique identifier of the pricing plan"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"baseRate\": \"<double>\",\n  \"tiers\": [\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"effectiveFrom\": \"<date>\",\n  \"effectiveTo\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "717d7e4b-5040-41ac-a7fa-744259b6b199",
+              "name": "Rate card created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId",
+                    "rate-cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"baseRate\": \"<double>\",\n  \"tiers\": [\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"effectiveFrom\": \"<date>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rateCardId\": \"string\",\n  \"name\": \"string\",\n  \"unit\": \"string\",\n  \"baseRate\": 1005.1654764029561,\n  \"tiers\": [\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"effectiveFrom\": \"1979-01-21\",\n  \"effectiveTo\": \"2002-09-13\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "616c0ff1-8bc2-402d-a9dc-d6ab73b42d67",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId",
+                    "rate-cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"baseRate\": \"<double>\",\n  \"tiers\": [\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"effectiveFrom\": \"<date>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9197cef-f1e2-407b-9e81-a01e378c5814",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId",
+                    "rate-cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"baseRate\": \"<double>\",\n  \"tiers\": [\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"effectiveFrom\": \"<date>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c25926f-b1a3-4bb0-a508-f94704ca274a",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId",
+                    "rate-cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"baseRate\": \"<double>\",\n  \"tiers\": [\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"effectiveFrom\": \"<date>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbcef9d6-0a12-4eae-99ea-52cc8b625c60",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pricing",
+                    "plans",
+                    ":planId",
+                    "rate-cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the pricing plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"unit\": \"<string>\",\n  \"baseRate\": \"<double>\",\n  \"tiers\": [\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"fromQuantity\": \"<double>\",\n      \"ratePerUnit\": \"<double>\",\n      \"tierName\": \"<string>\",\n      \"toQuantity\": \"<double>\",\n      \"flatFee\": {\n        \"value\": \"<double>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"effectiveFrom\": \"<date>\",\n  \"effectiveTo\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sap.com/convergent-charging/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "read write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.sap.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1d813656-9c59-4368-8e1f-3620ce2be829",
+    "name": "SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Pricing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.\n\nContact Support:\n Name: SAP Support\n Email: support@sap.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,657 @@
+{
+  "item": [
+    {
+      "id": "1c5b91f4-84aa-416f-b6cd-eaebc09041c4",
+      "name": "Billing",
+      "description": {
+        "content": "Billing cycle and invoice generation operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "665e748d-f548-49a6-a085-2cc1de2d4552",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Get subscription billing history",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Get subscription billing history",
+            "description": {
+              "content": "Retrieves the billing history for a subscription, including all generated invoices and payment records.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ":subscriptionId",
+                "billing-history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of items to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of items to return"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Unique identifier of the subscription"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f2f3d97-1ac5-45ba-b7a0-746740edf777",
+              "name": "Billing history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "billing-history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Unique identifier of the subscription"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"billingRecordId\": \"39dcc3e4-a760-141e-a915-a9a2d174592c\",\n      \"subscriptionId\": \"8aeb271f-f27a-e38b-0886-8d84ac1602df\",\n      \"invoiceNumber\": \"string\",\n      \"billingPeriodStart\": \"1947-10-16\",\n      \"billingPeriodEnd\": \"2013-05-17\",\n      \"subtotal\": {\n        \"value\": 6737.575790375765,\n        \"currency\": \"BBK\"\n      },\n      \"tax\": {\n        \"value\": 3516.176066791896,\n        \"currency\": \"OKR\"\n      },\n      \"total\": {\n        \"value\": 9585.201960782091,\n        \"currency\": \"GTI\"\n      },\n      \"status\": \"ISSUED\",\n      \"issuedAt\": \"1988-02-29T06:57:54.121Z\",\n      \"dueDate\": \"1995-01-05\",\n      \"paidAt\": \"1997-07-12T03:22:27.196Z\",\n      \"lineItems\": [\n        {\n          \"description\": \"string\",\n          \"quantity\": 287.6945570150058,\n          \"unitPrice\": {\n            \"value\": 6969.433470935525,\n            \"currency\": \"MEN\"\n          },\n          \"amount\": {\n            \"value\": 4659.850785569062,\n            \"currency\": \"TYU\"\n          }\n        },\n        {\n          \"description\": \"string\",\n          \"quantity\": 6991.661241046003,\n          \"unitPrice\": {\n            \"value\": 9586.301233415428,\n            \"currency\": \"QXE\"\n          },\n          \"amount\": {\n            \"value\": 8822.730707775296,\n            \"currency\": \"HTT\"\n          }\n        }\n      ]\n    },\n    {\n      \"billingRecordId\": \"9122290e-2feb-0e15-eba6-bf2ce0a7dbcf\",\n      \"subscriptionId\": \"0b0a4278-a7b9-67c8-5ba1-4a121338934a\",\n      \"invoiceNumber\": \"string\",\n      \"billingPeriodStart\": \"1991-06-28\",\n      \"billingPeriodEnd\": \"1957-07-07\",\n      \"subtotal\": {\n        \"value\": 2185.8065331825983,\n        \"currency\": \"WHJ\"\n      },\n      \"tax\": {\n        \"value\": 683.9489116423258,\n        \"currency\": \"ACC\"\n      },\n      \"total\": {\n        \"value\": 6721.530163515899,\n        \"currency\": \"XNX\"\n      },\n      \"status\": \"PAID\",\n      \"issuedAt\": \"1977-12-24T13:33:56.597Z\",\n      \"dueDate\": \"1962-08-27\",\n      \"paidAt\": \"1975-08-29T04:51:44.612Z\",\n      \"lineItems\": [\n        {\n          \"description\": \"string\",\n          \"quantity\": 2111.5628156660514,\n          \"unitPrice\": {\n            \"value\": 2632.3303414126563,\n            \"currency\": \"NKA\"\n          },\n          \"amount\": {\n            \"value\": 9188.549258891653,\n            \"currency\": \"OMO\"\n          }\n        },\n        {\n          \"description\": \"string\",\n          \"quantity\": 9587.759468077544,\n          \"unitPrice\": {\n            \"value\": 5120.858006160327,\n            \"currency\": \"FYU\"\n          },\n          \"amount\": {\n            \"value\": 3999.8531509182835,\n            \"currency\": \"HVG\"\n          }\n        }\n      ]\n    }\n  ],\n  \"totalCount\": 5631,\n  \"offset\": 2794,\n  \"limit\": 8815\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "863b0386-41b3-4f5b-b781-f15138a020de",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "billing-history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Unique identifier of the subscription"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe90b161-2e17-4ea1-a24d-02ad6305ffef",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "billing-history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Unique identifier of the subscription"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a578c77-8dfa-4d58-bafe-74354ee6922d",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "billing-history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Unique identifier of the subscription"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2676c42-c462-4e77-9db4-00122116ce9c",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Generate an invoice for a subscription",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Generate an invoice for a subscription",
+            "description": {
+              "content": "Manually triggers invoice generation for a subscription outside of the normal billing cycle. Useful for ad-hoc or on-demand billing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ":subscriptionId",
+                "generate-invoice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Unique identifier of the subscription"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billingPeriodStart\": \"<date>\",\n  \"billingPeriodEnd\": \"<date>\",\n  \"includeUsageCharges\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0072a325-c1d1-4579-a650-2bf492ff973c",
+              "name": "Invoice generated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "generate-invoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Unique identifier of the subscription"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingPeriodStart\": \"<date>\",\n  \"billingPeriodEnd\": \"<date>\",\n  \"includeUsageCharges\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"billingRecordId\": \"9730b7e9-b43f-029b-b19d-ac0878701cb4\",\n  \"subscriptionId\": \"4f2b07e2-bb8f-3dda-4bd6-93a861b5048c\",\n  \"invoiceNumber\": \"string\",\n  \"billingPeriodStart\": \"1949-07-12\",\n  \"billingPeriodEnd\": \"2019-03-11\",\n  \"subtotal\": {\n    \"value\": 4119.482315433634,\n    \"currency\": \"XSF\"\n  },\n  \"tax\": {\n    \"value\": 2130.4787157325554,\n    \"currency\": \"HGD\"\n  },\n  \"total\": {\n    \"value\": 9460.088320880997,\n    \"currency\": \"YYM\"\n  },\n  \"status\": \"OVERDUE\",\n  \"issuedAt\": \"1962-10-06T02:28:50.019Z\",\n  \"dueDate\": \"1982-08-02\",\n  \"paidAt\": \"1962-07-15T13:30:52.690Z\",\n  \"lineItems\": [\n    {\n      \"description\": \"string\",\n      \"quantity\": 1630.7900763192163,\n      \"unitPrice\": {\n        \"value\": 8781.158467689751,\n        \"currency\": \"YIV\"\n      },\n      \"amount\": {\n        \"value\": 3667.3506157778124,\n        \"currency\": \"UDM\"\n      }\n    },\n    {\n      \"description\": \"string\",\n      \"quantity\": 1813.4386799364465,\n      \"unitPrice\": {\n        \"value\": 7173.931954253144,\n        \"currency\": \"UTA\"\n      },\n      \"amount\": {\n        \"value\": 683.0426199752093,\n        \"currency\": \"RKQ\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b56418b-8cd8-48e3-90a7-82d76e06f947",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "generate-invoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Unique identifier of the subscription"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingPeriodStart\": \"<date>\",\n  \"billingPeriodEnd\": \"<date>\",\n  \"includeUsageCharges\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53763f47-d64a-4570-a72c-3df5b23e2b8d",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "generate-invoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Unique identifier of the subscription"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingPeriodStart\": \"<date>\",\n  \"billingPeriodEnd\": \"<date>\",\n  \"includeUsageCharges\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a803cb68-e5b3-4d59-bee6-895c27026ece",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId",
+                    "generate-invoice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Unique identifier of the subscription"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billingPeriodStart\": \"<date>\",\n  \"billingPeriodEnd\": \"<date>\",\n  \"includeUsageCharges\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sap.com/convergent-charging/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "read write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.sap.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f5e6a9d8-ee28-4e9d-b519-c60efdbee445",
+    "name": "SAP BRIM ( and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Billing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.\n\nContact Support:\n Name: SAP Support\n Email: support@sap.com",
+      "type": "text/plain"
+    }
+  }
+}

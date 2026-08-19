@@ -1,0 +1,1335 @@
+{
+  "item": [
+    {
+      "id": "f1409039-164e-49eb-be3c-5bdf166092bb",
+      "name": "Plans",
+      "description": {
+        "content": "Subscription plan and offer catalog management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "afb874cc-12a3-47c0-ab90-0a4849c2aaa6",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) List subscription plans",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) List subscription plans",
+            "description": {
+              "content": "Retrieves a paginated list of available subscription plans from the product catalog.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of items to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "billingFrequency",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3520e36c-e85a-4e05-ac78-17e705780580",
+              "name": "List of plans",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "billingFrequency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"planId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"status\": \"INACTIVE\",\n      \"billingFrequency\": \"ANNUAL\",\n      \"price\": {\n        \"value\": 2663.3943964316977,\n        \"currency\": \"ASD\"\n      },\n      \"setupFee\": {\n        \"value\": 6474.365452615193,\n        \"currency\": \"TYS\"\n      },\n      \"trialPeriodDays\": 1517,\n      \"contractTermMonths\": 717,\n      \"autoRenewDefault\": false,\n      \"includedItems\": [\n        {\n          \"productId\": \"string\",\n          \"productName\": \"string\",\n          \"quantity\": 6766,\n          \"billingType\": \"ONE_TIME\"\n        },\n        {\n          \"productId\": \"string\",\n          \"productName\": \"string\",\n          \"quantity\": 2453,\n          \"billingType\": \"ONE_TIME\"\n        }\n      ],\n      \"features\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdAt\": \"1994-12-20T02:13:19.813Z\",\n      \"modifiedAt\": \"1960-09-03T01:18:50.207Z\"\n    },\n    {\n      \"planId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"billingFrequency\": \"SEMI_ANNUAL\",\n      \"price\": {\n        \"value\": 8504.331360179878,\n        \"currency\": \"BPP\"\n      },\n      \"setupFee\": {\n        \"value\": 2650.761922322682,\n        \"currency\": \"OMO\"\n      },\n      \"trialPeriodDays\": 3573,\n      \"contractTermMonths\": 5699,\n      \"autoRenewDefault\": false,\n      \"includedItems\": [\n        {\n          \"productId\": \"string\",\n          \"productName\": \"string\",\n          \"quantity\": 611,\n          \"billingType\": \"ONE_TIME\"\n        },\n        {\n          \"productId\": \"string\",\n          \"productName\": \"string\",\n          \"quantity\": 6101,\n          \"billingType\": \"RECURRING\"\n        }\n      ],\n      \"features\": [\n        \"string\",\n        \"string\"\n      ],\n      \"createdAt\": \"1962-06-07T08:01:05.928Z\",\n      \"modifiedAt\": \"1972-03-07T20:18:54.132Z\"\n    }\n  ],\n  \"totalCount\": 1526,\n  \"offset\": 3238,\n  \"limit\": 1536\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3de3fdc4-cab6-42ef-82f6-1e46db974b85",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "billingFrequency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "068cc4ba-e52e-4f7f-aa44-73da2eda24e2",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "billingFrequency",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bebe3ade-1d19-4920-be32-12a4c73ee018",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Create a subscription plan",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Create a subscription plan",
+            "description": {
+              "content": "Creates a new subscription plan in the product catalog with pricing, billing frequency, and included items.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"billingFrequency\": \"<string>\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 0,\n  \"contractTermMonths\": \"<integer>\",\n  \"autoRenewDefault\": true,\n  \"features\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a0de6282-b722-4b53-81ca-b73e10d52ecf",
+              "name": "Plan created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"billingFrequency\": \"<string>\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 0,\n  \"contractTermMonths\": \"<integer>\",\n  \"autoRenewDefault\": true,\n  \"features\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"planId\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"billingFrequency\": \"MONTHLY\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 8324,\n  \"contractTermMonths\": 9402,\n  \"autoRenewDefault\": false,\n  \"includedItems\": [\n    {\n      \"productId\": \"string\",\n      \"productName\": \"string\",\n      \"quantity\": 1377,\n      \"billingType\": \"ONE_TIME\"\n    },\n    {\n      \"productId\": \"string\",\n      \"productName\": \"string\",\n      \"quantity\": 9533,\n      \"billingType\": \"ONE_TIME\"\n    }\n  ],\n  \"features\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"1964-05-24T20:48:01.790Z\",\n  \"modifiedAt\": \"1960-12-05T18:48:35.385Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45c0b575-ce5b-452f-8669-23fc8c4acf54",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"billingFrequency\": \"<string>\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 0,\n  \"contractTermMonths\": \"<integer>\",\n  \"autoRenewDefault\": true,\n  \"features\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36d9ec0b-74a9-419f-937e-786af0223415",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"billingFrequency\": \"<string>\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 0,\n  \"contractTermMonths\": \"<integer>\",\n  \"autoRenewDefault\": true,\n  \"features\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff78ea24-8846-4e5c-9596-29ca07d84c2e",
+              "name": "Plan with the same identifier already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"billingFrequency\": \"<string>\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 0,\n  \"contractTermMonths\": \"<integer>\",\n  \"autoRenewDefault\": true,\n  \"features\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19782ed4-56ba-4f1b-9045-3891386a351a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"billingFrequency\": \"<string>\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 0,\n  \"contractTermMonths\": \"<integer>\",\n  \"autoRenewDefault\": true,\n  \"features\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "296b3945-98ff-49a5-9447-47bc95a5492e",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Get a subscription plan",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Get a subscription plan",
+            "description": {
+              "content": "Retrieves details of a specific subscription plan.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "plans",
+                ":planId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) Unique identifier of the subscription plan"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7aa4d053-35db-45ed-beea-5a474464d706",
+              "name": "Plan details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the subscription plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"planId\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"billingFrequency\": \"MONTHLY\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 8324,\n  \"contractTermMonths\": 9402,\n  \"autoRenewDefault\": false,\n  \"includedItems\": [\n    {\n      \"productId\": \"string\",\n      \"productName\": \"string\",\n      \"quantity\": 1377,\n      \"billingType\": \"ONE_TIME\"\n    },\n    {\n      \"productId\": \"string\",\n      \"productName\": \"string\",\n      \"quantity\": 9533,\n      \"billingType\": \"ONE_TIME\"\n    }\n  ],\n  \"features\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"1964-05-24T20:48:01.790Z\",\n  \"modifiedAt\": \"1960-12-05T18:48:35.385Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e25d355-1158-4330-ad3e-d8bffc7b84eb",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the subscription plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58767feb-8a2a-4c6a-a867-7310f2c85346",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the subscription plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f02c30f-7a61-4415-93bc-804288f2456c",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Update a subscription plan",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Update a subscription plan",
+            "description": {
+              "content": "Updates an existing subscription plan. Changes do not affect existing subscriptions unless explicitly propagated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "plans",
+                ":planId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) Unique identifier of the subscription plan"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"billingFrequency\": \"<string>\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 0,\n  \"contractTermMonths\": \"<integer>\",\n  \"autoRenewDefault\": true,\n  \"features\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cb89d17a-3fe5-464c-a30a-48e307fe0211",
+              "name": "Plan updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the subscription plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"billingFrequency\": \"<string>\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 0,\n  \"contractTermMonths\": \"<integer>\",\n  \"autoRenewDefault\": true,\n  \"features\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"planId\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"billingFrequency\": \"MONTHLY\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 8324,\n  \"contractTermMonths\": 9402,\n  \"autoRenewDefault\": false,\n  \"includedItems\": [\n    {\n      \"productId\": \"string\",\n      \"productName\": \"string\",\n      \"quantity\": 1377,\n      \"billingType\": \"ONE_TIME\"\n    },\n    {\n      \"productId\": \"string\",\n      \"productName\": \"string\",\n      \"quantity\": 9533,\n      \"billingType\": \"ONE_TIME\"\n    }\n  ],\n  \"features\": [\n    \"string\",\n    \"string\"\n  ],\n  \"createdAt\": \"1964-05-24T20:48:01.790Z\",\n  \"modifiedAt\": \"1960-12-05T18:48:35.385Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8e90b8a-4d80-4e92-b788-b7d284c891d9",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the subscription plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"billingFrequency\": \"<string>\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 0,\n  \"contractTermMonths\": \"<integer>\",\n  \"autoRenewDefault\": true,\n  \"features\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2741a958-d8ae-4dc3-a458-6ef1aa30287b",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the subscription plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"billingFrequency\": \"<string>\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 0,\n  \"contractTermMonths\": \"<integer>\",\n  \"autoRenewDefault\": true,\n  \"features\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37bbc12f-f443-47e8-a239-08820fd53ae4",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the subscription plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"billingFrequency\": \"<string>\",\n  \"price\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"setupFee\": {\n    \"value\": \"<double>\",\n    \"currency\": \"<string>\"\n  },\n  \"trialPeriodDays\": 0,\n  \"contractTermMonths\": \"<integer>\",\n  \"autoRenewDefault\": true,\n  \"features\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d997df5a-a660-440d-9362-47698c9c4462",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Delete a subscription plan",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Delete a subscription plan",
+            "description": {
+              "content": "Deletes a subscription plan. Only DRAFT or INACTIVE plans with no active subscriptions can be deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "plans",
+                ":planId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "planId",
+                  "description": "(Required) Unique identifier of the subscription plan"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "401e238a-4df4-437e-a01b-53ac67dbadf3",
+              "name": "Plan deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the subscription plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "64688857-ebc6-41e1-aa37-882e47d35e96",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the subscription plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68e4fa24-c11a-4110-b3dc-b5d5e1292a8b",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the subscription plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e81853ea-146d-4180-80f1-8c93faaf26ca",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plans",
+                    ":planId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "planId",
+                      "description": "(Required) Unique identifier of the subscription plan"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sap.com/convergent-charging/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "read write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.sap.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cf0d6566-1ab6-4526-a060-865f159fbff5",
+    "name": "SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.\n\nContact Support:\n Name: SAP Support\n Email: support@sap.com",
+      "type": "text/plain"
+    }
+  }
+}

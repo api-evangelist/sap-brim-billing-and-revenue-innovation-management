@@ -1,0 +1,140 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Plans API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://auth.sap.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) List subscription plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sap.com/convergent-charging/v1/plans",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip for pagination"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "billingFrequency",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of available subscription plans from the product catalog."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Create a subscription plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sap.com/convergent-charging/v1/plans",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new subscription plan in the product catalog with pricing, billing frequency, and included items."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Get a subscription plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sap.com/convergent-charging/v1/plans/:planId",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the subscription plan"
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific subscription plan."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Update a subscription plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sap.com/convergent-charging/v1/plans/:planId",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the subscription plan"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing subscription plan. Changes do not affect existing subscriptions unless explicitly propagated."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Delete a subscription plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sap.com/convergent-charging/v1/plans/:planId",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the subscription plan"
+              }
+            ]
+          },
+          "docs": "Deletes a subscription plan. Only DRAFT or INACTIVE plans with no active subscriptions can be deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

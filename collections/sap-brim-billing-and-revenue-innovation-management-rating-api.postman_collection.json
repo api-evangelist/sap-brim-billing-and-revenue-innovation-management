@@ -1,0 +1,924 @@
+{
+  "item": [
+    {
+      "id": "dc1c96da-3da2-456c-b76c-097aeb7328a6",
+      "name": "Rating",
+      "description": {
+        "content": "Operations for rating usage events against pricing plans",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d7c45e32-38ba-47d6-baf4-fc0e3d3c350d",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Rate a usage event",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Rate a usage event",
+            "description": {
+              "content": "Rates a single usage event against the applicable pricing plan and returns the calculated charge. Supports real-time and batch rating scenarios.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rating",
+                "rate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subscriberId\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"usageTimestamp\": \"<dateTime>\",\n  \"unit\": \"<string>\",\n  \"pricingPlanId\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c3aa68a5-d3b4-43e3-b91f-f5ccf8cdf6f7",
+              "name": "Usage event rated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "rate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subscriberId\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"usageTimestamp\": \"<dateTime>\",\n  \"unit\": \"<string>\",\n  \"pricingPlanId\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ratingId\": \"04a6966e-5317-d363-54e1-57dfa52bffab\",\n  \"subscriberId\": \"string\",\n  \"serviceType\": \"string\",\n  \"quantity\": 8913.515175823679,\n  \"charge\": {\n    \"value\": 8165.988767882556,\n    \"currency\": \"WQQ\"\n  },\n  \"pricingPlanId\": \"string\",\n  \"rateApplied\": 6152.343770387336,\n  \"tierApplied\": \"string\",\n  \"ratedAt\": \"1973-10-20T16:57:43.871Z\",\n  \"status\": \"RATED\",\n  \"details\": [\n    {\n      \"tierName\": \"string\",\n      \"unitsInTier\": 8106.034315529301,\n      \"ratePerUnit\": 3791.4037724695695,\n      \"tierCharge\": {\n        \"value\": 2424.3384705773797,\n        \"currency\": \"RJL\"\n      }\n    },\n    {\n      \"tierName\": \"string\",\n      \"unitsInTier\": 9891.10930085929,\n      \"ratePerUnit\": 1760.7254083101564,\n      \"tierCharge\": {\n        \"value\": 838.6148421682104,\n        \"currency\": \"QNI\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc706ec1-1b87-44f2-97b8-01c4031724e5",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "rate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subscriberId\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"usageTimestamp\": \"<dateTime>\",\n  \"unit\": \"<string>\",\n  \"pricingPlanId\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30af73b1-2bd5-4d14-9509-0e53a38d26e2",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "rate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subscriberId\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"usageTimestamp\": \"<dateTime>\",\n  \"unit\": \"<string>\",\n  \"pricingPlanId\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f19ee5ae-9022-414d-abd4-6a1cc39b684c",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "rate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subscriberId\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"usageTimestamp\": \"<dateTime>\",\n  \"unit\": \"<string>\",\n  \"pricingPlanId\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8457e6cb-3cb4-4432-bbac-afc789023732",
+              "name": "Request is valid but cannot be processed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "rate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subscriberId\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"usageTimestamp\": \"<dateTime>\",\n  \"unit\": \"<string>\",\n  \"pricingPlanId\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a9d28e0-bfbc-4913-90d9-3fde01ce4377",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "rate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subscriberId\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"usageTimestamp\": \"<dateTime>\",\n  \"unit\": \"<string>\",\n  \"pricingPlanId\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58239f41-11d7-4f74-921a-b5f65431d4f0",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Rate a batch of usage events",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Rate a batch of usage events",
+            "description": {
+              "content": "Rates multiple usage events in a single request for high-throughput scenarios. Returns individual rating results for each event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rating",
+                "rate-batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"subscriberId\": \"<string>\",\n      \"serviceType\": \"<string>\",\n      \"quantity\": \"<double>\",\n      \"usageTimestamp\": \"<dateTime>\",\n      \"unit\": \"<string>\",\n      \"pricingPlanId\": \"<string>\",\n      \"attributes\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a5949e55-70a1-47d5-bbda-fa884ddf3683",
+              "name": "Batch rating completed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "rate-batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"subscriberId\": \"<string>\",\n      \"serviceType\": \"<string>\",\n      \"quantity\": \"<double>\",\n      \"usageTimestamp\": \"<dateTime>\",\n      \"unit\": \"<string>\",\n      \"pricingPlanId\": \"<string>\",\n      \"attributes\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"ratingId\": \"1240870f-18f3-665f-76ee-c6ebf24703ba\",\n      \"subscriberId\": \"string\",\n      \"serviceType\": \"string\",\n      \"quantity\": 1863.5962035450536,\n      \"charge\": {\n        \"value\": 7157.000737204431,\n        \"currency\": \"OHZ\"\n      },\n      \"pricingPlanId\": \"string\",\n      \"rateApplied\": 1189.9872558737611,\n      \"tierApplied\": \"string\",\n      \"ratedAt\": \"2006-11-18T02:18:32.545Z\",\n      \"status\": \"FAILED\",\n      \"details\": [\n        {\n          \"tierName\": \"string\",\n          \"unitsInTier\": 7955.0194882277765,\n          \"ratePerUnit\": 9857.363748875872,\n          \"tierCharge\": {\n            \"value\": 5566.907004077866,\n            \"currency\": \"MAZ\"\n          }\n        },\n        {\n          \"tierName\": \"string\",\n          \"unitsInTier\": 1548.5449200137236,\n          \"ratePerUnit\": 381.54891716582483,\n          \"tierCharge\": {\n            \"value\": 8929.302528029959,\n            \"currency\": \"NUG\"\n          }\n        }\n      ]\n    },\n    {\n      \"ratingId\": \"b237c8ed-3f48-4043-8c66-8da8cc613706\",\n      \"subscriberId\": \"string\",\n      \"serviceType\": \"string\",\n      \"quantity\": 9414.140931598144,\n      \"charge\": {\n        \"value\": 3203.898706144106,\n        \"currency\": \"USE\"\n      },\n      \"pricingPlanId\": \"string\",\n      \"rateApplied\": 294.33744341689993,\n      \"tierApplied\": \"string\",\n      \"ratedAt\": \"2020-01-28T01:26:52.374Z\",\n      \"status\": \"RATED\",\n      \"details\": [\n        {\n          \"tierName\": \"string\",\n          \"unitsInTier\": 4724.422720419579,\n          \"ratePerUnit\": 6773.429374608847,\n          \"tierCharge\": {\n            \"value\": 8832.113161964713,\n            \"currency\": \"AWN\"\n          }\n        },\n        {\n          \"tierName\": \"string\",\n          \"unitsInTier\": 5533.470060271042,\n          \"ratePerUnit\": 8034.068271443879,\n          \"tierCharge\": {\n            \"value\": 7106.857603140569,\n            \"currency\": \"XTT\"\n          }\n        }\n      ]\n    }\n  ],\n  \"summary\": {\n    \"totalEvents\": 9498,\n    \"successCount\": 4725,\n    \"failureCount\": 7376,\n    \"totalCharge\": {\n      \"value\": 9293.45203243812,\n      \"currency\": \"PPX\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "756ad73d-e795-463c-88b9-e5f944be3e26",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "rate-batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"subscriberId\": \"<string>\",\n      \"serviceType\": \"<string>\",\n      \"quantity\": \"<double>\",\n      \"usageTimestamp\": \"<dateTime>\",\n      \"unit\": \"<string>\",\n      \"pricingPlanId\": \"<string>\",\n      \"attributes\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4432f1b9-4c77-49f8-8d79-226e4085364d",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "rate-batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"subscriberId\": \"<string>\",\n      \"serviceType\": \"<string>\",\n      \"quantity\": \"<double>\",\n      \"usageTimestamp\": \"<dateTime>\",\n      \"unit\": \"<string>\",\n      \"pricingPlanId\": \"<string>\",\n      \"attributes\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4851b3fc-3e8e-4bb7-8500-94be8e9d660a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "rate-batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"subscriberId\": \"<string>\",\n      \"serviceType\": \"<string>\",\n      \"quantity\": \"<double>\",\n      \"usageTimestamp\": \"<dateTime>\",\n      \"unit\": \"<string>\",\n      \"pricingPlanId\": \"<string>\",\n      \"attributes\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bdcd254a-e2fb-4d3c-a410-0f89c2f428d9",
+          "name": "SAP BRIM (Billing and Revenue Innovation Management) Simulate rating without committing",
+          "request": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Simulate rating without committing",
+            "description": {
+              "content": "Simulates the rating of a usage event without persisting the result. Useful for quote generation and what-if analysis.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rating",
+                "simulate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subscriberId\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"usageTimestamp\": \"<dateTime>\",\n  \"unit\": \"<string>\",\n  \"pricingPlanId\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f70392fa-a809-41ab-91c0-19fdbfe07268",
+              "name": "Simulation completed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subscriberId\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"usageTimestamp\": \"<dateTime>\",\n  \"unit\": \"<string>\",\n  \"pricingPlanId\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ratingId\": \"900e9bad-a6ef-8426-2546-efd42ddc5da5\",\n  \"subscriberId\": \"string\",\n  \"serviceType\": \"string\",\n  \"quantity\": 7225.901222130726,\n  \"charge\": {\n    \"value\": 5751.697963253901,\n    \"currency\": \"TSV\"\n  },\n  \"pricingPlanId\": \"string\",\n  \"rateApplied\": 4552.870035159524,\n  \"tierApplied\": \"string\",\n  \"ratedAt\": \"1972-04-08T00:24:21.656Z\",\n  \"status\": \"FAILED\",\n  \"details\": [\n    {\n      \"tierName\": \"string\",\n      \"unitsInTier\": 1983.5634072935227,\n      \"ratePerUnit\": 9883.100842649501,\n      \"tierCharge\": {\n        \"value\": 6835.972537874264,\n        \"currency\": \"CLO\"\n      }\n    },\n    {\n      \"tierName\": \"string\",\n      \"unitsInTier\": 5529.587151812982,\n      \"ratePerUnit\": 5701.075019074849,\n      \"tierCharge\": {\n        \"value\": 4631.742235665405,\n        \"currency\": \"SCA\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28eb44b1-c0c5-471f-8235-526c15e12d5e",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subscriberId\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"usageTimestamp\": \"<dateTime>\",\n  \"unit\": \"<string>\",\n  \"pricingPlanId\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d2dac6a-9916-41df-b10c-0bf5751b9776",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subscriberId\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"usageTimestamp\": \"<dateTime>\",\n  \"unit\": \"<string>\",\n  \"pricingPlanId\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1bc17d9-1954-4a94-baaa-ba72db236475",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rating",
+                    "simulate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subscriberId\": \"<string>\",\n  \"serviceType\": \"<string>\",\n  \"quantity\": \"<double>\",\n  \"usageTimestamp\": \"<dateTime>\",\n  \"unit\": \"<string>\",\n  \"pricingPlanId\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"target\": \"string\",\n    \"details\": [\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.sap.com/convergent-charging/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "read write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.sap.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5520b688-7a3e-4642-96a3-c10dbe7f4b3a",
+    "name": "SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Rating API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.\n\nContact Support:\n Name: SAP Support\n Email: support@sap.com",
+      "type": "text/plain"
+    }
+  }
+}

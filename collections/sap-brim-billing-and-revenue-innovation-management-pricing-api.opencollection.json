@@ -1,0 +1,187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Pricing API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://auth.sap.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pricing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) List pricing plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sap.com/convergent-charging/v1/pricing/plans",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip for pagination"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "serviceType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "effectiveDate",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of pricing plans. Supports filtering by status, service type, and effective date."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Create a pricing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sap.com/convergent-charging/v1/pricing/plans",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new pricing plan with associated rate cards and pricing tiers."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Get a pricing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sap.com/convergent-charging/v1/pricing/plans/:planId",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the pricing plan"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific pricing plan by its identifier."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Update a pricing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.sap.com/convergent-charging/v1/pricing/plans/:planId",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the pricing plan"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing pricing plan. Only DRAFT plans can be fully updated; ACTIVE plans support limited modifications."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Delete a pricing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sap.com/convergent-charging/v1/pricing/plans/:planId",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the pricing plan"
+              }
+            ]
+          },
+          "docs": "Deletes a pricing plan. Only DRAFT or INACTIVE plans can be deleted."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) List rate cards for a pricing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sap.com/convergent-charging/v1/pricing/plans/:planId/rate-cards",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the pricing plan"
+              }
+            ]
+          },
+          "docs": "Retrieves all rate cards associated with a pricing plan."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Add a rate card to a pricing plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sap.com/convergent-charging/v1/pricing/plans/:planId/rate-cards",
+            "params": [
+              {
+                "name": "planId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the pricing plan"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new rate card and associates it with the specified pricing plan. Rate cards define the unit prices and tier structures."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

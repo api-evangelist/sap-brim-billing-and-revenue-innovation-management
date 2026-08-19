@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Subscription Items API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://auth.sap.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscription Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) List subscription items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sap.com/convergent-charging/v1/subscriptions/:subscriptionId/items",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the subscription"
+              }
+            ]
+          },
+          "docs": "Retrieves all items within a subscription, including their quantities, pricing, and status."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Add an item to a subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.sap.com/convergent-charging/v1/subscriptions/:subscriptionId/items",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the subscription"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new line item to an existing subscription. The item is billed according to the subscription billing cycle."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Get a subscription item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.sap.com/convergent-charging/v1/subscriptions/:subscriptionId/items/:itemId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the subscription"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the subscription item"
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific item within a subscription."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Update a subscription item",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.sap.com/convergent-charging/v1/subscriptions/:subscriptionId/items/:itemId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the subscription"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the subscription item"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the quantity or configuration of a subscription item."
+        },
+        {
+          "info": {
+            "name": "SAP BRIM (Billing and Revenue Innovation Management) Remove a subscription item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.sap.com/convergent-charging/v1/subscriptions/:subscriptionId/items/:itemId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the subscription"
+              },
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the subscription item"
+              }
+            ]
+          },
+          "docs": "Removes an item from a subscription. Prorated credits may be applied to the next billing cycle."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
