@@ -24,6 +24,14 @@ specificationVersion: '0.23'
 tags:
   - Billing
   - Enterprise
+  - Order-to-Cash
+  - Revenue Management
+  - SAP
+  - Subscription Management
+  - Usage-Based Pricing
+tags_raw:
+  - Billing
+  - Enterprise
   - Order to Cash
   - Revenue Management
   - SAP
@@ -392,6 +400,8 @@ apis:
   humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
   baseURL: https://api.sap.com/convergent-charging
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
