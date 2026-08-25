@@ -1,8 +1,7 @@
 name: SAP BRIM (Billing and Revenue Innovation Management)
-description: >-
-  SAP BRIM (Billing and Revenue Innovation Management) is a comprehensive solution for order-to-cash processes,
-  subscription management, usage-based pricing, and revenue management. It enables businesses to manage complex billing
-  scenarios, subscription lifecycle, and revenue recognition.
+description: SAP BRIM (Billing and Revenue Innovation Management) is a comprehensive solution for order-to-cash
+  processes, subscription management, usage-based pricing, and revenue management. It enables businesses to manage
+  complex billing scenarios, subscription lifecycle, and revenue recognition.
 accessModel:
   pricing: enterprise
   onboarding: self-serve
@@ -19,28 +18,27 @@ accessModel:
 image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
 url: https://www.sap.com/products/financial-management/billing-revenue-innovation-mgmt.html
 created: '2024-01-15'
-modified: '2026-05-19'
+modified: '2026-08-21'
 specificationVersion: '0.23'
 tags:
-  - Billing
-  - Enterprise
-  - Order-to-Cash
-  - Revenue Management
-  - SAP
-  - Subscription Management
-  - Usage-Based Pricing
+- Billing
+- Enterprise
+- Order-to-Cash
+- Revenue Management
+- SAP
+- Subscription Management
+- Usage-Based Pricing
 tags_raw:
-  - Billing
-  - Enterprise
-  - Order to Cash
-  - Revenue Management
-  - SAP
-  - Subscription Management
-  - Usage-Based Pricing
+- Billing
+- Enterprise
+- Order to Cash
+- Revenue Management
+- SAP
+- Subscription Management
+- Usage-Based Pricing
 apis:
 - name: SAP Subscription Order Management API
-  description: >-
-    API for managing subscription-based orders within the SAP BRIM suite, supporting complex offerings
+  description: API for managing subscription-based orders within the SAP BRIM suite, supporting complex offerings
     that combine physical products, services, and usage-based fees with full lifecycle management.
   image: https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg
   humanURL: https://help.sap.com/docs/BRIM
@@ -56,8 +54,7 @@ apis:
   - FN: SAP Support
     email: support@sap.com
     url: https://support.sap.com
-- aid: >-
-    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-balances-api
+- aid: sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-balances-api
   name: SAP BRIM (Billing and Revenue Innovation Management) Balances API
   description: Account balance inquiries and adjustments
   humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
@@ -82,8 +79,7 @@ apis:
   - type: Reference
     url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
   - type: GettingStarted
-    url: >-
-      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+    url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
   - type: JSONSchema
     url: json-schema/sap-brim-subscription-schema.json
   - type: Documentation
@@ -98,8 +94,7 @@ apis:
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
   - type: Compliance Guide
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
-- aid: >-
-    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-billing-api
+- aid: sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-billing-api
   name: SAP BRIM (Billing and Revenue Innovation Management) Billing API
   description: Billing cycle and invoice generation operations
   humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
@@ -124,8 +119,7 @@ apis:
   - type: Reference
     url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
   - type: GettingStarted
-    url: >-
-      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+    url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
   - type: JSONSchema
     url: json-schema/sap-brim-subscription-schema.json
   - type: Documentation
@@ -140,8 +134,7 @@ apis:
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
   - type: Compliance Guide
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
-- aid: >-
-    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-charging-api
+- aid: sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-charging-api
   name: SAP BRIM (Billing and Revenue Innovation Management) Charging API
   description: Real-time charging operations for prepaid and postpaid accounts
   humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
@@ -166,8 +159,7 @@ apis:
   - type: Reference
     url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
   - type: GettingStarted
-    url: >-
-      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+    url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
   - type: JSONSchema
     url: json-schema/sap-brim-subscription-schema.json
   - type: Documentation
@@ -182,8 +174,7 @@ apis:
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
   - type: Compliance Guide
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
-- aid: >-
-    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-customers-api
+- aid: sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-customers-api
   name: SAP BRIM (Billing and Revenue Innovation Management) Customers API
   description: Customer account management for subscriptions
   humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
@@ -208,8 +199,7 @@ apis:
   - type: Reference
     url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
   - type: GettingStarted
-    url: >-
-      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+    url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
   - type: JSONSchema
     url: json-schema/sap-brim-subscription-schema.json
   - type: Documentation
@@ -224,8 +214,7 @@ apis:
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
   - type: Compliance Guide
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
-- aid: >-
-    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-plans-api
+- aid: sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-plans-api
   name: SAP BRIM (Billing and Revenue Innovation Management) Plans API
   description: Subscription plan and offer catalog management
   humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
@@ -250,8 +239,7 @@ apis:
   - type: Reference
     url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
   - type: GettingStarted
-    url: >-
-      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+    url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
   - type: JSONSchema
     url: json-schema/sap-brim-subscription-schema.json
   - type: Documentation
@@ -266,8 +254,7 @@ apis:
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
   - type: Compliance Guide
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
-- aid: >-
-    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-pricing-api
+- aid: sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-pricing-api
   name: SAP BRIM (Billing and Revenue Innovation Management) Pricing API
   description: Management of pricing plans, rate cards, and pricing structures
   humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
@@ -292,8 +279,7 @@ apis:
   - type: Reference
     url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
   - type: GettingStarted
-    url: >-
-      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+    url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
   - type: JSONSchema
     url: json-schema/sap-brim-subscription-schema.json
   - type: Documentation
@@ -308,8 +294,7 @@ apis:
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
   - type: Compliance Guide
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
-- aid: >-
-    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-rating-api
+- aid: sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-rating-api
   name: SAP BRIM (Billing and Revenue Innovation Management) Rating API
   description: Operations for rating usage events against pricing plans
   humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
@@ -334,8 +319,7 @@ apis:
   - type: Reference
     url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
   - type: GettingStarted
-    url: >-
-      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+    url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
   - type: JSONSchema
     url: json-schema/sap-brim-subscription-schema.json
   - type: Documentation
@@ -350,8 +334,7 @@ apis:
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
   - type: Compliance Guide
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
-- aid: >-
-    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-subscription-items-api
+- aid: sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-subscription-items-api
   name: SAP BRIM (Billing and Revenue Innovation Management) Subscription Items API
   description: Management of individual items within a subscription
   humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
@@ -360,8 +343,7 @@ apis:
   - Subscription Items
   properties:
   - type: OpenAPI
-    url: >-
-      openapi/sap-brim-billing-and-revenue-innovation-management-subscription-items-api-openapi.yml
+    url: openapi/sap-brim-billing-and-revenue-innovation-management-subscription-items-api-openapi.yml
   - type: Documentation
     url: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
   - type: Authentication
@@ -377,8 +359,7 @@ apis:
   - type: Reference
     url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
   - type: GettingStarted
-    url: >-
-      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+    url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
   - type: JSONSchema
     url: json-schema/sap-brim-subscription-schema.json
   - type: Documentation
@@ -393,8 +374,7 @@ apis:
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
   - type: Compliance Guide
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
-- aid: >-
-    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-subscriptions-api
+- aid: sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-subscriptions-api
   name: SAP BRIM (Billing and Revenue Innovation Management) Subscriptions API
   description: Subscription lifecycle management operations
   humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
@@ -421,8 +401,7 @@ apis:
   - type: Reference
     url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
   - type: GettingStarted
-    url: >-
-      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+    url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
   - type: JSONSchema
     url: json-schema/sap-brim-subscription-schema.json
   - type: Documentation
@@ -437,8 +416,7 @@ apis:
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING
   - type: Compliance Guide
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
-- aid: >-
-    sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-usage-events-api
+- aid: sap-brim-billing-and-revenue-innovation-management:sap-brim-billing-and-revenue-innovation-management-usage-events-api
   name: SAP BRIM (Billing and Revenue Innovation Management) Usage Events API
   description: Submission and management of usage event records
   humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
@@ -463,8 +441,7 @@ apis:
   - type: Reference
     url: https://api.sap.com/package/SAPHybrisRevenueCloud/rest
   - type: GettingStarted
-    url: >-
-      https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
+    url: https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf
   - type: JSONSchema
     url: json-schema/sap-brim-subscription-schema.json
   - type: Documentation
@@ -480,119 +457,126 @@ apis:
   - type: Compliance Guide
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
 common:
-  - type: AgenticAccess
-    url: agentic-access/sap-brim-billing-and-revenue-innovation-management-agentic-access.yml
-  - type: VulnerabilityDisclosure
-    url: security/sap-brim-billing-and-revenue-innovation-management-vulnerability-disclosure.yml
-  - type: DomainSecurity
-    url: security/sap-brim-billing-and-revenue-innovation-management-domain-security.yml
-  - type: Authentication
-    url: authentication/sap-brim-billing-and-revenue-innovation-management-authentication.yml
-  - type: OAuthScopes
-    url: scopes/sap-brim-billing-and-revenue-innovation-management-scopes.yml
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/sap-brim-billing-and-revenue-innovation-management/overview
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-add-item-and-invoice-workflow.yml
-    name: SAP BRIM Add a Subscription Item and Invoice It
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-authorize-confirm-charge-workflow.yml
-    name: SAP BRIM Authorize and Confirm a Charge Reservation
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-authorize-or-release-workflow.yml
-    name: SAP BRIM Authorize a Charge or Release on Insufficient Balance
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-batch-rate-and-charge-workflow.yml
-    name: SAP BRIM Batch Rate Usage and Charge the Total
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-cancel-and-cleanup-workflow.yml
-    name: SAP BRIM Cancel and Clean Up a Subscription
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-charge-and-refund-workflow.yml
-    name: SAP BRIM Charge an Account and Refund It
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-customer-billing-overview-workflow.yml
-    name: SAP BRIM Customer Billing Overview
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-manual-renewal-invoice-workflow.yml
-    name: SAP BRIM Renew a Subscription and Invoice the New Term
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-prepaid-topup-and-charge-workflow.yml
-    name: SAP BRIM Top Up and Charge a Prepaid Account
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-pricing-plan-with-rate-card-workflow.yml
-    name: SAP BRIM Build a Pricing Plan with a Rate Card
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-provision-subscription-workflow.yml
-    name: SAP BRIM Provision a New Subscription
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-simulate-rate-and-charge-workflow.yml
-    name: SAP BRIM Simulate, Rate, and Charge Usage
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-subscription-upgrade-workflow.yml
-    name: SAP BRIM Upgrade or Downgrade a Subscription Plan
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-suspend-and-resume-workflow.yml
-    name: SAP BRIM Suspend and Resume a Subscription
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-update-item-quantity-and-invoice-workflow.yml
-    name: SAP BRIM Update a Subscription Item Quantity and Re-invoice
-  - type: Arazzo
-    url: arazzo/sap-brim-billing-and-revenue-innovation-management-usage-event-rating-poll-workflow.yml
-    name: SAP BRIM Submit a Usage Event and Poll for Rating
-  - type: Portal
-    url: https://api.sap.com
-  - type: OpenAPI
-    url: openapi/_original/sap-brim-convergent-charging-openapi.yml
-  - type: OpenAPI
-    url: openapi/_original/sap-brim-subscription-billing-openapi.yml
-  - type: JSONLD
-    url: json-ld/sap-brim-context.jsonld
-  - type: JSONSchema
-    url: json-schema/sap-brim-subscription-schema.json
-  - type: JSONStructure
-    url: json-structure/sap-brim-subscription-structure.json
-  - type: JSONStructure
-    url: json-structure/sap-brim-rating-request-structure.json
-  - type: SpectralRules
-    url: rules/sap-brim-rules.yml
-  - type: Vocabulary
-    url: vocabulary/sap-brim-vocabulary.yml
-  - type: GettingStarted
-    url: https://help.sap.com/docs/SAP_BRIM/getting-started
-  - type: Authentication
-    url: https://help.sap.com/docs/SAP_BRIM/authentication
-  - type: Support
-    url: https://support.sap.com
-  - type: TermsOfService
-    url: https://www.sap.com/about/legal/terms-of-use.html
-  - type: PrivacyPolicy
-    url: https://www.sap.com/about/legal/privacy.html
-  - type: StatusPage
-    url: https://www.sap.com/about/trust-center/cloud-service-status.html
-  - type: Community
-    url: https://community.sap.com
-  - type: Blog
-    url: https://blogs.sap.com
-  - type: Website
-    url: https://www.sap.com/products/financial-management/billing-revenue-innovation-management.html
-  - type: Documentation
-    url: https://help.sap.com/docs/BRIM
-  - type: SDKs
-    url: https://developers.sap.com/
-  - type: GitHubOrganization
-    url: https://github.com/SAP
-  - type: StackOverflow
-    url: https://stackoverflow.com/questions/tagged/sap
-  - type: Signup
-    url: https://developers.sap.com/
-  - type: YouTube
-    url: https://www.youtube.com/@sapdevs
-  - type: Learning
-    url: https://learning.sap.com/
-  - type: GettingStarted
-    url: https://support.sap.com/en/product/onboarding-resource-center/brim.html
+- type: ParentCompany
+  url: https://apis.io/providers/sap/
+  name: Sap
+  x-relationship: product
+  x-generated-by: sap-family:2026-08-21
+- type: AgenticAccess
+  url: agentic-access/sap-brim-billing-and-revenue-innovation-management-agentic-access.yml
+- type: VulnerabilityDisclosure
+  url: security/sap-brim-billing-and-revenue-innovation-management-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/sap-brim-billing-and-revenue-innovation-management-domain-security.yml
+- type: Authentication
+  url: authentication/sap-brim-billing-and-revenue-innovation-management-authentication.yml
+- type: OAuthScopes
+  url: scopes/sap-brim-billing-and-revenue-innovation-management-scopes.yml
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/sap-brim-billing-and-revenue-innovation-management/overview
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-add-item-and-invoice-workflow.yml
+  name: SAP BRIM Add a Subscription Item and Invoice It
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-authorize-confirm-charge-workflow.yml
+  name: SAP BRIM Authorize and Confirm a Charge Reservation
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-authorize-or-release-workflow.yml
+  name: SAP BRIM Authorize a Charge or Release on Insufficient Balance
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-batch-rate-and-charge-workflow.yml
+  name: SAP BRIM Batch Rate Usage and Charge the Total
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-cancel-and-cleanup-workflow.yml
+  name: SAP BRIM Cancel and Clean Up a Subscription
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-charge-and-refund-workflow.yml
+  name: SAP BRIM Charge an Account and Refund It
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-customer-billing-overview-workflow.yml
+  name: SAP BRIM Customer Billing Overview
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-manual-renewal-invoice-workflow.yml
+  name: SAP BRIM Renew a Subscription and Invoice the New Term
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-prepaid-topup-and-charge-workflow.yml
+  name: SAP BRIM Top Up and Charge a Prepaid Account
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-pricing-plan-with-rate-card-workflow.yml
+  name: SAP BRIM Build a Pricing Plan with a Rate Card
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-provision-subscription-workflow.yml
+  name: SAP BRIM Provision a New Subscription
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-simulate-rate-and-charge-workflow.yml
+  name: SAP BRIM Simulate, Rate, and Charge Usage
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-subscription-upgrade-workflow.yml
+  name: SAP BRIM Upgrade or Downgrade a Subscription Plan
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-suspend-and-resume-workflow.yml
+  name: SAP BRIM Suspend and Resume a Subscription
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-update-item-quantity-and-invoice-workflow.yml
+  name: SAP BRIM Update a Subscription Item Quantity and Re-invoice
+- type: Arazzo
+  url: arazzo/sap-brim-billing-and-revenue-innovation-management-usage-event-rating-poll-workflow.yml
+  name: SAP BRIM Submit a Usage Event and Poll for Rating
+- type: Portal
+  url: https://api.sap.com
+- type: OpenAPI
+  url: openapi/_original/sap-brim-convergent-charging-openapi.yml
+- type: OpenAPI
+  url: openapi/_original/sap-brim-subscription-billing-openapi.yml
+- type: JSONLD
+  url: json-ld/sap-brim-context.jsonld
+- type: JSONSchema
+  url: json-schema/sap-brim-subscription-schema.json
+- type: JSONStructure
+  url: json-structure/sap-brim-subscription-structure.json
+- type: JSONStructure
+  url: json-structure/sap-brim-rating-request-structure.json
+- type: SpectralRules
+  url: rules/sap-brim-rules.yml
+- type: Vocabulary
+  url: vocabulary/sap-brim-vocabulary.yml
+- type: GettingStarted
+  url: https://help.sap.com/docs/SAP_BRIM/getting-started
+- type: Authentication
+  url: https://help.sap.com/docs/SAP_BRIM/authentication
+- type: Support
+  url: https://support.sap.com
+- type: TermsOfService
+  url: https://www.sap.com/about/legal/terms-of-use.html
+- type: PrivacyPolicy
+  url: https://www.sap.com/about/legal/privacy.html
+- type: StatusPage
+  url: https://www.sap.com/about/trust-center/cloud-service-status.html
+- type: Community
+  url: https://community.sap.com
+- type: Blog
+  url: https://blogs.sap.com
+- type: Website
+  url: https://www.sap.com/products/financial-management/billing-revenue-innovation-management.html
+- type: Documentation
+  url: https://help.sap.com/docs/BRIM
+- type: SDKs
+  url: https://developers.sap.com/
+- type: GitHubOrganization
+  url: https://github.com/SAP
+- type: StackOverflow
+  url: https://stackoverflow.com/questions/tagged/sap
+- type: Signup
+  url: https://developers.sap.com/
+- type: YouTube
+  url: https://www.youtube.com/@sapdevs
+- type: Learning
+  url: https://learning.sap.com/
+- type: GettingStarted
+  url: https://support.sap.com/en/product/onboarding-resource-center/brim.html
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
-    url: https://apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
+  url: https://apievangelist.com
+x-parent: sap
+x-relationship: product
