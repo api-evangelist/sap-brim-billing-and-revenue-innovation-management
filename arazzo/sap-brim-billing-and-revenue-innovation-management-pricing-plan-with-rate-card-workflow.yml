@@ -10,8 +10,8 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: convergentChargingApi
-  url: ../openapi/sap-brim-convergent-charging-openapi.yml
+- name: pricingApi
+  url: ../openapi/sap-brim-billing-and-revenue-innovation-management-pricing-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: pricing-plan-with-rate-card

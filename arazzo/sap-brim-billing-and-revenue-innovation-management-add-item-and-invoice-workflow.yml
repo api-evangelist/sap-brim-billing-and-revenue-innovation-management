@@ -12,8 +12,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: subscriptionBillingApi
-  url: ../openapi/sap-brim-subscription-billing-openapi.yml
+- name: billingApi
+  url: ../openapi/sap-brim-billing-and-revenue-innovation-management-billing-api-openapi.yml
+  type: openapi
+- name: subscriptionItemsApi
+  url: ../openapi/sap-brim-billing-and-revenue-innovation-management-subscription-items-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: add-item-and-invoice

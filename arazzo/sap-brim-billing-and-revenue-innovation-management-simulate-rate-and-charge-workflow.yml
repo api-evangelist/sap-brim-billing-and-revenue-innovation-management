@@ -12,8 +12,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: convergentChargingApi
-  url: ../openapi/sap-brim-convergent-charging-openapi.yml
+- name: chargingApi
+  url: ../openapi/sap-brim-billing-and-revenue-innovation-management-charging-api-openapi.yml
+  type: openapi
+- name: ratingApi
+  url: ../openapi/sap-brim-billing-and-revenue-innovation-management-rating-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: simulate-rate-and-charge

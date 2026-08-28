@@ -10,8 +10,8 @@ info:
     can be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: subscriptionBillingApi
-  url: ../openapi/sap-brim-subscription-billing-openapi.yml
+- name: subscriptionsApi
+  url: ../openapi/sap-brim-billing-and-revenue-innovation-management-subscriptions-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: suspend-and-resume
