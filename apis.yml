@@ -2,6 +2,18 @@ name: SAP BRIM (Billing and Revenue Innovation Management)
 description: SAP BRIM (Billing and Revenue Innovation Management) is a comprehensive solution for order-to-cash
   processes, subscription management, usage-based pricing, and revenue management. It enables businesses to manage
   complex billing scenarios, subscription lifecycle, and revenue recognition.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
