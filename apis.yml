@@ -312,6 +312,8 @@ apis:
   humanURL: https://help.sap.com/docs/SAP_CONVERGENT_CHARGING
   baseURL: https://api.sap.com/convergent-charging
   tags:
+  - Ratings
+  tags_raw:
   - Rating
   properties:
   - type: OpenAPI
