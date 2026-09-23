@@ -1,32 +1,40 @@
 {
   "provider": "sap-brim-billing-and-revenue-innovation-management",
   "sources": [
-    "sap-brim-billing-and-revenue-innovation-management-balances-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-billing-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-charging-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-customers-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-plans-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-pricing-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-rating-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-subscription-items-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-subscriptions-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-usage-events-api-openapi.yml"
+    "_original/sap-brim-convergent-charging-openapi.yml",
+    "_original/sap-brim-subscription-billing-openapi.yml"
   ],
   "outputs": [
     "sap-brim-billing-and-revenue-innovation-management-balances-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-billing-api-openapi.yml",
     "sap-brim-billing-and-revenue-innovation-management-charging-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-customers-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-plans-api-openapi.yml",
     "sap-brim-billing-and-revenue-innovation-management-pricing-api-openapi.yml",
     "sap-brim-billing-and-revenue-innovation-management-rating-api-openapi.yml",
+    "sap-brim-billing-and-revenue-innovation-management-usage-events-api-openapi.yml",
+    "sap-brim-billing-and-revenue-innovation-management-billing-api-openapi.yml",
+    "sap-brim-billing-and-revenue-innovation-management-customers-api-openapi.yml",
+    "sap-brim-billing-and-revenue-innovation-management-plans-api-openapi.yml",
     "sap-brim-billing-and-revenue-innovation-management-subscription-items-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-subscriptions-api-openapi.yml",
-    "sap-brim-billing-and-revenue-innovation-management-usage-events-api-openapi.yml"
+    "sap-brim-billing-and-revenue-innovation-management-subscriptions-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sap-brim-convergent-charging-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sap-brim-subscription-billing-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "sap-brim-billing-and-revenue-innovation-management-balances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-brim-billing-and-revenue-innovation-management-billing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-brim-billing-and-revenue-innovation-management-charging-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-brim-billing-and-revenue-innovation-management-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-brim-billing-and-revenue-innovation-management-plans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-brim-billing-and-revenue-innovation-management-pricing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-brim-billing-and-revenue-innovation-management-rating-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-brim-billing-and-revenue-innovation-management-subscription-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-brim-billing-and-revenue-innovation-management-subscriptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-brim-billing-and-revenue-innovation-management-usage-events-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

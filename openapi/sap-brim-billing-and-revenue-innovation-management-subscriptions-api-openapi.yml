@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Subscriptions API
-  description: API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.
+  title: SAP BRIM (Billing and Revenue Innovation Management) SAP…
+  description: API for managing subscription lifecycle within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports creation, modification, renewal, suspension, and cancellation of subscriptions across various billing frequencies and subscription models including recurring, usage-based, and hybrid subscriptions.
   version: 1.0.0
   contact:
     name: SAP Support
@@ -12,9 +12,9 @@ info:
     url: https://www.sap.com/about/legal/terms-of-use.html
   termsOfService: https://www.sap.com/about/legal/terms-of-use.html
 servers:
-- url: https://api.sap.com/convergent-charging/v1
+- url: https://api.sap.com/subscription-billing/v1
   description: SAP API Business Hub - Production
-- url: https://sandbox.api.sap.com/convergent-charging/v1
+- url: https://sandbox.api.sap.com/subscription-billing/v1
   description: SAP API Business Hub - Sandbox
 security:
 - OAuth2:
@@ -392,6 +392,12 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     InternalServerError:
       description: Internal server error
       content:
@@ -404,12 +410,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required or invalid credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Resource not found
       content:
@@ -417,6 +417,62 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    SubscriptionItem:
+      type: object
+      properties:
+        itemId:
+          type: string
+        productId:
+          type: string
+        productName:
+          type: string
+        description:
+          type: string
+        quantity:
+          type: integer
+          minimum: 1
+        unitPrice:
+          $ref: '#/components/schemas/MonetaryAmount'
+        totalPrice:
+          $ref: '#/components/schemas/MonetaryAmount'
+        billingType:
+          type: string
+          enum:
+          - RECURRING
+          - ONE_TIME
+          - USAGE_BASED
+        includedUnits:
+          type: integer
+          description: Number of units included in the base price
+        overageRate:
+          type: number
+          format: double
+          description: Rate per unit above the included quantity
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
     SubscriptionCreate:
       type: object
       required:
@@ -475,6 +531,20 @@ components:
           type: string
           pattern: ^[A-Z]{3}$
           description: ISO 4217 currency code
+    SubscriptionUpdate:
+      type: object
+      properties:
+        autoRenew:
+          type: boolean
+        paymentMethod:
+          type: string
+        endDate:
+          type: string
+          format: date
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
     Subscription:
       type: object
       properties:
@@ -551,76 +621,6 @@ components:
         modifiedAt:
           type: string
           format: date-time
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            target:
-              type: string
-            details:
-              type: array
-              items:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  message:
-                    type: string
-    SubscriptionUpdate:
-      type: object
-      properties:
-        autoRenew:
-          type: boolean
-        paymentMethod:
-          type: string
-        endDate:
-          type: string
-          format: date
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-    SubscriptionItem:
-      type: object
-      properties:
-        itemId:
-          type: string
-        productId:
-          type: string
-        productName:
-          type: string
-        description:
-          type: string
-        quantity:
-          type: integer
-          minimum: 1
-        unitPrice:
-          $ref: '#/components/schemas/MonetaryAmount'
-        totalPrice:
-          $ref: '#/components/schemas/MonetaryAmount'
-        billingType:
-          type: string
-          enum:
-          - RECURRING
-          - ONE_TIME
-          - USAGE_BASED
-        includedUnits:
-          type: integer
-          description: Number of units included in the base price
-        overageRate:
-          type: number
-          format: double
-          description: Rate per unit above the included quantity
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
   parameters:
     SubscriptionId:
       name: subscriptionId
@@ -654,8 +654,8 @@ components:
         clientCredentials:
           tokenUrl: https://auth.sap.com/oauth/token
           scopes:
-            read: Read access to charging and rating resources
-            write: Write access to charging and rating resources
+            read: Read access to subscription resources
+            write: Write access to subscription resources
     ApiKeyAuth:
       type: apiKey
       in: header

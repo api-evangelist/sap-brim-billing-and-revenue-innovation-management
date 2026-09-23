@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Balances Charging API
+  title: SAP BRIM (Billing and Revenue Innovation Management) SAP…
   description: API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.
   version: 1.0.0
   contact:
@@ -90,7 +90,7 @@ paths:
   /charging/authorize:
     post:
       operationId: authorizeCharge
-      summary: SAP BRIM (Billing and Revenue Innovation Management) Authorize a charge reservation
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Authorize a charge…
       description: Reserves an amount against a prepaid balance without executing the final charge. The reservation can later be confirmed or released.
       tags:
       - Charging
@@ -122,7 +122,7 @@ paths:
   /charging/authorize/{authorizationId}/confirm:
     post:
       operationId: confirmAuthorization
-      summary: SAP BRIM (Billing and Revenue Innovation Management) Confirm a charge authorization
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Confirm a charge…
       description: Confirms a previously created authorization, converting the reserved amount into a final charge.
       tags:
       - Charging
@@ -153,7 +153,7 @@ paths:
   /charging/authorize/{authorizationId}/release:
     post:
       operationId: releaseAuthorization
-      summary: SAP BRIM (Billing and Revenue Innovation Management) Release a charge authorization
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Release a charge…
       description: Releases a previously created authorization, restoring the reserved amount to the available balance.
       tags:
       - Charging
@@ -181,7 +181,86 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    RefundResponse:
+      type: object
+      properties:
+        refundId:
+          type: string
+          format: uuid
+        originalChargeId:
+          type: string
+          format: uuid
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        status:
+          type: string
+          enum:
+          - COMPLETED
+          - PENDING
+        refundedAt:
+          type: string
+          format: date-time
+    RefundRequest:
+      type: object
+      required:
+      - originalChargeId
+      properties:
+        originalChargeId:
+          type: string
+          format: uuid
+          description: Identifier of the original charge to refund
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        reason:
+          type: string
+          description: Reason for the refund
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
     AuthorizationRequest:
       type: object
       required:
@@ -237,41 +316,32 @@ components:
           type: string
           pattern: ^[A-Z]{3}$
           description: ISO 4217 currency code
-    ErrorResponse:
+    ChargingResponse:
       type: object
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            target:
-              type: string
-            details:
-              type: array
-              items:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  message:
-                    type: string
-    RefundRequest:
-      type: object
-      required:
-      - originalChargeId
-      properties:
-        originalChargeId:
+        chargeId:
           type: string
           format: uuid
-          description: Identifier of the original charge to refund
+        accountId:
+          type: string
         amount:
           $ref: '#/components/schemas/MonetaryAmount'
-        reason:
+        chargeType:
           type: string
-          description: Reason for the refund
+          enum:
+          - PREPAID
+          - POSTPAID
+        status:
+          type: string
+          enum:
+          - COMPLETED
+          - PENDING
+          - FAILED
+        remainingBalance:
+          $ref: '#/components/schemas/MonetaryAmount'
+        chargedAt:
+          type: string
+          format: date-time
     ChargingRequest:
       type: object
       required:
@@ -301,76 +371,6 @@ components:
           type: object
           additionalProperties:
             type: string
-    ChargingResponse:
-      type: object
-      properties:
-        chargeId:
-          type: string
-          format: uuid
-        accountId:
-          type: string
-        amount:
-          $ref: '#/components/schemas/MonetaryAmount'
-        chargeType:
-          type: string
-          enum:
-          - PREPAID
-          - POSTPAID
-        status:
-          type: string
-          enum:
-          - COMPLETED
-          - PENDING
-          - FAILED
-        remainingBalance:
-          $ref: '#/components/schemas/MonetaryAmount'
-        chargedAt:
-          type: string
-          format: date-time
-    RefundResponse:
-      type: object
-      properties:
-        refundId:
-          type: string
-          format: uuid
-        originalChargeId:
-          type: string
-          format: uuid
-        amount:
-          $ref: '#/components/schemas/MonetaryAmount'
-        status:
-          type: string
-          enum:
-          - COMPLETED
-          - PENDING
-        refundedAt:
-          type: string
-          format: date-time
-  responses:
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required or invalid credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     AuthorizationId:
       name: authorizationId

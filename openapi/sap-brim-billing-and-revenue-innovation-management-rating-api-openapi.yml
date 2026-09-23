@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Rating API
+  title: SAP BRIM (Billing and Revenue Innovation Management) SAP…
   description: API for real-time charging and rating of usage-based services within the SAP BRIM (Billing and Revenue Innovation Management) suite. Supports complex pricing models, prepaid and postpaid scenarios, tiered and volume-based pricing, and real-time balance management.
   version: 1.0.0
   contact:
@@ -58,7 +58,7 @@ paths:
   /rating/rate-batch:
     post:
       operationId: rateUsageEventBatch
-      summary: SAP BRIM (Billing and Revenue Innovation Management) Rate a batch of usage events
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Rate a batch of usage…
       description: Rates multiple usage events in a single request for high-throughput scenarios. Returns individual rating results for each event.
       tags:
       - Rating
@@ -109,7 +109,7 @@ paths:
   /rating/simulate:
     post:
       operationId: simulateRating
-      summary: SAP BRIM (Billing and Revenue Innovation Management) Simulate rating without committing
+      summary: SAP BRIM (Billing and Revenue Innovation Management) Simulate rating without…
       description: Simulates the rating of a usage event without persisting the result. Useful for quote generation and what-if analysis.
       tags:
       - Rating
@@ -134,26 +134,8 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication required or invalid credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
       content:
         application/json:
           schema:
@@ -164,7 +146,46 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
     RatingResponse:
       type: object
       properties:
@@ -213,27 +234,6 @@ components:
                 format: double
               tierCharge:
                 $ref: '#/components/schemas/MonetaryAmount'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            target:
-              type: string
-            details:
-              type: array
-              items:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  message:
-                    type: string
     MonetaryAmount:
       type: object
       required:
