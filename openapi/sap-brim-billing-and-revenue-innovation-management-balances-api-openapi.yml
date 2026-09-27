@@ -90,9 +90,17 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
+  parameters:
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Unique identifier of the subscriber account
+      schema:
+        type: string
   responses:
-    Unauthorized:
-      description: Authentication required or invalid credentials
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -103,14 +111,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
+    Unauthorized:
+      description: Authentication required or invalid credentials
       content:
         application/json:
           schema:
@@ -172,14 +180,6 @@ components:
           type: string
           pattern: ^[A-Z]{3}$
           description: ISO 4217 currency code
-  parameters:
-    AccountId:
-      name: accountId
-      in: path
-      required: true
-      description: Unique identifier of the subscriber account
-      schema:
-        type: string
   securitySchemes:
     OAuth2:
       type: oauth2

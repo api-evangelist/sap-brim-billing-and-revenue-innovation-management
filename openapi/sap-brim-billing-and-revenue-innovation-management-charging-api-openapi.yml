@@ -181,32 +181,36 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required or invalid credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ChargingRequest:
+      type: object
+      required:
+      - accountId
+      - amount
+      - chargeType
+      properties:
+        accountId:
+          type: string
+          description: Account to charge
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        chargeType:
+          type: string
+          enum:
+          - PREPAID
+          - POSTPAID
+          description: Charging model
+        serviceType:
+          type: string
+        description:
+          type: string
+        externalReference:
+          type: string
+          description: External transaction reference
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
     RefundResponse:
       type: object
       properties:
@@ -226,20 +230,55 @@ components:
         refundedAt:
           type: string
           format: date-time
-    RefundRequest:
+    AuthorizationResponse:
       type: object
-      required:
-      - originalChargeId
       properties:
-        originalChargeId:
+        authorizationId:
           type: string
           format: uuid
-          description: Identifier of the original charge to refund
+        accountId:
+          type: string
+        reservedAmount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        status:
+          type: string
+          enum:
+          - AUTHORIZED
+          - EXPIRED
+          - CONFIRMED
+          - RELEASED
+        expiresAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+    ChargingResponse:
+      type: object
+      properties:
+        chargeId:
+          type: string
+          format: uuid
+        accountId:
+          type: string
         amount:
           $ref: '#/components/schemas/MonetaryAmount'
-        reason:
+        chargeType:
           type: string
-          description: Reason for the refund
+          enum:
+          - PREPAID
+          - POSTPAID
+        status:
+          type: string
+          enum:
+          - COMPLETED
+          - PENDING
+          - FAILED
+        remainingBalance:
+          $ref: '#/components/schemas/MonetaryAmount'
+        chargedAt:
+          type: string
+          format: date-time
     ErrorResponse:
       type: object
       properties:
@@ -279,29 +318,20 @@ components:
           type: string
         description:
           type: string
-    AuthorizationResponse:
+    RefundRequest:
       type: object
+      required:
+      - originalChargeId
       properties:
-        authorizationId:
+        originalChargeId:
           type: string
           format: uuid
-        accountId:
-          type: string
-        reservedAmount:
+          description: Identifier of the original charge to refund
+        amount:
           $ref: '#/components/schemas/MonetaryAmount'
-        status:
+        reason:
           type: string
-          enum:
-          - AUTHORIZED
-          - EXPIRED
-          - CONFIRMED
-          - RELEASED
-        expiresAt:
-          type: string
-          format: date-time
-        createdAt:
-          type: string
-          format: date-time
+          description: Reason for the refund
     MonetaryAmount:
       type: object
       required:
@@ -316,61 +346,6 @@ components:
           type: string
           pattern: ^[A-Z]{3}$
           description: ISO 4217 currency code
-    ChargingResponse:
-      type: object
-      properties:
-        chargeId:
-          type: string
-          format: uuid
-        accountId:
-          type: string
-        amount:
-          $ref: '#/components/schemas/MonetaryAmount'
-        chargeType:
-          type: string
-          enum:
-          - PREPAID
-          - POSTPAID
-        status:
-          type: string
-          enum:
-          - COMPLETED
-          - PENDING
-          - FAILED
-        remainingBalance:
-          $ref: '#/components/schemas/MonetaryAmount'
-        chargedAt:
-          type: string
-          format: date-time
-    ChargingRequest:
-      type: object
-      required:
-      - accountId
-      - amount
-      - chargeType
-      properties:
-        accountId:
-          type: string
-          description: Account to charge
-        amount:
-          $ref: '#/components/schemas/MonetaryAmount'
-        chargeType:
-          type: string
-          enum:
-          - PREPAID
-          - POSTPAID
-          description: Charging model
-        serviceType:
-          type: string
-        description:
-          type: string
-        externalReference:
-          type: string
-          description: External transaction reference
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
   parameters:
     AuthorizationId:
       name: authorizationId
@@ -379,6 +354,31 @@ components:
       description: Unique identifier of the charge authorization
       schema:
         type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -232,32 +232,132 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication required or invalid credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 20
+        minimum: 1
+        maximum: 100
+    PlanId:
+      name: planId
+      in: path
+      required: true
+      description: Unique identifier of the pricing plan
+      schema:
+        type: string
+    Offset:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   schemas:
+    PricingPlanCreate:
+      type: object
+      required:
+      - name
+      - serviceType
+      - pricingModel
+      - effectiveFrom
+      - currency
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        serviceType:
+          type: string
+        pricingModel:
+          type: string
+          enum:
+          - FLAT
+          - TIERED
+          - VOLUME
+          - STAIRCASE
+          - PERCENTAGE
+        effectiveFrom:
+          type: string
+          format: date
+        effectiveTo:
+          type: string
+          format: date
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+    RateCard:
+      type: object
+      properties:
+        rateCardId:
+          type: string
+        name:
+          type: string
+        unit:
+          type: string
+          description: Unit of measurement
+        baseRate:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingTier'
+        effectiveFrom:
+          type: string
+          format: date
+        effectiveTo:
+          type: string
+          format: date
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+    RateCardCreate:
+      type: object
+      required:
+      - name
+      - unit
+      - baseRate
+      properties:
+        name:
+          type: string
+        unit:
+          type: string
+        baseRate:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingTier'
+        effectiveFrom:
+          type: string
+          format: date
+        effectiveTo:
+          type: string
+          format: date
     PricingPlan:
       type: object
       properties:
@@ -302,50 +402,6 @@ components:
         modifiedAt:
           type: string
           format: date-time
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            target:
-              type: string
-            details:
-              type: array
-              items:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  message:
-                    type: string
-    RateCard:
-      type: object
-      properties:
-        rateCardId:
-          type: string
-        name:
-          type: string
-        unit:
-          type: string
-          description: Unit of measurement
-        baseRate:
-          type: number
-          format: double
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/PricingTier'
-        effectiveFrom:
-          type: string
-          format: date
-        effectiveTo:
-          type: string
-          format: date
     MonetaryAmount:
       type: object
       required:
@@ -360,62 +416,6 @@ components:
           type: string
           pattern: ^[A-Z]{3}$
           description: ISO 4217 currency code
-    RateCardCreate:
-      type: object
-      required:
-      - name
-      - unit
-      - baseRate
-      properties:
-        name:
-          type: string
-        unit:
-          type: string
-        baseRate:
-          type: number
-          format: double
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/PricingTier'
-        effectiveFrom:
-          type: string
-          format: date
-        effectiveTo:
-          type: string
-          format: date
-    PricingPlanCreate:
-      type: object
-      required:
-      - name
-      - serviceType
-      - pricingModel
-      - effectiveFrom
-      - currency
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        serviceType:
-          type: string
-        pricingModel:
-          type: string
-          enum:
-          - FLAT
-          - TIERED
-          - VOLUME
-          - STAIRCASE
-          - PERCENTAGE
-        effectiveFrom:
-          type: string
-          format: date
-        effectiveTo:
-          type: string
-          format: date
-        currency:
-          type: string
-          pattern: ^[A-Z]{3}$
     PricingTier:
       type: object
       required:
@@ -436,31 +436,31 @@ components:
           format: double
         flatFee:
           $ref: '#/components/schemas/MonetaryAmount'
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        default: 20
-        minimum: 1
-        maximum: 100
-    Offset:
-      name: offset
-      in: query
-      description: Number of items to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    PlanId:
-      name: planId
-      in: path
-      required: true
-      description: Unique identifier of the pricing plan
-      schema:
-        type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2
