@@ -171,40 +171,9 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        default: 20
-        minimum: 1
-        maximum: 100
-    PlanId:
-      name: planId
-      in: path
-      required: true
-      description: Unique identifier of the subscription plan
-      schema:
-        type: string
-    Offset:
-      name: offset
-      in: query
-      description: Number of items to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
   responses:
     NotFound:
       description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
       content:
         application/json:
           schema:
@@ -221,28 +190,49 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
+    PlanCreate:
       type: object
+      required:
+      - name
+      - billingFrequency
+      - price
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            target:
-              type: string
-            details:
-              type: array
-              items:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  message:
-                    type: string
+        name:
+          type: string
+        description:
+          type: string
+        billingFrequency:
+          type: string
+          enum:
+          - MONTHLY
+          - QUARTERLY
+          - SEMI_ANNUAL
+          - ANNUAL
+          - CUSTOM
+        price:
+          $ref: '#/components/schemas/MonetaryAmount'
+        setupFee:
+          $ref: '#/components/schemas/MonetaryAmount'
+        trialPeriodDays:
+          type: integer
+          minimum: 0
+          default: 0
+        contractTermMonths:
+          type: integer
+        autoRenewDefault:
+          type: boolean
+          default: true
+        features:
+          type: array
+          items:
+            type: string
     Plan:
       type: object
       properties:
@@ -306,6 +296,27 @@ components:
         modifiedAt:
           type: string
           format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
     MonetaryAmount:
       type: object
       required:
@@ -319,42 +330,31 @@ components:
           type: string
           pattern: ^[A-Z]{3}$
           description: ISO 4217 currency code
-    PlanCreate:
-      type: object
-      required:
-      - name
-      - billingFrequency
-      - price
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        billingFrequency:
-          type: string
-          enum:
-          - MONTHLY
-          - QUARTERLY
-          - SEMI_ANNUAL
-          - ANNUAL
-          - CUSTOM
-        price:
-          $ref: '#/components/schemas/MonetaryAmount'
-        setupFee:
-          $ref: '#/components/schemas/MonetaryAmount'
-        trialPeriodDays:
-          type: integer
-          minimum: 0
-          default: 0
-        contractTermMonths:
-          type: integer
-        autoRenewDefault:
-          type: boolean
-          default: true
-        features:
-          type: array
-          items:
-            type: string
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 20
+        minimum: 1
+        maximum: 100
+    Offset:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    PlanId:
+      name: planId
+      in: path
+      required: true
+      description: Unique identifier of the subscription plan
+      schema:
+        type: string
   securitySchemes:
     OAuth2:
       type: oauth2
