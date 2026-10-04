@@ -232,84 +232,32 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required or invalid credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    PlanId:
+      name: planId
+      in: path
+      required: true
+      description: Unique identifier of the pricing plan
+      schema:
+        type: string
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 20
+        minimum: 1
+        maximum: 100
+    Offset:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   schemas:
-    PricingTier:
-      type: object
-      required:
-      - fromQuantity
-      - ratePerUnit
-      properties:
-        tierName:
-          type: string
-        fromQuantity:
-          type: number
-          format: double
-        toQuantity:
-          type: number
-          format: double
-          description: Upper bound of the tier (null for unlimited)
-        ratePerUnit:
-          type: number
-          format: double
-        flatFee:
-          $ref: '#/components/schemas/MonetaryAmount'
-    PricingPlanCreate:
-      type: object
-      required:
-      - name
-      - serviceType
-      - pricingModel
-      - effectiveFrom
-      - currency
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        serviceType:
-          type: string
-        pricingModel:
-          type: string
-          enum:
-          - FLAT
-          - TIERED
-          - VOLUME
-          - STAIRCASE
-          - PERCENTAGE
-        effectiveFrom:
-          type: string
-          format: date
-        effectiveTo:
-          type: string
-          format: date
-        currency:
-          type: string
-          pattern: ^[A-Z]{3}$
     RateCard:
       type: object
       properties:
@@ -333,27 +281,64 @@ components:
         effectiveTo:
           type: string
           format: date
-    ErrorResponse:
+    RateCardCreate:
       type: object
+      required:
+      - name
+      - unit
+      - baseRate
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            target:
-              type: string
-            details:
-              type: array
-              items:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  message:
-                    type: string
+        name:
+          type: string
+        unit:
+          type: string
+        baseRate:
+          type: number
+          format: double
+        tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingTier'
+        effectiveFrom:
+          type: string
+          format: date
+        effectiveTo:
+          type: string
+          format: date
+    MonetaryAmount:
+      type: object
+      required:
+      - value
+      - currency
+      properties:
+        value:
+          type: number
+          format: double
+          description: The monetary value
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 currency code
+    PricingTier:
+      type: object
+      required:
+      - fromQuantity
+      - ratePerUnit
+      properties:
+        tierName:
+          type: string
+        fromQuantity:
+          type: number
+          format: double
+        toQuantity:
+          type: number
+          format: double
+          description: Upper bound of the tier (null for unlimited)
+        ratePerUnit:
+          type: number
+          format: double
+        flatFee:
+          $ref: '#/components/schemas/MonetaryAmount'
     PricingPlan:
       type: object
       properties:
@@ -398,69 +383,84 @@ components:
         modifiedAt:
           type: string
           format: date-time
-    MonetaryAmount:
-      type: object
-      required:
-      - value
-      - currency
-      properties:
-        value:
-          type: number
-          format: double
-          description: The monetary value
-        currency:
-          type: string
-          pattern: ^[A-Z]{3}$
-          description: ISO 4217 currency code
-    RateCardCreate:
+    PricingPlanCreate:
       type: object
       required:
       - name
-      - unit
-      - baseRate
+      - serviceType
+      - pricingModel
+      - effectiveFrom
+      - currency
       properties:
         name:
           type: string
-        unit:
+        description:
           type: string
-        baseRate:
-          type: number
-          format: double
-        tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/PricingTier'
+        serviceType:
+          type: string
+        pricingModel:
+          type: string
+          enum:
+          - FLAT
+          - TIERED
+          - VOLUME
+          - STAIRCASE
+          - PERCENTAGE
         effectiveFrom:
           type: string
           format: date
         effectiveTo:
           type: string
           format: date
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        default: 20
-        minimum: 1
-        maximum: 100
-    PlanId:
-      name: planId
-      in: path
-      required: true
-      description: Unique identifier of the pricing plan
-      schema:
-        type: string
-    Offset:
-      name: offset
-      in: query
-      description: Number of items to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            target:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     OAuth2:
       type: oauth2

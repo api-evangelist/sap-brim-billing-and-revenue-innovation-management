@@ -92,14 +92,8 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
@@ -110,76 +104,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    UsageEvent:
-      type: object
-      required:
-      - subscriberId
-      - serviceType
-      - quantity
-      - usageTimestamp
-      properties:
-        externalId:
-          type: string
-          description: External identifier for deduplication
-        subscriberId:
-          type: string
-        serviceType:
-          type: string
-        quantity:
-          type: number
-          format: double
-        unit:
-          type: string
-        usageTimestamp:
-          type: string
-          format: date-time
-        attributes:
-          type: object
-          additionalProperties:
-            type: string
-    UsageEventDetail:
-      type: object
-      properties:
-        eventId:
-          type: string
-          format: uuid
-        externalId:
-          type: string
-        subscriberId:
-          type: string
-        serviceType:
-          type: string
-        quantity:
-          type: number
-          format: double
-        unit:
-          type: string
-        usageTimestamp:
-          type: string
-          format: date-time
-        status:
-          type: string
-          enum:
-          - ACCEPTED
-          - QUEUED
-          - RATED
-          - CHARGED
-          - FAILED
-        ratingResult:
-          $ref: '#/components/schemas/RatingResponse'
-        receivedAt:
-          type: string
-          format: date-time
-        processedAt:
-          type: string
-          format: date-time
     RatingResponse:
       type: object
       properties:
@@ -228,6 +165,83 @@ components:
                 format: double
               tierCharge:
                 $ref: '#/components/schemas/MonetaryAmount'
+    MonetaryAmount:
+      type: object
+      required:
+      - value
+      - currency
+      properties:
+        value:
+          type: number
+          format: double
+          description: The monetary value
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 currency code
+    UsageEventDetail:
+      type: object
+      properties:
+        eventId:
+          type: string
+          format: uuid
+        externalId:
+          type: string
+        subscriberId:
+          type: string
+        serviceType:
+          type: string
+        quantity:
+          type: number
+          format: double
+        unit:
+          type: string
+        usageTimestamp:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+          - ACCEPTED
+          - QUEUED
+          - RATED
+          - CHARGED
+          - FAILED
+        ratingResult:
+          $ref: '#/components/schemas/RatingResponse'
+        receivedAt:
+          type: string
+          format: date-time
+        processedAt:
+          type: string
+          format: date-time
+    UsageEvent:
+      type: object
+      required:
+      - subscriberId
+      - serviceType
+      - quantity
+      - usageTimestamp
+      properties:
+        externalId:
+          type: string
+          description: External identifier for deduplication
+        subscriberId:
+          type: string
+        serviceType:
+          type: string
+        quantity:
+          type: number
+          format: double
+        unit:
+          type: string
+        usageTimestamp:
+          type: string
+          format: date-time
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
     ErrorResponse:
       type: object
       properties:
@@ -249,20 +263,6 @@ components:
                     type: string
                   message:
                     type: string
-    MonetaryAmount:
-      type: object
-      required:
-      - value
-      - currency
-      properties:
-        value:
-          type: number
-          format: double
-          description: The monetary value
-        currency:
-          type: string
-          pattern: ^[A-Z]{3}$
-          description: ISO 4217 currency code
   securitySchemes:
     OAuth2:
       type: oauth2

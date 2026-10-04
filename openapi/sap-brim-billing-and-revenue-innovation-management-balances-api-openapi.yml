@@ -91,14 +91,8 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
@@ -109,8 +103,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
@@ -124,6 +124,20 @@ components:
       schema:
         type: string
   schemas:
+    MonetaryAmount:
+      type: object
+      required:
+      - value
+      - currency
+      properties:
+        value:
+          type: number
+          format: double
+          description: The monetary value
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 currency code
     AccountBalance:
       type: object
       properties:
@@ -166,20 +180,6 @@ components:
                     type: string
                   message:
                     type: string
-    MonetaryAmount:
-      type: object
-      required:
-      - value
-      - currency
-      properties:
-        value:
-          type: number
-          format: double
-          description: The monetary value
-        currency:
-          type: string
-          pattern: ^[A-Z]{3}$
-          description: ISO 4217 currency code
   securitySchemes:
     OAuth2:
       type: oauth2

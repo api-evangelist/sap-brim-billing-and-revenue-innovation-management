@@ -100,14 +100,8 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
@@ -118,12 +112,44 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
+    InternalServerError:
+      description: Internal server error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      required: true
+      description: Unique identifier of the subscription
+      schema:
+        type: string
+        format: uuid
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        default: 20
+        minimum: 1
+        maximum: 100
+    Offset:
+      name: offset
+      in: query
+      description: Number of items to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   schemas:
     BillingRecord:
       type: object
@@ -178,6 +204,19 @@ components:
                 $ref: '#/components/schemas/MonetaryAmount'
               amount:
                 $ref: '#/components/schemas/MonetaryAmount'
+    MonetaryAmount:
+      type: object
+      required:
+      - value
+      - currency
+      properties:
+        value:
+          type: number
+          format: double
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 currency code
     ErrorResponse:
       type: object
       properties:
@@ -199,45 +238,6 @@ components:
                     type: string
                   message:
                     type: string
-    MonetaryAmount:
-      type: object
-      required:
-      - value
-      - currency
-      properties:
-        value:
-          type: number
-          format: double
-        currency:
-          type: string
-          pattern: ^[A-Z]{3}$
-          description: ISO 4217 currency code
-  parameters:
-    SubscriptionId:
-      name: subscriptionId
-      in: path
-      required: true
-      description: Unique identifier of the subscription
-      schema:
-        type: string
-        format: uuid
-    Limit:
-      name: limit
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        default: 20
-        minimum: 1
-        maximum: 100
-    Offset:
-      name: offset
-      in: query
-      description: Number of items to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
   securitySchemes:
     OAuth2:
       type: oauth2
