@@ -1,0 +1,78 @@
+slug: sap-brim-billing-and-revenue-innovation-management
+provider: SAP BRIM (Billing and Revenue Innovation Management)
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 7
+edges:
+- tag: Billing
+  spec_file: sap-brim-billing-and-revenue-innovation-management-billing-api-openapi.yml
+  capability_id: BC-4250.30
+  capability_id_l1: BC-4250
+  capability_name: Invoicing & Statement Management
+  confidence: 0.9
+  evidence: POST /subscriptions/{subscriptionId}/generate-invoice generateInvoice; GET /subscriptions/{subscriptionId}/billing-history
+  reason: Invoice generation and billing history for subscriptions is squarely subscription invoicing
+    and statement management.
+- tag: Subscriptions
+  spec_file: sap-brim-billing-and-revenue-innovation-management-subscriptions-api-openapi.yml
+  capability_id: BC-4240
+  capability_id_l1: BC-4240
+  capability_name: Subscription Lifecycle Management
+  confidence: 0.9
+  evidence: '"Activate a subscription", "Suspend a subscription", "Cancel a subscription", "Renew a subscription",
+    "Change subscription plan"'
+  reason: Full subscription lifecycle surface spanning provisioning, modification, renewal and cancellation;
+    L1 is the honest level.
+- tag: Charging
+  spec_file: sap-brim-billing-and-revenue-innovation-management-charging-api-openapi.yml
+  capability_id: BC-4250.20
+  capability_id_l1: BC-4250
+  capability_name: Rating & Charging
+  confidence: 0.88
+  evidence: '"API for real-time charging and rating of usage-based services"; operations "Charge an account",
+    "Authorize a charge", "Refund a previous charge"'
+  reason: Operations apply tariffs and charge/authorise amounts against accounts — rating & charging within
+    subscription billing.
+- tag: Rating
+  spec_file: sap-brim-billing-and-revenue-innovation-management-rating-api-openapi.yml
+  capability_id: BC-4250.20
+  capability_id_l1: BC-4250
+  capability_name: Rating & Charging
+  confidence: 0.88
+  evidence: '"Rate a usage event", "Rate a batch of usage events", "Simulate rating"'
+  reason: Applying usage tariffs to compute charges is exactly rating & charging.
+- tag: Usage Events
+  spec_file: sap-brim-billing-and-revenue-innovation-management-usage-events-api-openapi.yml
+  capability_id: BC-4250.10
+  capability_id_l1: BC-4250
+  capability_name: Usage Metering
+  confidence: 0.85
+  evidence: '"Submit a usage event", "Get usage event status", schema UsageEvent'
+  reason: Ingestion of usage events feeding rating is usage metering.
+- tag: Plans
+  spec_file: sap-brim-billing-and-revenue-innovation-management-plans-api-openapi.yml
+  capability_id: BC-4240.10
+  capability_id_l1: BC-4240
+  capability_name: Plan & Entitlement Design
+  confidence: 0.8
+  evidence: '"List subscription plans", "Create a subscription plan", schemas PlanCreate, Plan'
+  reason: CRUD over subscription plan definitions corresponds to plan and entitlement design.
+- tag: Balances
+  spec_file: sap-brim-billing-and-revenue-innovation-management-balances-api-openapi.yml
+  capability_id: BC-4250.40
+  capability_id_l1: BC-4250
+  capability_name: Payment Collection & Dunning
+  confidence: 0.7
+  evidence: POST /balances/{accountId}/topup topUpBalance; 'real-time charging and rating of usage-based
+    services ... prepaid and postpaid scenarios ... real-time balance management'
+  reason: Prepaid account balance and top-up in a usage-based charging engine — payment/collection side
+    of subscription billing; sub-capability choice slightly uncertain versus rating.
