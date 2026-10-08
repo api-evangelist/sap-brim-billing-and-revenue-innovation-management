@@ -471,6 +471,12 @@ apis:
   - type: Compliance Guide
     url: https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance
 common:
+- type: Plans
+  url: plans/sap-brim-billing-and-revenue-innovation-management-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/sap-brim-billing-and-revenue-innovation-management-rate-limits.yml
+- type: FinOps
+  url: finops/sap-brim-billing-and-revenue-innovation-management-finops.yml
 - type: CapabilityMap
   url: capabilities/sap-brim-billing-and-revenue-innovation-management-capability-edges.yml
   name: SAP BRIM (Billing and Revenue Innovation Management) Business Capability Map
