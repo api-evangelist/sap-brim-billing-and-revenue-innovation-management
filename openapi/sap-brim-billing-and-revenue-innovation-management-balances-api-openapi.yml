@@ -90,75 +90,7 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication required or invalid credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    AccountId:
-      name: accountId
-      in: path
-      required: true
-      description: Unique identifier of the subscriber account
-      schema:
-        type: string
   schemas:
-    MonetaryAmount:
-      type: object
-      required:
-      - value
-      - currency
-      properties:
-        value:
-          type: number
-          format: double
-          description: The monetary value
-        currency:
-          type: string
-          pattern: ^[A-Z]{3}$
-          description: ISO 4217 currency code
-    AccountBalance:
-      type: object
-      properties:
-        accountId:
-          type: string
-        accountType:
-          type: string
-          enum:
-          - PREPAID
-          - POSTPAID
-        availableBalance:
-          $ref: '#/components/schemas/MonetaryAmount'
-        reservedAmount:
-          $ref: '#/components/schemas/MonetaryAmount'
-        totalBalance:
-          $ref: '#/components/schemas/MonetaryAmount'
-        creditLimit:
-          $ref: '#/components/schemas/MonetaryAmount'
-        lastUpdated:
-          type: string
-          format: date-time
     ErrorResponse:
       type: object
       properties:
@@ -180,6 +112,74 @@ components:
                     type: string
                   message:
                     type: string
+    AccountBalance:
+      type: object
+      properties:
+        accountId:
+          type: string
+        accountType:
+          type: string
+          enum:
+          - PREPAID
+          - POSTPAID
+        availableBalance:
+          $ref: '#/components/schemas/MonetaryAmount'
+        reservedAmount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        totalBalance:
+          $ref: '#/components/schemas/MonetaryAmount'
+        creditLimit:
+          $ref: '#/components/schemas/MonetaryAmount'
+        lastUpdated:
+          type: string
+          format: date-time
+    MonetaryAmount:
+      type: object
+      required:
+      - value
+      - currency
+      properties:
+        value:
+          type: number
+          format: double
+          description: The monetary value
+        currency:
+          type: string
+          pattern: ^[A-Z]{3}$
+          description: ISO 4217 currency code
+  responses:
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Unique identifier of the subscriber account
+      schema:
+        type: string
   securitySchemes:
     OAuth2:
       type: oauth2
