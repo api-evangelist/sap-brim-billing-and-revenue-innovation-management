@@ -1,4 +1,4 @@
-# SAP BRIM (Billing and Revenue Innovation Management) (sap-brim-billing-and-revenue-innovation-management)
+# SAP BRIM (Billing and Revenue Innovation Management)
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,220 +66,239 @@
 
 SAP BRIM (Billing and Revenue Innovation Management) is a comprehensive solution for order-to-cash processes, subscription management, usage-based pricing, and revenue management. It enables businesses to manage complex billing scenarios, subscription lifecycle, and revenue recognition.
 
-**APIs.json:** [https://www.sap.com/products/financial-management/billing-revenue-innovation-mgmt.html](https://www.sap.com/products/financial-management/billing-revenue-innovation-mgmt.html)
+**Areas:** Billing · Enterprise · Order-to-Cash · Revenue Management · SAP · Subscription Management · Usage-Based Pricing
 
-## Tags
+## SAP BRIM (Billing and Revenue Innovation Management) on APIs.io
 
-- Billing
-- Enterprise
-- Order to Cash
-- Revenue Management
-- SAP
-- Subscription Management
-- Usage-Based Pricing
+Everything profiled for SAP BRIM (Billing and Revenue Innovation Management) is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/sap-brim-billing-and-revenue-innovation-management/](https://apis.io/providers/sap-brim-billing-and-revenue-innovation-management/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (11)
 
-- **Created:** 2024-01-15
-- **Modified:** 2026-05-19
+- [SAP Subscription Order Management API](https://apis.io/apis/sap-brim-billing-and-revenue-innovation-management/sap-subscription-order-management-api/) — API for managing subscription-based orders within the SAP BRIM suite, supporting complex offerings that combine physical products, services, and usage-based…
+- [SAP BRIM (Billing and Revenue Innovation Management) Balances API](https://apis.io/apis/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-balances-api/) — Account balance inquiries and adjustments
+- [SAP BRIM (Billing and Revenue Innovation Management) Billing API](https://apis.io/apis/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-billing-api/) — Billing cycle and invoice generation operations
+- [SAP BRIM (Billing and Revenue Innovation Management) Charging API](https://apis.io/apis/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-charging-api/) — Real-time charging operations for prepaid and postpaid accounts
+- [SAP BRIM (Billing and Revenue Innovation Management) Customers API](https://apis.io/apis/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-customers-api/) — Customer account management for subscriptions
+- [SAP BRIM (Billing and Revenue Innovation Management) Plans API](https://apis.io/apis/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-plans-api/) — Subscription plan and offer catalog management
+- [SAP BRIM (Billing and Revenue Innovation Management) Pricing API](https://apis.io/apis/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-pricing-api/) — Management of pricing plans, rate cards, and pricing structures
+- [SAP BRIM (Billing and Revenue Innovation Management) Rating API](https://apis.io/apis/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-rating-api/) — Operations for rating usage events against pricing plans
+- [SAP BRIM (Billing and Revenue Innovation Management) Subscription Items API](https://apis.io/apis/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-subscription-items-api/) — Management of individual items within a subscription
+- [SAP BRIM (Billing and Revenue Innovation Management) Subscriptions API](https://apis.io/apis/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-subscriptions-api/) — Subscription lifecycle management operations
+- [SAP BRIM (Billing and Revenue Innovation Management) Usage Events API](https://apis.io/apis/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-usage-events-api/) — Submission and management of usage event records
 
-## APIs
+### Published properties
 
-### SAP Convergent Charging API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-API for real-time charging and rating of usage-based services. Supports complex pricing models, prepaid and postpaid scenarios.
+#### Arazzo workflows (16)
 
-- **Human URL:** [https://help.sap.com/docs/SAP_CONVERGENT_CHARGING](https://help.sap.com/docs/SAP_CONVERGENT_CHARGING)
-- **Base URL:** `https://api.sap.com/convergent-charging`
+Multi-step workflows that chain operations into a business task.
 
-#### Tags
+- [SAP BRIM Add a Subscription Item and Invoice It](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-add-item-and-invoice-workflow/)
+- [SAP BRIM Authorize and Confirm a Charge Reservation](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-authorize-confirm-charge-workflow/)
+- [SAP BRIM Authorize a Charge or Release on Insufficient Balance](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-authorize-or-release-workflow/)
+- [SAP BRIM Batch Rate Usage and Charge the Total](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-batch-rate-and-charge-workflow/)
+- [SAP BRIM Cancel and Clean Up a Subscription](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-cancel-and-cleanup-workflow/)
+- [SAP BRIM Charge an Account and Refund It](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-charge-and-refund-workflow/)
+- [SAP BRIM Customer Billing Overview](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-customer-billing-overview-workflow/)
+- [SAP BRIM Renew a Subscription and Invoice the New Term](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-manual-renewal-invoice-workflow/)
+- [SAP BRIM Top Up and Charge a Prepaid Account](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-prepaid-topup-and-charge-workflow/)
+- [SAP BRIM Build a Pricing Plan with a Rate Card](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-pricing-plan-with-rate-card-workflow/)
+- [SAP BRIM Provision a New Subscription](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-provision-subscription-workflow/)
+- [SAP BRIM Simulate, Rate, and Charge Usage](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-simulate-rate-and-charge-workflow/)
+- [SAP BRIM Upgrade or Downgrade a Subscription Plan](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-subscription-upgrade-workflow/)
+- [SAP BRIM Suspend and Resume a Subscription](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-suspend-and-resume-workflow/)
+- [SAP BRIM Update a Subscription Item Quantity and Re-invoice](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-update-item-quantity-and-invoice-workflow/)
+- [SAP BRIM Submit a Usage Event and Poll for Rating](https://apis.io/arazzos/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-usage-event-rating-poll-workflow/)
 
-- Charging
-- Rating
-- Real-Time
-- Usage-Based Pricing
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://help.sap.com/docs/SAP_CONVERGENT_CHARGING)
-- [OpenAPI](https://api.sap.com/api/convergent_charging/overview) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sap-brim-convergent-charging-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sap-brim-convergent-charging.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-brim-convergent-charging.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Authentication](https://help.sap.com/docs/SAP_CONVERGENT_CHARGING/authentication)
+- [Sap Brim Billing And Revenue Innovation Management Agentic Access](https://apis.io/agentic-access/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-agentic-access/)
 
-### SAP Convergent Invoicing API
+#### JSON Schema (28)
 
-API for creating, managing, and processing invoices from multiple sources. Supports complex billing scenarios, invoice consolidation, and flexible output formats.
+The data models the API reads and writes.
 
-- **Human URL:** [https://help.sap.com/docs/SAP_CONVERGENT_INVOICING](https://help.sap.com/docs/SAP_CONVERGENT_INVOICING)
-- **Base URL:** `https://api.sap.com/convergent-invoicing`
+- [AccountBalance](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-accountbalance/)
+- [AuthorizationRequest](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-authorizationrequest/)
+- [AuthorizationResponse](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-authorizationresponse/)
+- [BillingRecord](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-billingrecord/)
+- [ChargingRequest](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-chargingrequest/)
+- [ChargingResponse](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-chargingresponse/)
+- [CustomerBillingSummary](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-customerbillingsummary/)
+- [ErrorResponse](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-errorresponse/)
+- [MonetaryAmount](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-monetaryamount/)
+- [Plan](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-plan/)
+- [PlanCreate](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-plancreate/)
+- [PricingPlan](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-pricingplan/)
+- [PricingPlanCreate](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-pricingplancreate/)
+- [PricingTier](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-pricingtier/)
+- [RateCard](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-ratecard/)
+- [RateCardCreate](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-ratecardcreate/)
+- [RatingRequest](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-ratingrequest/)
+- [RatingResponse](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-ratingresponse/)
+- [RefundRequest](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-refundrequest/)
+- [RefundResponse](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-refundresponse/)
+- [Subscription](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-subscription/)
+- [SubscriptionCreate](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-subscriptioncreate/)
+- [SubscriptionItem](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-subscriptionitem/)
+- [SubscriptionItemCreate](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-subscriptionitemcreate/)
+- [SubscriptionUpdate](https://apis.io/schemas/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-subscriptionupdate/)
+- …and 3 more published on APIs.io
 
-#### Tags
+#### JSON Structure (3)
 
-- Billing
-- Invoice Management
-- Invoicing
+Data models expressed in JSON Structure.
 
-#### Properties
+- [Sap Brim Billing And Revenue Innovation Management Structure](https://apis.io/json-structure/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-structure/)
+- [Sap Brim Rating Request Structure](https://apis.io/json-structure/sap-brim-billing-and-revenue-innovation-management/sap-brim-rating-request-structure/)
+- [Sap Brim Subscription Structure](https://apis.io/json-structure/sap-brim-billing-and-revenue-innovation-management/sap-brim-subscription-structure/)
 
-- [Documentation](https://help.sap.com/docs/SAP_CONVERGENT_INVOICING)
-- [OpenAPI](https://api.sap.com/api/convergent_invoicing/overview) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Sandbox](https://api.sap.com/api/convergent_invoicing/tryout)
-- [Postman Collection](collections/sap-brim-convergent-charging.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-brim-convergent-charging.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-brim-subscription-billing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-brim-subscription-billing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### JSON-LD (1)
 
-### SAP Subscription Billing API
+Linked-data contexts for the provider's vocabulary.
 
-API for managing subscription lifecycle, including creation, modification, renewal, and cancellation. Supports various billing frequencies and subscription models.
+- [Sap Brim Context](https://apis.io/jsonld/sap-brim-billing-and-revenue-innovation-management/sap-brim-context/)
 
-- **Human URL:** [https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING](https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING)
-- **Base URL:** `https://api.sap.com/subscription-billing`
+#### Vocabulary (2)
 
-#### Tags
+The provider's domain terms, defined.
 
-- Lifecycle Management
-- Recurring Billing
-- Subscriptions
+- [SAP BRIM (Billing and Revenue Innovation Management) Domain Vocabulary](https://apis.io/vocabularies/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-vocabulary/)
+- [SAP BRIM Vocabulary](https://apis.io/vocabularies/sap-brim-billing-and-revenue-innovation-management/sap-brim-vocabulary/)
 
-#### Properties
+#### Examples (2)
 
-- [Documentation](https://help.sap.com/docs/SAP_SUBSCRIPTION_BILLING)
-- [OpenAPI](https://api.sap.com/api/subscription_billing/overview) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sap-brim-subscription-billing-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sap-brim-subscription-billing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-brim-subscription-billing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [A P I  Console](https://api.sap.com/api/subscription_billing/console)
-- [Reference](https://api.sap.com/package/SAPHybrisRevenueCloud/rest)
-- [Getting Started](https://help.sap.com/doc/13f339973aee49e4a59f153b3c8299d8/2025-12-15/en-US/SAP_Subscription_Billing_API_Guide.pdf)
-- [JSON Schema](json-schema/sap-brim-subscription-schema.json) — [JSON Schema](https://json-schema.org/specification)
+Example requests and responses.
 
-### SAP Contract Accounts Receivable and Payable API
+- [Sap Brim List Subscriptions Example](https://apis.io/examples/sap-brim-billing-and-revenue-innovation-management/sap-brim-list-subscriptions-example/)
+- [Sap Brim Rate Usage Event Example](https://apis.io/examples/sap-brim-billing-and-revenue-innovation-management/sap-brim-rate-usage-event-example/)
 
-API for managing customer accounts, payment processing, dunning, and dispute management. Core component for financial customer relationship management.
+#### Collections (14)
 
-- **Human URL:** [https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE](https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE)
-- **Base URL:** `https://api.sap.com/fica`
+Postman and Open Collection request collections.
 
-#### Tags
+- [SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/open-sap-brim-billing-and-revenue-innovation-management-balances-api/)
+- [SAP BRIM ( and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Billing API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/open-sap-brim-billing-and-revenue-innovation-management-billing-api/)
+- [SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Balances Charging API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/open-sap-brim-billing-and-revenue-innovation-management-charging-api/)
+- [SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Customers API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/open-sap-brim-billing-and-revenue-innovation-management-customers-api/)
+- [SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Plans API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/open-sap-brim-billing-and-revenue-innovation-management-plans-api/)
+- [SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Pricing API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/open-sap-brim-billing-and-revenue-innovation-management-pricing-api/)
+- [SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Rating API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/open-sap-brim-billing-and-revenue-innovation-management-rating-api/)
+- [SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Subscription Items API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/open-sap-brim-billing-and-revenue-innovation-management-subscription-items-api/)
+- [SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Subscriptions API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/open-sap-brim-billing-and-revenue-innovation-management-subscriptions-api/)
+- [SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging Balances Usage Events API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/open-sap-brim-billing-and-revenue-innovation-management-usage-events-api/)
+- [SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/open-sap-brim-convergent-charging/)
+- [SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Subscription Billing API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/open-sap-brim-subscription-billing/)
+- [SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Convergent Charging API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/postman-sap-brim-convergent-charging/)
+- [SAP BRIM (Billing and Revenue Innovation Management) SAP BRIM Subscription Billing API](https://apis.io/collections/sap-brim-billing-and-revenue-innovation-management/postman-sap-brim-subscription-billing/)
 
-- Accounts Receivable
-- Dunning
-- Financial Accounting
-- Payments
+#### Governance rules (2)
 
-#### Properties
+Spectral rulesets for the provider's contracts.
 
-- [Documentation](https://help.sap.com/docs/SAP_CONTRACT_ACCOUNTS_RECEIVABLE_PAYABLE)
-- [OpenAPI](https://api.sap.com/api/fica/overview) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Integration  Guide](https://help.sap.com/docs/SAP_FICA/integration)
-- [Postman Collection](collections/sap-brim-convergent-charging.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-brim-convergent-charging.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-brim-subscription-billing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-brim-subscription-billing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [SAP BRIM (Billing and Revenue Innovation Management) — jsonschema rules](https://apis.io/rules/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-jsonschema-spectral-rules/)
+- [SAP BRIM (Billing and Revenue Innovation Management) — sap brim rules](https://apis.io/rules/sap-brim-billing-and-revenue-innovation-management/sap-brim-rules/)
 
-### SAP BRIM Usage Data Intake API
+#### Security (3)
 
-API for ingesting high-volume usage data from various sources. Supports batch and real-time processing of usage events for rating and billing.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE](https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE)
-- **Base URL:** `https://api.sap.com/usage-data-intake`
+- [Sap Brim Billing And Revenue Innovation Management Authentication](https://apis.io/security/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-authentication/)
+- [Sap Brim Billing And Revenue Innovation Management Domain Security](https://apis.io/security/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-domain-security/)
+- [Sap Brim Billing And Revenue Innovation Management Vulnerability Disclosure](https://apis.io/security/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-vulnerability-disclosure/)
 
-#### Tags
+#### OAuth scopes (1)
 
-- Data Ingestion
-- Mediation
-- Usage Data
+The permissions the API asks for.
 
-#### Properties
+- [Sap Brim Billing And Revenue Innovation Management Scopes](https://apis.io/scopes/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-scopes/)
 
-- [Documentation](https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE)
-- [OpenAPI](https://api.sap.com/api/usage_data_intake/overview) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Technical  Specifications](https://help.sap.com/docs/SAP_BRIM_USAGE_DATA_INTAKE/specs)
-- [Postman Collection](collections/sap-brim-convergent-charging.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-brim-convergent-charging.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-brim-subscription-billing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-brim-subscription-billing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### SAP Revenue Accounting and Reporting API
+Published plans, tiers and prices.
 
-API for revenue recognition according to IFRS 15 and ASC 606 standards. Manages performance obligations, revenue allocation, and compliance reporting.
+- [Sap Brim Billing And Revenue Innovation Management Plans Pricing](https://apis.io/plans/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-plans-pricing/)
 
-- **Human URL:** [https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING](https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING)
-- **Base URL:** `https://api.sap.com/revenue-accounting`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- ASC 606
-- Compliance
-- IFRS 15
-- Revenue Recognition
+- [Sap Brim Billing And Revenue Innovation Management Rate Limits](https://apis.io/rate-limits/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING)
-- [OpenAPI](https://api.sap.com/api/revenue_accounting/overview) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Compliance  Guide](https://help.sap.com/docs/SAP_REVENUE_ACCOUNTING_REPORTING/compliance)
-- [Postman Collection](collections/sap-brim-convergent-charging.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-brim-convergent-charging.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-brim-subscription-billing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-brim-subscription-billing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### SAP Subscription Order Management API
+- [Sap Brim Billing And Revenue Innovation Management Finops](https://apis.io/finops/sap-brim-billing-and-revenue-innovation-management/sap-brim-billing-and-revenue-innovation-management-finops/)
 
-API for managing subscription-based orders within the SAP BRIM suite, supporting complex offerings that combine physical products, services, and usage-based fees with full lifecycle management.
+## Where to find this API
 
-- **Human URL:** [https://help.sap.com/docs/BRIM](https://help.sap.com/docs/BRIM)
-- **Base URL:** `https://api.sap.com/subscription-order-management`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Lifecycle Management
-- Order Management
-- Subscription Orders
-
-#### Properties
-
-- [Documentation](https://help.sap.com/docs/BRIM)
-- [Postman Collection](collections/sap-brim-convergent-charging.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-brim-convergent-charging.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-brim-subscription-billing.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-brim-subscription-billing.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [Portal](https://api.sap.com)
-- [OpenAPI](openapi/sap-brim-convergent-charging-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sap-brim-subscription-billing-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [JSON-LD](json-ld/sap-brim-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/sap-brim-subscription-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/sap-brim-subscription-structure.json)
-- [JSON Structure](json-structure/sap-brim-rating-request-structure.json)
-- [Spectral Rules](rules/sap-brim-rules.yml)
-- [Vocabulary](vocabulary/sap-brim-vocabulary.yml)
-- [Getting Started](https://help.sap.com/docs/SAP_BRIM/getting-started)
-- [Authentication](https://help.sap.com/docs/SAP_BRIM/authentication)
-- [Support](https://support.sap.com)
-- [Terms of Service](https://www.sap.com/about/legal/terms-of-use.html)
-- [Privacy Policy](https://www.sap.com/about/legal/privacy.html)
-- [Status Page](https://www.sap.com/about/trust-center/cloud-service-status.html)
-- [Community](https://community.sap.com)
-- [Blog](https://blogs.sap.com)
 - [Website](https://www.sap.com/products/financial-management/billing-revenue-innovation-management.html)
 - [Documentation](https://help.sap.com/docs/BRIM)
-- [S D Ks](https://developers.sap.com/)
-- [GitHub Organization](https://github.com/SAP)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/sap)
-- [Sign Up](https://developers.sap.com/)
-- [YouTube](https://www.youtube.com/@sapdevs)
-- [Learning](https://learning.sap.com/)
-- [Onboarding](https://support.sap.com/en/product/onboarding-resource-center/brim.html)
+- [Getting started](https://help.sap.com/docs/SAP_BRIM/getting-started)
+- [Support](https://support.sap.com)
+- [Blog](https://blogs.sap.com)
+- [Terms of service](https://www.sap.com/about/legal/terms-of-use.html)
+- [Privacy policy](https://www.sap.com/about/legal/privacy.html)
+- [GitHub](https://github.com/SAP)
+- [Status](https://www.sap.com/about/trust-center/cloud-service-status.html)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 53.4** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 63.3 |
+| Contract governance | 27.3 |
+| Operational transparency | 34.2 |
+| Developer ergonomics | 44.0 |
+| Access clarity | 39.5 |
+
+**Agent readiness 30.5** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 40.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/sap-brim-billing-and-revenue-innovation-management/](https://apis.io/providers/sap-brim-billing-and-revenue-innovation-management/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for SAP BRIM (Billing and Revenue Innovation Management): the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/sap-brim-billing-and-revenue-innovation-management/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
